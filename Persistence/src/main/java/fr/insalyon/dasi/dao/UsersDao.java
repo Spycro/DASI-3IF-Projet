@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package fr.insalyon.dasi.dao;
-import fr.insalyon.dasi.metier.modele.User;
+import fr.insalyon.dasi.metier.modele.Users;
 import fr.insalyon.dasi.metier.modele.Client;
 import fr.insalyon.dasi.metier.modele.Employe;
 import java.util.List;
@@ -15,7 +15,7 @@ import javax.persistence.TypedQuery;
  *
  * @author Lucas
  */
-public class UserDao {
+public class UsersDao {
     
     
     /*public void creer(Employe employe) {
@@ -33,7 +33,7 @@ public class UserDao {
         em.persist(client);
     }*/
     
-    public void creer(User user) {
+    public void creer(Users user) {
         EntityManager em = JpaUtil.obtenirContextePersistance();
         em.persist(user);
     }

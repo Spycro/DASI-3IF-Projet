@@ -12,7 +12,7 @@ import javax.persistence.OneToOne;
  * @author DASI Team
  */
 @Entity
-public class Client extends User implements Serializable {
+public class Client extends Users implements Serializable {
 
     
     private String nom;

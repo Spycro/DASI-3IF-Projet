@@ -2,7 +2,7 @@ package fr.insalyon.dasi.metier.service;
 
 import fr.insalyon.dasi.dao.ClientDao;
 import fr.insalyon.dasi.dao.MediumDao;
-import fr.insalyon.dasi.dao.UserDao;
+import fr.insalyon.dasi.dao.UsersDao;
 import fr.insalyon.dasi.dao.JpaUtil;
 import fr.insalyon.dasi.metier.modele.Client;
 import java.util.List;
@@ -12,7 +12,7 @@ import com.google.gson.JsonObject;
 import fr.insalyon.dasi.dao.ProfilAstralDao;
 import fr.insalyon.dasi.metier.modele.Medium;
 import fr.insalyon.dasi.metier.modele.ProfilAstral;
-import fr.insalyon.dasi.metier.modele.User;
+import fr.insalyon.dasi.metier.modele.Users;
 
 /**
  *
@@ -22,10 +22,10 @@ public class Service {
 
     protected ClientDao clientDao = new ClientDao();
     protected MediumDao mediumDao = new MediumDao();
-    protected UserDao userDao = new UserDao();
+    protected UsersDao userDao = new UsersDao();
     protected ProfilAstralDao profilAstralDao = new ProfilAstralDao();
 
-    public Long inscrireClient(User user) {
+    public Long inscrireClient(Users user) {
         Long resultat = null;
         JpaUtil.creerContextePersistance();
         try {

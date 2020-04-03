@@ -20,7 +20,7 @@ import javax.persistence.InheritanceType;
  */
 @Entity
 @Inheritance (strategy = InheritanceType.TABLE_PER_CLASS)
-abstract public class User implements Serializable{
+abstract public class Users implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +29,7 @@ abstract public class User implements Serializable{
     @Column(unique = true)
     protected String mail;
 
-    public User() {
+    public Users() {
     }
 
     public String getMail() {
@@ -40,7 +40,7 @@ abstract public class User implements Serializable{
         this.mail = mail;
     }
 
-    public User(String motDePasse, String mail) {
+    public Users(String motDePasse, String mail) {
         this.motDePasse = motDePasse;
         this.mail = mail;
     }

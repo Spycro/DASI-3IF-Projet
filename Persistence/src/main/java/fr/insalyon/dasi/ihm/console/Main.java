@@ -7,7 +7,7 @@ import fr.insalyon.dasi.metier.modele.Employe;
 import fr.insalyon.dasi.metier.modele.Medium;
 import fr.insalyon.dasi.metier.modele.ProfilAstral;
 import fr.insalyon.dasi.metier.modele.Spirite;
-import fr.insalyon.dasi.metier.modele.User;
+import fr.insalyon.dasi.metier.modele.Users;
 import fr.insalyon.dasi.metier.service.Service;
 import java.sql.Date;
 import java.util.List;
@@ -144,7 +144,7 @@ public class Main {
         afficherProfil(profil2);
 
         
-        User user1 = new Client("Jean", "bon", "3636", "11 rue", 25, profil2, Date.valueOf("2015-12-25"), "12345", "l@g.com");
+        Users user1 = new Client("Jean", "bon", "3636", "11 rue", 25, profil2, Date.valueOf("2015-12-25"), "12345", "l@g.com");
         Long profil1ID = service.inscrireClient(user1);
         if (profil1ID != null) {
             System.out.println("> Succès inscription");
@@ -176,7 +176,7 @@ public class Main {
         
 
         
-        User user1 = new Employe("Jean", "bon", "3636",  25, "M", 0, "12345", "l@g.com");
+        Users user1 = new Employe("Jean", "bon", "3636",  25, "M", 0, "12345", "l@g.com");
         Long profil1ID = service.inscrireClient(user1);
         if (profil1ID != null) {
             System.out.println("> Succès inscription");
