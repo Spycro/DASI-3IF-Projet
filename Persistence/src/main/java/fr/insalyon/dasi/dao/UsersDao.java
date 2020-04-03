@@ -16,30 +16,65 @@ import javax.persistence.TypedQuery;
  * @author Lucas
  */
 public class UsersDao {
-    
-    
-    /*public void creer(Employe employe) {
-        EntityManager em = JpaUtil.obtenirContextePersistance();
-        em.persist(employe);
-    }*/
-    
-    public Employe chercherEmployeParId(Long employeId) {
-        EntityManager em = JpaUtil.obtenirContextePersistance();
-        return em.find(Employe.class, employeId); // renvoie null si l'identifiant n'existe pas
-    }
-    
-    /*public void creer(Client client) {
-        EntityManager em = JpaUtil.obtenirContextePersistance();
-        em.persist(client);
-    }*/
-    
+
     public void creer(Users user) {
         EntityManager em = JpaUtil.obtenirContextePersistance();
         em.persist(user);
     }
     
+    //Dao en relation avec les clients
+    
     public Client chercherClientParId(Long clientId) {
         EntityManager em = JpaUtil.obtenirContextePersistance();
         return em.find(Client.class, clientId); // renvoie null si l'identifiant n'existe pas
     }
+    
+    public Client chercherClientParMail(String clientMail) {
+        EntityManager em = JpaUtil.obtenirContextePersistance();
+        TypedQuery<Client> query = em.createQuery("SELECT c FROM Client c WHERE c.mail = :mail", Client.class);
+        query.setParameter("mail", clientMail); // correspond au paramètre ":mail" dans la requête
+        List<Client> clients = query.getResultList();
+        Client result = null;
+        if (!clients.isEmpty()) {
+            result = clients.get(0); // premier de la liste
+        }
+        return result;
+    }
+    
+    public List<Client> listerClients() {
+        EntityManager em = JpaUtil.obtenirContextePersistance();
+        TypedQuery<Client> query = em.createQuery("SELECT c FROM Client c ORDER BY c.nom ASC, c.prenom ASC", Client.class);
+        return query.getResultList();
+    }
+    
+    
+    //Dao en relation avec les employes
+    
+    public Employe chercherEmployeParMail(String employeMail) {
+        EntityManager em = JpaUtil.obtenirContextePersistance();
+        TypedQuery<Employe> query = em.createQuery("SELECT c FROM Employe c WHERE c.mail = :mail", Employe.class);
+        query.setParameter("mail", employeMail); // correspond au paramètre ":mail" dans la requête
+        List<Employe> employes = query.getResultList();
+        Employe result = null;
+        if (!employes.isEmpty()) {
+            result = employes.get(0); // premier de la liste
+        }
+        return result;
+    }
+              
+    public Employe chercherEmployeParId(Long employeId) {
+        EntityManager em = JpaUtil.obtenirContextePersistance();
+        return em.find(Employe.class, employeId); // renvoie null si l'identifiant n'existe pas
+    }
+    
+    public List<Employe> listerEmployes() {
+        EntityManager em = JpaUtil.obtenirContextePersistance();
+        TypedQuery<Employe> query = em.createQuery("SELECT c FROM Employe c ORDER BY c.nom ASC, c.prenom ASC", Employe.class);
+        return query.getResultList();
+    }
+    
+    
+  
+
+    
 }

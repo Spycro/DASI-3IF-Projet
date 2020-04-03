@@ -83,4 +83,9 @@ public class Employe extends Users implements Serializable{
     public void setNbConsultations(Integer nbConsultations) {
         this.nbConsultations = nbConsultations;
     }
+    
+        @Override
+    public String toString() {
+        return "Client : id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", mail=" + mail + ", motDePasse=" + motDePasse;
+    }
 }
