@@ -3,6 +3,7 @@ package fr.insalyon.dasi.ihm.console;
 import fr.insalyon.dasi.dao.JpaUtil;
 import fr.insalyon.dasi.metier.modele.Cartomancien;
 import fr.insalyon.dasi.metier.modele.Client;
+import fr.insalyon.dasi.metier.modele.Consultation;
 import fr.insalyon.dasi.metier.modele.Employe;
 import fr.insalyon.dasi.metier.modele.Medium;
 import fr.insalyon.dasi.metier.modele.ProfilAstral;
@@ -36,53 +37,15 @@ public class Main {
         //testerAuthentificationClient();  // Question 8
         //saisirInscriptionClient();       // Question 9
         //saisirRechercheClient();
-        testerInscriptionMedium();
-        testerInscriptionClient();
+        //testerInscriptionMedium();
+        //testerInscriptionClient();
+        testerInscriptionConsultation();
         
         JpaUtil.destroy();
     }
 
     
-    public static void initialiserProfilAstral(){
-        System.out.println();
-        System.out.println("**** initialiserClients() ****");
-        System.out.println();
-        
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("DASI-PU");
-        EntityManager em = emf.createEntityManager();
-
-        ProfilAstral profil1 = new ProfilAstral("Cancer", "Chat", "jaune", "voiture");
-        ProfilAstral profil2 = new ProfilAstral("Cancer", "chien", "jaune", "chat");
-
-        
-        System.out.println();
-        System.out.println("** Clients avant persistance: ");
-        afficherProfil(profil1);
-        afficherProfil(profil2);
-        System.out.println();
-
-        try {
-            em.getTransaction().begin();
-            em.persist(profil1);
-            em.persist(profil2);
-            em.getTransaction().commit();
-        } catch (Exception ex) {
-            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service", ex);
-            try {
-                em.getTransaction().rollback();
-            }
-            catch (IllegalStateException ex2) {
-                // Ignorer cette exception...
-            }
-        } finally {
-            em.close();
-        }
-
-        System.out.println();
-        System.out.println("** Clients après persistance: ");
-        
-        System.out.println();
-    }
+    
     
     
     public static void afficherProfil(ProfilAstral profil) {
@@ -496,6 +459,39 @@ public class Main {
             System.out.println("> Échec inscription");
         }
         System.out.println(david.toString());
+      
+    }
+    public static void testerInscriptionConsultation(){
+        System.out.println();
+        System.out.println("**** testerInscriptionConsultation() ****");
+        System.out.println();
+        
+        Service service = new Service();
+        Medium david = new Spirite("David","M","Yo tout le monde c'est david lafarge pokemon","cartes pokemon");
+        service.inscrireMedium(david);
+        ProfilAstral profil2 = new ProfilAstral("Cancer", "chien", "jaune", "chat");
+        service.inscrireProfilAstral(profil2);
+        Users user1 = new Client("Jean", "bon", "3636", "11 rue", 25, profil2, Date.valueOf("2015-12-25"), "12345", "l@g.com");
+        service.inscrireClient(user1);
+        Users user2 = new Employe("Jean", "bon", "3636",  25, "M", 0, "12345", "l@g.com");
+        service.inscrireClient(user2);
+        Consultation consult1 = new Consultation(Date.valueOf("2015-12-25"),12,Date.valueOf("2015-12-25"),Date.valueOf("2015-12-25"),"c t bi1",(Client)user1,(Employe)user2,david);
+        Long idc1 = service.inscrireConsultation(consult1);
+        if (idc1 != null) {
+            System.out.println("> Succès inscription");
+        } else {
+            System.out.println("> Échec inscription");
+        }
+        System.out.println(consult1.toString());
+        
+        /*Consultation consult2 = new Consultation(Date.valueOf("2015-12-25"),12,Date.valueOf("2015-12-25"),Date.valueOf("2015-12-25"),"franchement pas fou");
+        Long idc2 = service.inscrireConsultation(consult2);
+        if (idc2 != null) {
+            System.out.println("> Succès inscription");
+        } else {
+            System.out.println("> Échec inscription");
+        }
+        System.out.println(consult2.toString());*/
       
     }
 }

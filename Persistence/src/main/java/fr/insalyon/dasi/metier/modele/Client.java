@@ -2,8 +2,10 @@ package fr.insalyon.dasi.metier.modele;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 
@@ -22,6 +24,8 @@ public class Client extends Users implements Serializable {
     private Integer Age;
     @OneToOne
     private ProfilAstral profilAstral;
+    @OneToMany(mappedBy="client")
+    private List<Consultation> consultations;
 
     public Client(String nom, String prenom, String numeroTel, String adresse, Integer Age, ProfilAstral profilAstral, Date dateNaissance, String motDePasse, String mail) {
         super(motDePasse, mail);
@@ -45,6 +49,18 @@ public class Client extends Users implements Serializable {
         
         //TODO : Utiliser l'API des profs pour generer automatiquement le profil astral
     }
+
+    public Client(String nom, String prenom, String numeroTel, String adresse, Integer Age, ProfilAstral profilAstral, List<Consultation> consultations, Date dateNaissance) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.numeroTel = numeroTel;
+        this.adresse = adresse;
+        this.Age = Age;
+        this.profilAstral = profilAstral;
+        this.consultations = consultations;
+        this.dateNaissance = dateNaissance;
+    }
+    
 
     public Date getDateNaissance() {
         return dateNaissance;

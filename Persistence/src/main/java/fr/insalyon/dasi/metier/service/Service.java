@@ -9,7 +9,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.google.gson.JsonObject;
+import fr.insalyon.dasi.dao.ConsultationDao;
 import fr.insalyon.dasi.dao.ProfilAstralDao;
+import fr.insalyon.dasi.metier.modele.Consultation;
 import fr.insalyon.dasi.metier.modele.Medium;
 import fr.insalyon.dasi.metier.modele.ProfilAstral;
 import fr.insalyon.dasi.metier.modele.Users;
@@ -24,6 +26,7 @@ public class Service {
     protected MediumDao mediumDao = new MediumDao();
     protected UsersDao userDao = new UsersDao();
     protected ProfilAstralDao profilAstralDao = new ProfilAstralDao();
+    protected ConsultationDao consultationDao = new ConsultationDao();
 
     public Long inscrireClient(Users user) {
         Long resultat = null;
@@ -125,6 +128,24 @@ public class Service {
             resultat = medium.getId();
         } catch (Exception ex) {
             Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service inscrireMedium(medium)", ex);
+            JpaUtil.annulerTransaction();
+            resultat = null;
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+        return resultat;
+    }
+    
+    public Long inscrireConsultation(Consultation consultation) {
+        Long resultat = null;
+        JpaUtil.creerContextePersistance();
+        try {
+            JpaUtil.ouvrirTransaction();
+            consultationDao.creer(consultation);
+            JpaUtil.validerTransaction();
+            resultat = consultation.getId();
+        } catch (Exception ex) {
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service inscrireConsultation(consultation)", ex);
             JpaUtil.annulerTransaction();
             resultat = null;
         } finally {
