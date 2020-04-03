@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -24,7 +25,7 @@ public class ProfilAstral implements Serializable {
     private String SigneAstrologique;
     private String CouleurPorteBonheur;
     private String AnimalTotem;
-
+    
     protected ProfilAstral() {
     }
 

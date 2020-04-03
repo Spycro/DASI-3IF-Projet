@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
 
 /**
@@ -19,6 +20,19 @@ public class Client extends User implements Serializable {
     private String numeroTel;
     private String adresse;
     private Integer Age;
+    @OneToOne
+    private ProfilAstral profilAstral;
+
+    public Client(String nom, String prenom, String numeroTel, String adresse, Integer Age, ProfilAstral profilAstral, Date dateNaissance, String motDePasse, String mail) {
+        super(motDePasse, mail);
+        this.nom = nom;
+        this.prenom = prenom;
+        this.numeroTel = numeroTel;
+        this.adresse = adresse;
+        this.Age = Age;
+        this.profilAstral = profilAstral;
+        this.dateNaissance = dateNaissance;
+    }
 
     public Client(String nom, String prenom, String numeroTel, String adresse, Integer Age, Date dateNaissance, String motDePasse, String mail) {
         super(motDePasse, mail);
@@ -28,6 +42,8 @@ public class Client extends User implements Serializable {
         this.adresse = adresse;
         this.Age = Age;
         this.dateNaissance = dateNaissance;
+        
+        //TODO : Utiliser l'API des profs pour generer automatiquement le profil astral
     }
 
     public Date getDateNaissance() {
