@@ -1,8 +1,11 @@
 package fr.insalyon.dasi.ihm.console;
 
 import fr.insalyon.dasi.dao.JpaUtil;
+import fr.insalyon.dasi.metier.modele.Cartomancien;
 import fr.insalyon.dasi.metier.modele.Client;
+import fr.insalyon.dasi.metier.modele.Medium;
 import fr.insalyon.dasi.metier.modele.ProfilAstral;
+import fr.insalyon.dasi.metier.modele.Spirite;
 import fr.insalyon.dasi.metier.service.Service;
 import java.util.List;
 import java.util.logging.Level;
@@ -30,8 +33,8 @@ public class Main {
         //testerAuthentificationClient();  // Question 8
         //saisirInscriptionClient();       // Question 9
         //saisirRechercheClient();
-
-        testerInscriptionClient();
+        testerInscriptionMedium();
+        //testerInscriptionClient();
         
         JpaUtil.destroy();
     }
@@ -394,4 +397,30 @@ public class Main {
 
     }
     */
+    public static void testerInscriptionMedium() {
+        
+        System.out.println();
+        System.out.println("**** testerInscriptionMedium() ****");
+        System.out.println();
+        
+        Service service = new Service();
+        Medium irma = new Cartomancien("Irma","F","Yo moi c'est IRMA");
+        Long idIrma = service.inscrireMedium(irma);
+        if (idIrma != null) {
+            System.out.println("> Succès inscription");
+        } else {
+            System.out.println("> Échec inscription");
+        }
+        System.out.println(irma.toString());
+        
+        Medium david = new Spirite("David","M","Yo tout le monde c'est david lafarge pokemon","cartes pokemon");
+        Long idDavid = service.inscrireMedium(david);
+        if (idDavid != null) {
+            System.out.println("> Succès inscription");
+        } else {
+            System.out.println("> Échec inscription");
+        }
+        System.out.println(david.toString());
+      
+    }
 }

@@ -1,6 +1,7 @@
 package fr.insalyon.dasi.metier.service;
 
 import fr.insalyon.dasi.dao.ClientDao;
+import fr.insalyon.dasi.dao.MediumDao;
 import fr.insalyon.dasi.dao.JpaUtil;
 import fr.insalyon.dasi.metier.modele.Client;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.google.gson.JsonObject;
 import fr.insalyon.dasi.dao.ProfilAstralDao;
+import fr.insalyon.dasi.metier.modele.Medium;
 import fr.insalyon.dasi.metier.modele.ProfilAstral;
 
 /**
@@ -17,6 +19,7 @@ import fr.insalyon.dasi.metier.modele.ProfilAstral;
 public class Service {
 
     protected ClientDao clientDao = new ClientDao();
+    protected MediumDao mediumDao = new MediumDao();
     protected ProfilAstralDao profilAstralDao = new ProfilAstralDao();
 
     public Long inscrireClient(Client client) {
@@ -98,6 +101,23 @@ public class Service {
             resultat = profilAstral.getId();
         } catch (Exception ex) {
             Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service inscrireProfilAstral(profilastral)", ex);
+            JpaUtil.annulerTransaction();
+            resultat = null;
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+        return resultat;
+    }
+    public Long inscrireMedium(Medium medium) {
+        Long resultat = null;
+        JpaUtil.creerContextePersistance();
+        try {
+            JpaUtil.ouvrirTransaction();
+            mediumDao.creer(medium);
+            JpaUtil.validerTransaction();
+            resultat = medium.getId();
+        } catch (Exception ex) {
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service inscrireMedium(medium)", ex);
             JpaUtil.annulerTransaction();
             resultat = null;
         } finally {
