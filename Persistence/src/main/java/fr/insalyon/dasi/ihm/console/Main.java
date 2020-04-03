@@ -37,7 +37,7 @@ public class Main {
         //saisirInscriptionClient();       // Question 9
         //saisirRechercheClient();
         testerInscriptionMedium();
-        //testerInscriptionClient();
+        testerInscriptionClient();
         
         JpaUtil.destroy();
     }
