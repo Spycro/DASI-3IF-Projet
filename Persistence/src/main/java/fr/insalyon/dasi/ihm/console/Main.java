@@ -48,6 +48,7 @@ public class Main {
     
     
     
+
     public static void afficherProfil(ProfilAstral profil) {
         System.out.println("-> " + profil);
     }
@@ -55,7 +56,7 @@ public class Main {
     public static void testerInscriptionProfil() {
         
         System.out.println();
-        System.out.println("**** testerInscriptionClient() ****");
+        System.out.println("**** testerInscriptionProfil() ****");
         System.out.println();
         
         Service service = new Service();
@@ -115,15 +116,6 @@ public class Main {
             System.out.println("> Échec inscription");
         }
 
-      
-        /*Client hedwig = new Client("Lamarr", "Hedwig Eva Maria", "hlamarr@insa-lyon.fr", "WiFi");
-        Long idHedwig = service.inscrireClient(hedwig);
-        if (idHedwig != null) {
-            System.out.println("> Succès inscription");
-        } else {
-            System.out.println("> Échec inscription");
-        }
-        afficherClient(hedwig);*/
     }
     
     public static void testerInscriptionEmploye() {
@@ -146,24 +138,91 @@ public class Main {
         } else {
             System.out.println("> Échec inscription");
         }
-
-      
-        /*Client hedwig = new Client("Lamarr", "Hedwig Eva Maria", "hlamarr@insa-lyon.fr", "WiFi");
-        Long idHedwig = service.inscrireClient(hedwig);
-        if (idHedwig != null) {
-            System.out.println("> Succès inscription");
-        } else {
-            System.out.println("> Échec inscription");
-        }
-        afficherClient(hedwig);*/
     }
     
+    public static void testerAuthentificationClient() {
+        
+        System.out.println();
+        System.out.println("**** testerAuthentificationClient() ****");
+        System.out.println();
+        
+        Service service = new Service();
+        Client client;
+        String mail;
+        String motDePasse;
+
+        mail = "ada.lovelace@insa-lyon.fr";
+        motDePasse = "Ada1012";
+        client = service.authentifierClient(mail, motDePasse);
+        if (client != null) {
+            System.out.println("Authentification réussie avec le mail '" + mail + "' et le mot de passe '" + motDePasse + "'");
+            afficherClient(client);
+        } else {
+            System.out.println("Authentification échouée avec le mail '" + mail + "' et le mot de passe '" + motDePasse + "'");
+        }
+
+        mail = "ada.lovelace@insa-lyon.fr";
+        motDePasse = "Ada2020";
+        client = service.authentifierClient(mail, motDePasse);
+        if (client != null) {
+            System.out.println("Authentification réussie avec le mail '" + mail + "' et le mot de passe '" + motDePasse + "'");
+            afficherClient(client);
+        } else {
+            System.out.println("Authentification échouée avec le mail '" + mail + "' et le mot de passe '" + motDePasse + "'");
+        }
+
+        mail = "l@g.com";
+        motDePasse = "12345";
+        client = service.authentifierClient(mail, motDePasse);
+        if (client != null) {
+            System.out.println("Authentification réussie avec le mail '" + mail + "' et le mot de passe '" + motDePasse + "'");
+            afficherClient(client);
+        } else {
+            System.out.println("Authentification échouée avec le mail '" + mail + "' et le mot de passe '" + motDePasse + "'");
+        }
+    }
     
-    /*
+    public static void testerAuthentificationEmploye() {
+        
+        System.out.println();
+        System.out.println("**** testerAuthentificationEmploye() ****");
+        System.out.println();
+        
+        Service service = new Service();
+        Employe employe;
+        String mail;
+        String motDePasse;
+
+        mail = "ada.lovelace@insa-lyon.fr";
+        motDePasse = "Ada1012";
+        employe = service.authentifierEmploye(mail, motDePasse);
+        if (employe != null) {
+            System.out.println("Authentification réussie avec le mail '" + mail + "' et le mot de passe '" + motDePasse + "'");
+            afficherEmploye(employe);
+        } else {
+            System.out.println("Authentification échouée avec le mail '" + mail + "' et le mot de passe '" + motDePasse + "'");
+        }
+
+        mail = "l@g.com";
+        motDePasse = "12345";
+        employe = service.authentifierEmploye(mail, motDePasse);
+        if (employe != null) {
+            System.out.println("Authentification réussie avec le mail '" + mail + "' et le mot de passe '" + motDePasse + "'");
+            afficherEmploye(employe);
+        } else {
+            System.out.println("Authentification échouée avec le mail '" + mail + "' et le mot de passe '" + motDePasse + "'");
+        }
+
+    }
+
     public static void afficherClient(Client client) {
         System.out.println("-> " + client);
     }
-
+    
+     public static void afficherEmploye(Employe employe) {
+        System.out.println("-> " + employe);
+    }
+    /*
     public static void initialiserClients() {
         
         System.out.println();
@@ -252,31 +311,31 @@ public class Main {
         
         Service service = new Service();
         long id;
-        Client client;
+        Client employe;
 
         id = 1;
         System.out.println("** Recherche du Client #" + id);
-        client = service.rechercherClientParId(id);
-        if (client != null) {
-            afficherClient(client);
+        employe = service.rechercherClientParId(id);
+        if (employe != null) {
+            afficherClient(employe);
         } else {
             System.out.println("=> Client non-trouvé");
         }
 
         id = 3;
         System.out.println("** Recherche du Client #" + id);
-        client = service.rechercherClientParId(id);
-        if (client != null) {
-            afficherClient(client);
+        employe = service.rechercherClientParId(id);
+        if (employe != null) {
+            afficherClient(employe);
         } else {
             System.out.println("=> Client non-trouvé");
         }
 
         id = 17;
         System.out.println("** Recherche du Client #" + id);
-        client = service.rechercherClientParId(id);
-        if (client != null) {
-            afficherClient(client);
+        employe = service.rechercherClientParId(id);
+        if (employe != null) {
+            afficherClient(employe);
         } else {
             System.out.println("=> Client #" + id + " non-trouvé");
         }
@@ -292,8 +351,8 @@ public class Main {
         List<Client> listeClients = service.listerClients();
         System.out.println("*** Liste des Clients");
         if (listeClients != null) {
-            for (Client client : listeClients) {
-                afficherClient(client);
+            for (Client employe : listeClients) {
+                afficherClient(employe);
             }
         }
         else {
@@ -301,47 +360,7 @@ public class Main {
         }
     }
 
-    public static void testerAuthentificationClient() {
-        
-        System.out.println();
-        System.out.println("**** testerAuthentificationClient() ****");
-        System.out.println();
-        
-        Service service = new Service();
-        Client client;
-        String mail;
-        String motDePasse;
 
-        mail = "ada.lovelace@insa-lyon.fr";
-        motDePasse = "Ada1012";
-        client = service.authentifierClient(mail, motDePasse);
-        if (client != null) {
-            System.out.println("Authentification réussie avec le mail '" + mail + "' et le mot de passe '" + motDePasse + "'");
-            afficherClient(client);
-        } else {
-            System.out.println("Authentification échouée avec le mail '" + mail + "' et le mot de passe '" + motDePasse + "'");
-        }
-
-        mail = "ada.lovelace@insa-lyon.fr";
-        motDePasse = "Ada2020";
-        client = service.authentifierClient(mail, motDePasse);
-        if (client != null) {
-            System.out.println("Authentification réussie avec le mail '" + mail + "' et le mot de passe '" + motDePasse + "'");
-            afficherClient(client);
-        } else {
-            System.out.println("Authentification échouée avec le mail '" + mail + "' et le mot de passe '" + motDePasse + "'");
-        }
-
-        mail = "etudiant.fictif@insa-lyon.fr";
-        motDePasse = "********";
-        client = service.authentifierClient(mail, motDePasse);
-        if (client != null) {
-            System.out.println("Authentification réussie avec le mail '" + mail + "' et le mot de passe '" + motDePasse + "'");
-            afficherClient(client);
-        } else {
-            System.out.println("Authentification échouée avec le mail '" + mail + "' et le mot de passe '" + motDePasse + "'");
-        }
-    }
 
     public static void saisirInscriptionClient() {
         Service service = new Service();
@@ -361,15 +380,15 @@ public class Main {
         String mail = Saisie.lireChaine("Mail ? ");
         String motDePasse = Saisie.lireChaine("Mot de passe ? ");
 
-        Client client = new Client(nom, prenom, mail, motDePasse);
-        Long idClient = service.inscrireClient(client);
+        Client employe = new Client(nom, prenom, mail, motDePasse);
+        Long idClient = service.inscrireClient(employe);
 
         if (idClient != null) {
             System.out.println("> Succès inscription");
         } else {
             System.out.println("> Échec inscription");
         }
-        afficherClient(client);
+        afficherClient(employe);
 
     }
 
@@ -395,9 +414,9 @@ public class Main {
 
         Integer idClient = Saisie.lireInteger("Identifiant ? [0 pour quitter] ");
         while (idClient != 0) {
-            Client client = service.rechercherClientParId(idClient.longValue());
-            if (client != null) {
-                afficherClient(client);
+            Client employe = service.rechercherClientParId(idClient.longValue());
+            if (employe != null) {
+                afficherClient(employe);
             } else {
                 System.out.println("=> Client #" + idClient + " non-trouvé");
             }
@@ -418,9 +437,9 @@ public class Main {
 
         while (!clientMail.equals("0")) {
             String clientMotDePasse = Saisie.lireChaine("Mot de passe ? ");
-            Client client = service.authentifierClient(clientMail, clientMotDePasse);
-            if (client != null) {
-                afficherClient(client);
+            Client employe = service.authentifierClient(clientMail, clientMotDePasse);
+            if (employe != null) {
+                afficherClient(employe);
             } else {
                 System.out.println("=> Client non-authentifié");
             }

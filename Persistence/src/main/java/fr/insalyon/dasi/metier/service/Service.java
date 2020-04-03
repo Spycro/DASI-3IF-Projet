@@ -1,6 +1,5 @@
 package fr.insalyon.dasi.metier.service;
 
-import fr.insalyon.dasi.dao.ClientDao;
 import fr.insalyon.dasi.dao.MediumDao;
 import fr.insalyon.dasi.dao.UsersDao;
 import fr.insalyon.dasi.dao.JpaUtil;
@@ -12,6 +11,7 @@ import com.google.gson.JsonObject;
 import fr.insalyon.dasi.dao.ConsultationDao;
 import fr.insalyon.dasi.dao.ProfilAstralDao;
 import fr.insalyon.dasi.metier.modele.Consultation;
+import fr.insalyon.dasi.metier.modele.Employe;
 import fr.insalyon.dasi.metier.modele.Medium;
 import fr.insalyon.dasi.metier.modele.ProfilAstral;
 import fr.insalyon.dasi.metier.modele.Users;
@@ -22,9 +22,8 @@ import fr.insalyon.dasi.metier.modele.Users;
  */
 public class Service {
 
-    protected ClientDao clientDao = new ClientDao();
     protected MediumDao mediumDao = new MediumDao();
-    protected UsersDao userDao = new UsersDao();
+    protected UsersDao usersDao = new UsersDao();
     protected ProfilAstralDao profilAstralDao = new ProfilAstralDao();
     protected ConsultationDao consultationDao = new ConsultationDao();
 
@@ -33,7 +32,7 @@ public class Service {
         JpaUtil.creerContextePersistance();
         try {
             JpaUtil.ouvrirTransaction();
-            userDao.creer(user);
+            usersDao.creer(user);
             JpaUtil.validerTransaction();
             resultat = user.getId();
         } catch (Exception ex) {
@@ -45,29 +44,13 @@ public class Service {
         }
         return resultat;
     }
-
-    /*
     
-    public Client rechercherClientParId(Long id) {
-        Client resultat = null;
-        JpaUtil.creerContextePersistance();
-        try {
-            resultat = userDao.chercherParId(id);
-        } catch (Exception ex) {
-            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service rechercherClientParId(id)", ex);
-            resultat = null;
-        } finally {
-            JpaUtil.fermerContextePersistance();
-        }
-        return resultat;
-    }
-
     public Client authentifierClient(String mail, String motDePasse) {
         Client resultat = null;
         JpaUtil.creerContextePersistance();
         try {
             // Recherche du client
-            Client client = userDao.chercherParMail(mail);
+            Client client = usersDao.chercherClientParMail(mail);
             if (client != null) {
                 // Vérification du mot de passe
                 if (client.getMotDePasse().equals(motDePasse)) {
@@ -81,15 +64,54 @@ public class Service {
             JpaUtil.fermerContextePersistance();
         }
         
+        return resultat;
+    }
+
+    
+    public Employe authentifierEmploye(String mail, String motDePasse) {
+        Employe resultat = null;
+        JpaUtil.creerContextePersistance();
+        try {
+            // Recherche du client
+            Employe employe = usersDao.chercherEmployeParMail(mail);
+            if (employe != null) {
+                // Vérification du mot de passe
+                if (employe.getMotDePasse().equals(motDePasse)) {
+                    resultat = employe;
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service authentifierClient(mail,motDePasse)", ex);
+            resultat = null;
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
         
         return resultat;
     }
+    /*
+    
+    public Client rechercherClientParId(Long id) {
+        Client resultat = null;
+        JpaUtil.creerContextePersistance();
+        try {
+            resultat = usersDao.chercherParId(id);
+        } catch (Exception ex) {
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service rechercherClientParId(id)", ex);
+            resultat = null;
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+        return resultat;
+    }
+
+
 
     public List<Client> listerClients() {
         List<Client> resultat = null;
         JpaUtil.creerContextePersistance();
         try {
-            resultat = userDao.listerClients();
+            resultat = usersDao.listerClients();
         } catch (Exception ex) {
             Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service listerClients()", ex);
             resultat = null;
