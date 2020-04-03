@@ -18,19 +18,24 @@ import javax.persistence.TypedQuery;
 public class UserDao {
     
     
-    public void creer(Employe employe) {
+    /*public void creer(Employe employe) {
         EntityManager em = JpaUtil.obtenirContextePersistance();
         em.persist(employe);
-    }
+    }*/
     
     public Employe chercherEmployeParId(Long employeId) {
         EntityManager em = JpaUtil.obtenirContextePersistance();
         return em.find(Employe.class, employeId); // renvoie null si l'identifiant n'existe pas
     }
     
-    public void creer(Client client) {
+    /*public void creer(Client client) {
         EntityManager em = JpaUtil.obtenirContextePersistance();
         em.persist(client);
+    }*/
+    
+    public void creer(User user) {
+        EntityManager em = JpaUtil.obtenirContextePersistance();
+        em.persist(user);
     }
     
     public Client chercherClientParId(Long clientId) {

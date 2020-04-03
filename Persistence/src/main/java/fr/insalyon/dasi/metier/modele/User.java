@@ -11,12 +11,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
 /**
  *
  * @author Lucas
  */
 @Entity
+@Inheritance (strategy = InheritanceType.TABLE_PER_CLASS)
 abstract public class User implements Serializable{
     
     @Id
@@ -42,9 +45,6 @@ abstract public class User implements Serializable{
         this.mail = mail;
     }
 
-    
-
- 
     public Long getId() {
         return id;
     }

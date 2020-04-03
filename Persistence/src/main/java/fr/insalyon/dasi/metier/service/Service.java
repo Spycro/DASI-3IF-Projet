@@ -8,7 +8,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.google.gson.JsonObject;
 import fr.insalyon.dasi.dao.ProfilAstralDao;
+import fr.insalyon.dasi.dao.UserDao;
 import fr.insalyon.dasi.metier.modele.ProfilAstral;
+import fr.insalyon.dasi.metier.modele.User;
 
 /**
  *
@@ -16,17 +18,18 @@ import fr.insalyon.dasi.metier.modele.ProfilAstral;
  */
 public class Service {
 
-    protected ClientDao clientDao = new ClientDao();
+    //protected ClientDao clientDao = new ClientDao();
+    protected UserDao userDao = new UserDao();
     protected ProfilAstralDao profilAstralDao = new ProfilAstralDao();
 
-    public Long inscrireClient(Client client) {
+    public Long inscrireClient(User user) {
         Long resultat = null;
         JpaUtil.creerContextePersistance();
         try {
             JpaUtil.ouvrirTransaction();
-            clientDao.creer(client);
+            userDao.creer(user);
             JpaUtil.validerTransaction();
-            resultat = client.getId();
+            resultat = user.getId();
         } catch (Exception ex) {
             Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service inscrireClient(client)", ex);
             JpaUtil.annulerTransaction();
@@ -37,11 +40,13 @@ public class Service {
         return resultat;
     }
 
+    /*
+    
     public Client rechercherClientParId(Long id) {
         Client resultat = null;
         JpaUtil.creerContextePersistance();
         try {
-            resultat = clientDao.chercherParId(id);
+            resultat = userDao.chercherParId(id);
         } catch (Exception ex) {
             Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service rechercherClientParId(id)", ex);
             resultat = null;
@@ -56,7 +61,7 @@ public class Service {
         JpaUtil.creerContextePersistance();
         try {
             // Recherche du client
-            Client client = clientDao.chercherParMail(mail);
+            Client client = userDao.chercherParMail(mail);
             if (client != null) {
                 // Vérification du mot de passe
                 if (client.getMotDePasse().equals(motDePasse)) {
@@ -78,7 +83,7 @@ public class Service {
         List<Client> resultat = null;
         JpaUtil.creerContextePersistance();
         try {
-            resultat = clientDao.listerClients();
+            resultat = userDao.listerClients();
         } catch (Exception ex) {
             Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service listerClients()", ex);
             resultat = null;
@@ -87,6 +92,8 @@ public class Service {
         }
         return resultat;
     }
+    
+    */
     
     public Long inscrireProfilAstral(ProfilAstral profilAstral) {
         Long resultat = null;
@@ -105,5 +112,7 @@ public class Service {
         }
         return resultat;
     }
+    
+    
     
 }

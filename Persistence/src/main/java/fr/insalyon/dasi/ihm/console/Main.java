@@ -2,8 +2,11 @@ package fr.insalyon.dasi.ihm.console;
 
 import fr.insalyon.dasi.dao.JpaUtil;
 import fr.insalyon.dasi.metier.modele.Client;
+import fr.insalyon.dasi.metier.modele.Employe;
 import fr.insalyon.dasi.metier.modele.ProfilAstral;
+import fr.insalyon.dasi.metier.modele.User;
 import fr.insalyon.dasi.metier.service.Service;
+import java.sql.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,6 +35,7 @@ public class Main {
         //saisirRechercheClient();
 
         testerInscriptionClient();
+        testerInscriptionEmploye();
         
         JpaUtil.destroy();
     }
@@ -83,7 +87,7 @@ public class Main {
         System.out.println("-> " + profil);
     }
     
-    public static void testerInscriptionClient() {
+    public static void testerInscriptionProfil() {
         
         System.out.println();
         System.out.println("**** testerInscriptionClient() ****");
@@ -117,6 +121,78 @@ public class Main {
         }
         afficherClient(hedwig);*/
     }
+    
+    public static void testerInscriptionClient() {
+        
+        System.out.println();
+        System.out.println("**** testerInscriptionClient() ****");
+        System.out.println();
+        
+        
+        
+        Service service = new Service();
+        
+        ProfilAstral profil2 = new ProfilAstral("Cancer", "chien", "jaune", "chat");
+        Long idProfil2 = service.inscrireProfilAstral(profil2);
+        if (idProfil2 != null) {
+            System.out.println("> Succès inscription");
+        } else {
+            System.out.println("> Échec inscription");
+        }
+        afficherProfil(profil2);
+
+        
+        User user1 = new Client("Jean", "bon", "3636", "11 rue", 25, profil2, Date.valueOf("2015-12-25"), "12345", "l@g.com");
+        Long profil1ID = service.inscrireClient(user1);
+        if (profil1ID != null) {
+            System.out.println("> Succès inscription");
+        } else {
+            System.out.println("> Échec inscription");
+        }
+
+      
+        /*Client hedwig = new Client("Lamarr", "Hedwig Eva Maria", "hlamarr@insa-lyon.fr", "WiFi");
+        Long idHedwig = service.inscrireClient(hedwig);
+        if (idHedwig != null) {
+            System.out.println("> Succès inscription");
+        } else {
+            System.out.println("> Échec inscription");
+        }
+        afficherClient(hedwig);*/
+    }
+    
+    public static void testerInscriptionEmploye() {
+        
+        System.out.println();
+        System.out.println("**** testerInscriptionClient() ****");
+        System.out.println();
+        
+        
+        
+        Service service = new Service();
+        
+        
+
+        
+        User user1 = new Employe("Jean", "bon", "3636",  25, "M", 0, "12345", "l@g.com");
+        Long profil1ID = service.inscrireClient(user1);
+        if (profil1ID != null) {
+            System.out.println("> Succès inscription");
+        } else {
+            System.out.println("> Échec inscription");
+        }
+
+      
+        /*Client hedwig = new Client("Lamarr", "Hedwig Eva Maria", "hlamarr@insa-lyon.fr", "WiFi");
+        Long idHedwig = service.inscrireClient(hedwig);
+        if (idHedwig != null) {
+            System.out.println("> Succès inscription");
+        } else {
+            System.out.println("> Échec inscription");
+        }
+        afficherClient(hedwig);*/
+    }
+    
     
     /*
     public static void afficherClient(Client client) {
