@@ -2,6 +2,7 @@ package fr.insalyon.dasi.ihm.console;
 
 import fr.insalyon.dasi.dao.JpaUtil;
 import fr.insalyon.dasi.metier.modele.Client;
+import fr.insalyon.dasi.metier.modele.ProfilAstral;
 import fr.insalyon.dasi.metier.service.Service;
 import java.util.List;
 import java.util.logging.Level;
@@ -22,7 +23,7 @@ public class Main {
         // Contrôlez l'affichage du log de JpaUtil grâce à la méthode log de la classe JpaUtil
         JpaUtil.init();
 
-        initialiserClients();            // Question 3
+        //initialiserClients();            // Question 3
         //testerInscriptionClient();       // Question 4 & 5
         //testerRechercheClient();         // Question 6
         //testerListeClients();            // Question 7
@@ -30,9 +31,94 @@ public class Main {
         //saisirInscriptionClient();       // Question 9
         //saisirRechercheClient();
 
+        testerInscriptionClient();
+        
         JpaUtil.destroy();
     }
 
+    
+    public static void initialiserProfilAstral(){
+        System.out.println();
+        System.out.println("**** initialiserClients() ****");
+        System.out.println();
+        
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("DASI-PU");
+        EntityManager em = emf.createEntityManager();
+
+        ProfilAstral profil1 = new ProfilAstral("Cancer", "Chat", "jaune", "voiture");
+        ProfilAstral profil2 = new ProfilAstral("Cancer", "chien", "jaune", "chat");
+
+        
+        System.out.println();
+        System.out.println("** Clients avant persistance: ");
+        afficherProfil(profil1);
+        afficherProfil(profil2);
+        System.out.println();
+
+        try {
+            em.getTransaction().begin();
+            em.persist(profil1);
+            em.persist(profil2);
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service", ex);
+            try {
+                em.getTransaction().rollback();
+            }
+            catch (IllegalStateException ex2) {
+                // Ignorer cette exception...
+            }
+        } finally {
+            em.close();
+        }
+
+        System.out.println();
+        System.out.println("** Clients après persistance: ");
+        
+        System.out.println();
+    }
+    
+    
+    public static void afficherProfil(ProfilAstral profil) {
+        System.out.println("-> " + profil);
+    }
+    
+    public static void testerInscriptionClient() {
+        
+        System.out.println();
+        System.out.println("**** testerInscriptionClient() ****");
+        System.out.println();
+        
+        Service service = new Service();
+        ProfilAstral profil1 = new ProfilAstral("Cancer", "Chat", "jaune", "voiture");
+        Long profil1ID = service.inscrireProfilAstral(profil1);
+        if (profil1ID != null) {
+            System.out.println("> Succès inscription");
+        } else {
+            System.out.println("> Échec inscription");
+        }
+        afficherProfil(profil1);
+
+        ProfilAstral profil2 = new ProfilAstral("Cancer", "chien", "jaune", "chat");
+        Long idProfil2 = service.inscrireProfilAstral(profil2);
+        if (idProfil2 != null) {
+            System.out.println("> Succès inscription");
+        } else {
+            System.out.println("> Échec inscription");
+        }
+        afficherProfil(profil2);
+
+        /*Client hedwig = new Client("Lamarr", "Hedwig Eva Maria", "hlamarr@insa-lyon.fr", "WiFi");
+        Long idHedwig = service.inscrireClient(hedwig);
+        if (idHedwig != null) {
+            System.out.println("> Succès inscription");
+        } else {
+            System.out.println("> Échec inscription");
+        }
+        afficherClient(hedwig);*/
+    }
+    
+    /*
     public static void afficherClient(Client client) {
         System.out.println("-> " + client);
     }
@@ -46,9 +132,8 @@ public class Main {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("DASI-PU");
         EntityManager em = emf.createEntityManager();
 
-        Client ada = new Client("Lovelace", "Ada", "ada.lovelace@insa-lyon.fr", "Ada1012");
-        Client blaise = new Client("Pascal", "Blaise", "blaise.pascal@insa-lyon.fr", "Blaise1906");
-        Client fred = new Client("Fotiadu", "Frédéric", "frederic.fotiadu@insa-lyon.fr", "INSA-Forever");
+        User ada = new Client("Lovelace", "Ada", "ada.lovelace@insa-lyon.fr", "Ada1012", );
+        
         
         System.out.println();
         System.out.println("** Clients avant persistance: ");
@@ -308,4 +393,5 @@ public class Main {
         System.out.println();
 
     }
+    */
 }

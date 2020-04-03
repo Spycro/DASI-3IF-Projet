@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.google.gson.JsonObject;
+import fr.insalyon.dasi.dao.ProfilAstralDao;
+import fr.insalyon.dasi.metier.modele.ProfilAstral;
 
 /**
  *
@@ -15,6 +17,7 @@ import com.google.gson.JsonObject;
 public class Service {
 
     protected ClientDao clientDao = new ClientDao();
+    protected ProfilAstralDao profilAstralDao = new ProfilAstralDao();
 
     public Long inscrireClient(Client client) {
         Long resultat = null;
@@ -85,6 +88,22 @@ public class Service {
         return resultat;
     }
     
-    
+    public Long inscrireProfilAstral(ProfilAstral profilAstral) {
+        Long resultat = null;
+        JpaUtil.creerContextePersistance();
+        try {
+            JpaUtil.ouvrirTransaction();
+            profilAstralDao.creer(profilAstral);
+            JpaUtil.validerTransaction();
+            resultat = profilAstral.getId();
+        } catch (Exception ex) {
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service inscrireProfilAstral(profilastral)", ex);
+            JpaUtil.annulerTransaction();
+            resultat = null;
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+        return resultat;
+    }
     
 }
