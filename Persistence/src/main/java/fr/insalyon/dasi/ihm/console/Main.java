@@ -40,7 +40,11 @@ public class Main {
         //testerInscriptionMedium();
         //testerInscriptionClient();
         testerInscriptionConsultation();
-        
+        Service s=new Service();
+        //System.out.println(s.rechercherConsultationParId((long)1).toString());
+        for(Consultation c : s.listerConsultationParClient((long)1)){
+            System.out.println(c.toString());
+        }
         JpaUtil.destroy();
     }
 

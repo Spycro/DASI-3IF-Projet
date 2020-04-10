@@ -31,22 +31,22 @@ public class ConsultationDao {
     
     public List<Consultation> listerConsultation() {
         EntityManager em = JpaUtil.obtenirContextePersistance();
-        TypedQuery<Consultation> query = em.createQuery("SELECT c FROM Consultation c ORDER BY c.nom ASC, c.prenom ASC", Consultation.class);
+        TypedQuery<Consultation> query = em.createQuery("SELECT c FROM Consultation c", Consultation.class);
         return query.getResultList();
     }
      public List<Consultation> listerConsultationParClient(long clientId) {
         EntityManager em = JpaUtil.obtenirContextePersistance();
-        TypedQuery<Consultation> query = em.createQuery("SELECT c FROM Consultation c WHERE c.client.id="+clientId+" ORDER BY c.nom ASC, c.prenom ASC", Consultation.class);
+        TypedQuery<Consultation> query = em.createQuery("SELECT c FROM Consultation c WHERE c.client.id="+clientId, Consultation.class);
         return query.getResultList();
     }
       public List<Consultation> listerConsultationParEmploye(long employeId) {
         EntityManager em = JpaUtil.obtenirContextePersistance();
-        TypedQuery<Consultation> query = em.createQuery("SELECT c FROM Consultation c WHERE c.employe.id="+employeId+" ORDER BY c.nom ASC, c.prenom ASC", Consultation.class);
+        TypedQuery<Consultation> query = em.createQuery("SELECT c FROM Consultation c WHERE c.employe.id="+employeId, Consultation.class);
         return query.getResultList();
     }
        public List<Consultation> listerConsultationParMedium(long mediumId) {
         EntityManager em = JpaUtil.obtenirContextePersistance();
-        TypedQuery<Consultation> query = em.createQuery("SELECT c FROM Consultation c WHERE c.medium.id="+mediumId+"  ORDER BY c.nom ASC, c.prenom ASC", Consultation.class);
+        TypedQuery<Consultation> query = em.createQuery("SELECT c FROM Consultation c WHERE c.medium.id="+mediumId, Consultation.class);
         return query.getResultList();
     }
     

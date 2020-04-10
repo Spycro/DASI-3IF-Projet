@@ -105,6 +105,20 @@ public class Service {
         return resultat;
     }
     
+     public Client rechercherClientParMail(String mail) {
+        Client resultat = null;
+        JpaUtil.creerContextePersistance();
+        try {
+            resultat = usersDao.chercherClientParMail(mail);
+        } catch (Exception ex) {
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service rechercherClientParMail(mail)", ex);
+            resultat = null;
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+        return resultat;
+    }
+    
     public Employe rechercherEmployeParId(Long id) {
       Employe resultat = null;
       JpaUtil.creerContextePersistance();
@@ -154,7 +168,64 @@ public class Service {
         try {
             resultat = mediumDao.listerMedium();
         } catch (Exception ex) {
-            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service listerClients()", ex);
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service listerMedium()", ex);
+            resultat = null;
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+        return resultat;
+    }
+    
+     public List<Consultation> listerConsultation() {
+        List<Consultation> resultat = null;
+
+        JpaUtil.creerContextePersistance();
+        try {
+            resultat = consultationDao.listerConsultation();
+        } catch (Exception ex) {
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service listerConsultation()", ex);
+            resultat = null;
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+        return resultat;
+    }
+     public List<Consultation> listerConsultationParClient(long idC) {
+        List<Consultation> resultat = null;
+
+        JpaUtil.creerContextePersistance();
+        try {
+            resultat = consultationDao.listerConsultationParClient(idC);
+        } catch (Exception ex) {
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service listerConsultation()", ex);
+            resultat = null;
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+        return resultat;
+    }
+     public List<Consultation> listerConsultationParEmploye(long idE) {
+        List<Consultation> resultat = null;
+
+        JpaUtil.creerContextePersistance();
+        try {
+            resultat = consultationDao.listerConsultationParEmploye(idE);
+        } catch (Exception ex) {
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service listerConsultation()", ex);
+            resultat = null;
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+        return resultat;
+    }
+     public List<Consultation> listerConsultationParMedium(long idM) {
+        List<Consultation> resultat = null;
+
+        JpaUtil.creerContextePersistance();
+        try {
+            resultat = consultationDao.listerConsultationParMedium(idM);
+        } catch (Exception ex) {
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service listerConsultation()", ex);
             resultat = null;
         } finally {
             JpaUtil.fermerContextePersistance();
