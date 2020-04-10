@@ -149,6 +149,7 @@ public class Service {
 
     public List<Medium> listerMedium() {
         List<Medium> resultat = null;
+
         JpaUtil.creerContextePersistance();
         try {
             resultat = mediumDao.listerMedium();
