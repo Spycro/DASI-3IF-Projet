@@ -25,14 +25,12 @@ public class Consultation implements Serializable{
     private Date dateDebut;
     private Date dateFin;
     private String commentaire;
-    
     @ManyToOne
     private Client client;
     @ManyToOne
     private Employe employe;
     @ManyToOne
     private Medium medium;
-    
     
     public Consultation(){
         
