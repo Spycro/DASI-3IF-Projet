@@ -28,21 +28,25 @@ public class ConsultationDao {
         return em.find(Consultation.class, consultationId); // renvoie null si l'identifiant n'existe pas
     }
     
-    /*public Medium chercherParMail(String clientMail) {
-        EntityManager em = JpaUtil.obtenirContextePersistance();
-        TypedQuery<Client> query = em.createQuery("SELECT c FROM Client c WHERE c.mail = :mail", Client.class);
-        query.setParameter("mail", clientMail); // correspond au paramètre ":mail" dans la requête
-        List<Client> clients = query.getResultList();
-        Client result = null;
-        if (!clients.isEmpty()) {
-            result = clients.get(0); // premier de la liste
-        }
-        return result;
-    }*/
     
     public List<Consultation> listerConsultation() {
         EntityManager em = JpaUtil.obtenirContextePersistance();
         TypedQuery<Consultation> query = em.createQuery("SELECT c FROM Consultation c ORDER BY c.nom ASC, c.prenom ASC", Consultation.class);
+        return query.getResultList();
+    }
+     public List<Consultation> listerConsultationParClient(long clientId) {
+        EntityManager em = JpaUtil.obtenirContextePersistance();
+        TypedQuery<Consultation> query = em.createQuery("SELECT c FROM Consultation c WHERE c.client.id="+clientId+" ORDER BY c.nom ASC, c.prenom ASC", Consultation.class);
+        return query.getResultList();
+    }
+      public List<Consultation> listerConsultationParEmploye(long employeId) {
+        EntityManager em = JpaUtil.obtenirContextePersistance();
+        TypedQuery<Consultation> query = em.createQuery("SELECT c FROM Consultation c WHERE c.employe.id="+employeId+" ORDER BY c.nom ASC, c.prenom ASC", Consultation.class);
+        return query.getResultList();
+    }
+       public List<Consultation> listerConsultationParMedium(long mediumId) {
+        EntityManager em = JpaUtil.obtenirContextePersistance();
+        TypedQuery<Consultation> query = em.createQuery("SELECT c FROM Consultation c WHERE c.medium.id="+mediumId+"  ORDER BY c.nom ASC, c.prenom ASC", Consultation.class);
         return query.getResultList();
     }
     

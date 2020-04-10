@@ -89,13 +89,55 @@ public class Service {
         
         return resultat;
     }
-    /*
+    
     
     public Client rechercherClientParId(Long id) {
         Client resultat = null;
         JpaUtil.creerContextePersistance();
         try {
-            resultat = usersDao.chercherParId(id);
+            resultat = usersDao.chercherClientParId(id);
+        } catch (Exception ex) {
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service rechercherClientParId(id)", ex);
+            resultat = null;
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+        return resultat;
+    }
+    
+    public Employe rechercherEmployeParId(Long id) {
+      Employe resultat = null;
+      JpaUtil.creerContextePersistance();
+      try {
+          resultat = usersDao.chercherEmployeParId(id);
+      } catch (Exception ex) {
+          Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service rechercherClientParId(id)", ex);
+          resultat = null;
+      } finally {
+          JpaUtil.fermerContextePersistance();
+      }
+      return resultat;
+    }
+      
+    public Medium rechercherMediumParId(Long id) {
+        Medium resultat = null;
+        JpaUtil.creerContextePersistance();
+        try {
+            resultat = mediumDao.chercherParId(id);
+        } catch (Exception ex) {
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service rechercherClientParId(id)", ex);
+            resultat = null;
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+        return resultat;
+    }
+    
+    public Consultation rechercherConsultationParId(Long id) {
+        Consultation resultat = null;
+        JpaUtil.creerContextePersistance();
+        try {
+            resultat = consultationDao.chercherParId(id);
         } catch (Exception ex) {
             Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service rechercherClientParId(id)", ex);
             resultat = null;
@@ -106,7 +148,7 @@ public class Service {
     }
 
 
-
+/*
     public List<Client> listerClients() {
         List<Client> resultat = null;
         JpaUtil.creerContextePersistance();

@@ -31,6 +31,7 @@ public class Consultation implements Serializable{
     private Employe employe;
     @ManyToOne
     private Medium medium;
+    
     public Consultation(){
         
     }
