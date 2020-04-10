@@ -6,6 +6,7 @@
 package fr.insalyon.dasi.metier.modele;
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -94,6 +95,18 @@ public abstract class Medium implements Serializable {
     public void setNbConsultation(int nbConsultation) {
         this.nbConsultation = nbConsultation;
     }
+    
+
+    public List<Consultation> getConsultations() {
+        return consultations;
+    }
+
+    public void setConsultations(List<Consultation> consultations) {
+        this.consultations = consultations;
+    }
+    
+    
+   
     
      @Override
     public String toString() {

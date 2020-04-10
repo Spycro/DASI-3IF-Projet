@@ -3,6 +3,7 @@ package fr.insalyon.dasi.metier.modele;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -24,7 +25,7 @@ public class Client extends Users implements Serializable {
     private Integer Age;
     @OneToOne
     private ProfilAstral profilAstral;
-    @OneToMany(mappedBy="client")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,mappedBy="client")
     private List<Consultation> consultations;
 
     public Client(String nom, String prenom, String numeroTel, String adresse, Integer Age, ProfilAstral profilAstral, Date dateNaissance, String motDePasse, String mail) {

@@ -486,15 +486,20 @@ public class Main {
         System.out.println();
         
         Service service = new Service();
-        Medium david = new Spirite("David","M","Yo tout le monde c'est david lafarge pokemon","cartes pokemon");
+        
+        Spirite david = new Spirite("David","M","Yo tout le monde c'est david lafarge pokemon","cartes pokemon");
         service.inscrireMedium(david);
+        
         ProfilAstral profil2 = new ProfilAstral("Cancer", "chien", "jaune", "chat");
         service.inscrireProfilAstral(profil2);
+        
         Users user1 = new Client("Jean", "bon", "3636", "11 rue", 25, profil2, Date.valueOf("2015-12-25"), "12345", "l@g.com");
         service.inscrireClient(user1);
+        
         Users user2 = new Employe("Jean", "bon", "3636",  25, "M", 0, "12345", "l@g.com");
         service.inscrireClient(user2);
-        Consultation consult1 = new Consultation(Date.valueOf("2015-12-25"),12,Date.valueOf("2015-12-25"),Date.valueOf("2015-12-25"),"c t bi1",(Client)user1,(Employe)user2,david);
+        
+        Consultation consult1 = new Consultation(Date.valueOf("2015-12-25"),12,Date.valueOf("2015-12-25"),Date.valueOf("2015-12-25"),"c t bi1",(Client)user1,(Employe)user2, david);
         Long idc1 = service.inscrireConsultation(consult1);
         if (idc1 != null) {
             System.out.println("> Succès inscription");

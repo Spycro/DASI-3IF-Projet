@@ -7,6 +7,7 @@ package fr.insalyon.dasi.metier.modele;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
@@ -24,7 +25,7 @@ public class Employe extends Users implements Serializable{
     private Integer Age;
     private String genre;
     private Integer nbConsultations;
-    @OneToMany(mappedBy="employe")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="employe")
     private List<Consultation> consultations;
     
     public Employe() {

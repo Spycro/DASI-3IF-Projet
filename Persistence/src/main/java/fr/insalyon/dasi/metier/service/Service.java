@@ -105,13 +105,12 @@ public class Service {
         return resultat;
     }
 
-
-
-    public List<Client> listerClients() {
-        List<Client> resultat = null;
+    */
+    public List<Medium> listerMedium() {
+        List<Medium> resultat = null;
         JpaUtil.creerContextePersistance();
         try {
-            resultat = usersDao.listerClients();
+            resultat = mediumDao.listerMedium();
         } catch (Exception ex) {
             Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service listerClients()", ex);
             resultat = null;
@@ -121,7 +120,7 @@ public class Service {
         return resultat;
     }
     
-    */
+    
     
     public Long inscrireProfilAstral(ProfilAstral profilAstral) {
         Long resultat = null;
