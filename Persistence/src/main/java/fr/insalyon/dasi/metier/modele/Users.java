@@ -56,4 +56,6 @@ abstract public class Users implements Serializable{
     public void setMotDePasse(String motDePasse) {
         this.motDePasse = motDePasse;
     }
+    
+    abstract public void addConsultation(Consultation consultation);
 }

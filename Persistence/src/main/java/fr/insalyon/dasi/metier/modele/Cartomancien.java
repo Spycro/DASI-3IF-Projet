@@ -22,7 +22,7 @@ public class Cartomancien extends Medium implements Serializable {
     }
     public Cartomancien(String denomination, String genre, String presentation) {
         super(denomination, genre, presentation);
-        this.type=1;
+//        this.type=1;
     }
     
     @Override

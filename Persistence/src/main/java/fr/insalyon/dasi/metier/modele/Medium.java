@@ -22,7 +22,7 @@ import javax.persistence.OneToMany;
  * @author Samuel GUYETANT
  */
 @Entity
-@Inheritance (strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance (strategy = InheritanceType.JOINED)
 public abstract class Medium implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +31,7 @@ public abstract class Medium implements Serializable {
     protected String genre;
     protected String presentation;
     protected int nbConsultation;
-    protected short type;
+//    protected short type;
     @OneToMany(mappedBy="medium")
     protected List<Consultation> consultations;
 
@@ -45,16 +45,15 @@ public abstract class Medium implements Serializable {
         this.nbConsultation = 0;
     }
 
-    public Medium(Long id, String denomination, String genre, String presentation, int nbConsultation, short type, List<Consultation> consultations) {
-        this.id = id;
-        this.denomination = denomination;
-        this.genre = genre;
-        this.presentation = presentation;
-        this.nbConsultation = nbConsultation;
-        this.type = type;
-        this.consultations = consultations;
-    }
-    
+//    public Medium(Long id, String denomination, String genre, String presentation, int nbConsultation, List<Consultation> consultations) {
+//        this.id = id;
+//        this.denomination = denomination;
+//        this.genre = genre;
+//        this.presentation = presentation;
+//        this.nbConsultation = nbConsultation;
+//        this.consultations = consultations;
+//    }
+//    
 
     public Long getId() {
         return id;
@@ -75,10 +74,10 @@ public abstract class Medium implements Serializable {
     public int getNbConsultation() {
         return nbConsultation;
     }
-
-    public short getType() {
-        return type;
-    }
+//
+//    public short getType() {
+//        return type;
+//    }
 
     public void setDenomination(String denomination) {
         this.denomination = denomination;
@@ -105,7 +104,9 @@ public abstract class Medium implements Serializable {
         this.consultations = consultations;
     }
     
-    
+    public void addConsultation(Consultation consultation){
+        this.consultations.add(consultation);
+    }
    
     
      @Override

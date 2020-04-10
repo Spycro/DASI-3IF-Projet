@@ -39,7 +39,7 @@ public class Main {
         //saisirRechercheClient();
         //testerInscriptionMedium();
         //testerInscriptionClient();
-        //testerInscriptionConsultation();
+        testerInscriptionConsultation();
         
         JpaUtil.destroy();
     }
@@ -487,7 +487,7 @@ public class Main {
         
         Service service = new Service();
         
-        Spirite david = new Spirite("David","M","Yo tout le monde c'est david lafarge pokemon","cartes pokemon");
+        Medium david = new Spirite("David","M","Yo tout le monde c'est david lafarge pokemon","cartes pokemon");
         service.inscrireMedium(david);
         
         ProfilAstral profil2 = new ProfilAstral("Cancer", "chien", "jaune", "chat");
@@ -499,8 +499,15 @@ public class Main {
         Users user2 = new Employe("Jean", "bon", "3636",  25, "M", 0, "12345", "l@g.com");
         service.inscrireClient(user2);
         
-        Consultation consult1 = new Consultation(Date.valueOf("2015-12-25"),12,Date.valueOf("2015-12-25"),Date.valueOf("2015-12-25"),"c t bi1",(Client)user1,(Employe)user2, david);
+        Consultation consult1 = new Consultation(Date.valueOf("2015-12-25"),12,Date.valueOf("2015-12-25"),Date.valueOf("2015-12-25"),"c t bi1");
+        
+        consult1.setClient((Client)user1);
+        consult1.setEmploye((Employe)user2);
+        consult1.setMedium(david);
+        
         Long idc1 = service.inscrireConsultation(consult1);
+        
+        
         if (idc1 != null) {
             System.out.println("> Succès inscription");
         } else {

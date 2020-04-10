@@ -6,12 +6,14 @@
  */
 package fr.insalyon.dasi.metier.modele;
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 /**
  *
  * @author Samuel GUYETANT
@@ -21,9 +23,12 @@ public class Consultation implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
+    @Temporal(TemporalType.DATE) //A enlever probablement
     private Date dateConsultation;
     private int duree;
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateDebut;
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateFin;
     private String commentaire;
     @ManyToOne
@@ -37,15 +42,23 @@ public class Consultation implements Serializable{
         
     }
 
-    public Consultation(Date date, int duree, Date dateDebut, Date dateFin, String commentaire,Client cl,Employe em,Medium me) {
-        this.dateConsultation = date;
+//    public Consultation(Date date, int duree, Date dateDebut, Date dateFin, String commentaire,Client cl,Employe em,Medium me) {
+//        this.dateConsultation = date;
+//        this.duree = duree;
+//        this.dateDebut = dateDebut;
+//        this.dateFin = dateFin;
+//        this.commentaire = commentaire;
+//        this.client=cl;
+//        this.employe=em;
+//        this.medium=me;
+//    }
+
+    public Consultation(Date dateConsultation, int duree, Date dateDebut, Date dateFin, String commentaire) {
+        this.dateConsultation = dateConsultation;
         this.duree = duree;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
         this.commentaire = commentaire;
-        this.client=cl;
-        this.employe=em;
-        this.medium=me;
     }
 
     public Long getId() {
@@ -108,15 +121,19 @@ public class Consultation implements Serializable{
 
     public void setClient(Client client) {
         this.client = client;
+        client.addConsultation(this);
     }
 
     public void setEmploye(Employe employe) {
         this.employe = employe;
+        employe.addConsultation(this);
     }
 
     public void setMedium(Medium medium) {
         this.medium = medium;
+        medium.addConsultation(this);
     }
+    
      @Override
     public String toString() {
         return "Consultation : id=" + id + ", date de consultation=" + dateConsultation + ", duree=" + duree + ", date de debut=" + dateDebut + ", date de fin=" + dateFin+"\nCommentaire :"+commentaire +"\n"+client.toString()+"\n"+employe.toString()+"\n"+medium.toString();

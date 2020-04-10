@@ -61,7 +61,7 @@ public class Client extends Users implements Serializable {
         this.consultations = consultations;
         this.dateNaissance = dateNaissance;
     }
-    
+//    
 
     public Date getDateNaissance() {
         return dateNaissance;
@@ -112,7 +112,10 @@ public class Client extends Users implements Serializable {
         this.prenom = prenom;
     }
 
-
+    @Override
+    public void addConsultation(Consultation consultation) {
+        consultations.add(consultation);
+    }
 
     @Override
     public String toString() {

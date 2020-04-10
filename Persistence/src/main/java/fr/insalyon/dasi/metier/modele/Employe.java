@@ -42,15 +42,15 @@ public class Employe extends Users implements Serializable{
        
     }
 
-    public Employe(String nom, String prenom, String numeroTel, Integer Age, String genre, Integer nbConsultations, List<Consultation> consultations) {
-        this.nom = nom;
-        this.prenom = prenom;
-        this.numeroTel = numeroTel;
-        this.Age = Age;
-        this.genre = genre;
-        this.nbConsultations = nbConsultations;
-        this.consultations = consultations;
-    }
+//    public Employe(String nom, String prenom, String numeroTel, Integer Age, String genre, Integer nbConsultations, List<Consultation> consultations) {
+//        this.nom = nom;
+//        this.prenom = prenom;
+//        this.numeroTel = numeroTel;
+//        this.Age = Age;
+//        this.genre = genre;
+//        this.nbConsultations = nbConsultations;
+//        this.consultations = consultations;
+//    }
     
 
     public String getNom() {
@@ -104,5 +104,10 @@ public class Employe extends Users implements Serializable{
         @Override
     public String toString() {
         return "Client : id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", mail=" + mail + ", motDePasse=" + motDePasse;
+    }
+
+    @Override
+    public void addConsultation(Consultation consultation) {
+        consultations.add(consultation);
     }
 }
