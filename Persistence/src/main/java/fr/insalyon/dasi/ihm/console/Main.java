@@ -39,7 +39,7 @@ public class Main {
         //saisirRechercheClient();
         //testerInscriptionMedium();
         //testerInscriptionClient();
-        testerInscriptionConsultation();
+        //testerInscriptionConsultation();
         
         JpaUtil.destroy();
     }
