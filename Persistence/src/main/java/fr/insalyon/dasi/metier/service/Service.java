@@ -7,7 +7,6 @@ import fr.insalyon.dasi.metier.modele.Client;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import com.google.gson.JsonObject;
 import fr.insalyon.dasi.dao.ConsultationDao;
 import fr.insalyon.dasi.dao.ProfilAstralDao;
 import fr.insalyon.dasi.metier.modele.Consultation;
@@ -15,6 +14,7 @@ import fr.insalyon.dasi.metier.modele.Employe;
 import fr.insalyon.dasi.metier.modele.Medium;
 import fr.insalyon.dasi.metier.modele.ProfilAstral;
 import fr.insalyon.dasi.metier.modele.Users;
+import fr.insalyon.dasi.util.AstroUtil;
 
 /**
  *
@@ -26,8 +26,9 @@ public class Service {
     protected UsersDao usersDao = new UsersDao();
     protected ProfilAstralDao profilAstralDao = new ProfilAstralDao();
     protected ConsultationDao consultationDao = new ConsultationDao();
+    protected AstroUtil astroUtil = new AstroUtil();
 
-    public Long inscrireClient(Users user) {
+    public Long inscrireUsers(Users user) {
         Long resultat = null;
         JpaUtil.creerContextePersistance();
         try {
@@ -42,6 +43,29 @@ public class Service {
         } finally {
             JpaUtil.fermerContextePersistance();
         }
+        return resultat;
+    }
+    
+    public long inscrireClient(Client client) {
+        Long resultat = null;
+        JpaUtil.creerContextePersistance();
+        try{
+            JpaUtil.ouvrirTransaction();
+            List<String> profil_array = astroUtil.getProfil(client.getPrenom(), client.getDateNaissance());
+            ProfilAstral prof = new ProfilAstral(profil_array.get(0),profil_array.get(1), profil_array.get(2), profil_array.get(3) );
+            client.setProfilAstral(prof);
+            usersDao.creer(client);
+            JpaUtil.validerTransaction();
+            resultat= client.getId();
+        }
+        catch (Exception ex) {
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service inscrireClient(client)", ex);
+            JpaUtil.annulerTransaction();
+            resultat = null;
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+        
         return resultat;
     }
     
@@ -176,7 +200,7 @@ public class Service {
         return resultat;
     }
     
-     public List<Consultation> listerConsultation() {
+    public List<Consultation> listerConsultation() {
         List<Consultation> resultat = null;
 
         JpaUtil.creerContextePersistance();
@@ -190,7 +214,8 @@ public class Service {
         }
         return resultat;
     }
-     public List<Consultation> listerConsultationParClient(long idC) {
+     
+    public List<Consultation> listerConsultationParClient(long idC) {
         List<Consultation> resultat = null;
 
         JpaUtil.creerContextePersistance();
@@ -204,7 +229,8 @@ public class Service {
         }
         return resultat;
     }
-     public List<Consultation> listerConsultationParEmploye(long idE) {
+     
+    public List<Consultation> listerConsultationParEmploye(long idE) {
         List<Consultation> resultat = null;
 
         JpaUtil.creerContextePersistance();
@@ -217,8 +243,9 @@ public class Service {
             JpaUtil.fermerContextePersistance();
         }
         return resultat;
-    }
-     public List<Consultation> listerConsultationParMedium(long idM) {
+    } 
+    
+    public List<Consultation> listerConsultationParMedium(long idM) {
         List<Consultation> resultat = null;
 
         JpaUtil.creerContextePersistance();
@@ -232,8 +259,6 @@ public class Service {
         }
         return resultat;
     }
-    
-
     
     public Long inscrireProfilAstral(ProfilAstral profilAstral) {
         Long resultat = null;
@@ -252,6 +277,7 @@ public class Service {
         }
         return resultat;
     }
+    
     public Long inscrireMedium(Medium medium) {
         Long resultat = null;
         JpaUtil.creerContextePersistance();
@@ -287,7 +313,5 @@ public class Service {
         }
         return resultat;
     }
-    
-    
     
 }

@@ -23,21 +23,12 @@ public class Client extends Users implements Serializable {
     private String numeroTel;
     private String adresse;
     private Integer Age;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private ProfilAstral profilAstral;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,mappedBy="client")
     private List<Consultation> consultations;
 
-    public Client(String nom, String prenom, String numeroTel, String adresse, Integer Age, ProfilAstral profilAstral, Date dateNaissance, String motDePasse, String mail) {
-        super(motDePasse, mail);
-        this.nom = nom;
-        this.prenom = prenom;
-        this.numeroTel = numeroTel;
-        this.adresse = adresse;
-        this.Age = Age;
-        this.profilAstral = profilAstral;
-        this.dateNaissance = dateNaissance;
-    }
+
 
     public Client(String nom, String prenom, String numeroTel, String adresse, Integer Age, Date dateNaissance, String motDePasse, String mail) {
         super(motDePasse, mail);
@@ -110,6 +101,10 @@ public class Client extends Users implements Serializable {
 
     public void setPrenom(String prenom) {
         this.prenom = prenom;
+    }
+
+    public void setProfilAstral(ProfilAstral profilAstral) {
+        this.profilAstral = profilAstral;
     }
 
     @Override

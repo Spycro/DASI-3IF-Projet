@@ -31,7 +31,7 @@ public class Main {
         JpaUtil.init();
 
         //initialiserClients();            // Question 3
-        //testerInscriptionClient();       // Question 4 & 5
+        testerInscriptionClient();       // Question 4 & 5
         //testerRechercheClient();         // Question 6
         //testerListeClients();            // Question 7
         //testerAuthentificationClient();  // Question 8
@@ -39,12 +39,11 @@ public class Main {
         //saisirRechercheClient();
         //testerInscriptionMedium();
         //testerInscriptionClient();
-        testerInscriptionConsultation();
-        Service s=new Service();
+        //testerInscriptionConsultation();
         //System.out.println(s.rechercherConsultationParId((long)1).toString());
-        for(Consultation c : s.listerConsultationParClient((long)1)){
+       /* for(Consultation c : s.listerConsultationParClient((long)1)){
             System.out.println(c.toString());
-        }
+        }*/
         JpaUtil.destroy();
     }
 
@@ -83,7 +82,7 @@ public class Main {
         afficherProfil(profil2);
 
         /*Client hedwig = new Client("Lamarr", "Hedwig Eva Maria", "hlamarr@insa-lyon.fr", "WiFi");
-        Long idHedwig = service.inscrireClient(hedwig);
+        Long idHedwig = service.inscrireUsers(hedwig);
         if (idHedwig != null) {
             System.out.println("> Succès inscription");
         } else {
@@ -102,17 +101,10 @@ public class Main {
         
         Service service = new Service();
         
-        ProfilAstral profil2 = new ProfilAstral("Cancer", "chien", "jaune", "chat");
-        Long idProfil2 = service.inscrireProfilAstral(profil2);
-        if (idProfil2 != null) {
-            System.out.println("> Succès inscription");
-        } else {
-            System.out.println("> Échec inscription");
-        }
-        afficherProfil(profil2);
+
 
         
-        Users user1 = new Client("Jean", "bon", "3636", "11 rue", 25, profil2, Date.valueOf("2015-12-25"), "12345", "l@g.com");
+        Client user1 = new Client("Jean", "bon", "3636", "11 rue", 25, Date.valueOf("2015-12-25"), "12345", "l@g.com");
         Long profil1ID = service.inscrireClient(user1);
         if (profil1ID != null) {
             System.out.println("> Succès inscription");
@@ -136,7 +128,7 @@ public class Main {
 
         
         Users user1 = new Employe("Jean", "bon", "3636",  25, "M", 0, "12345", "l@g.com");
-        Long profil1ID = service.inscrireClient(user1);
+        Long profil1ID = service.inscrireUsers(user1);
         if (profil1ID != null) {
             System.out.println("> Succès inscription");
         } else {
@@ -272,40 +264,6 @@ public class Main {
         System.out.println();
     }
 
-    public static void testerInscriptionClient() {
-        
-        System.out.println();
-        System.out.println("**** testerInscriptionClient() ****");
-        System.out.println();
-        
-        Service service = new Service();
-        Client claude = new Client("Chappe", "Claude", "claude.chappe@insa-lyon.fr", "HaCKeR");
-        Long idClaude = service.inscrireClient(claude);
-        if (idClaude != null) {
-            System.out.println("> Succès inscription");
-        } else {
-            System.out.println("> Échec inscription");
-        }
-        afficherClient(claude);
-
-        Client hedy = new Client("Lamarr", "Hedy", "hlamarr@insa-lyon.fr", "WiFi");
-        Long idHedy = service.inscrireClient(hedy);
-        if (idHedy != null) {
-            System.out.println("> Succès inscription");
-        } else {
-            System.out.println("> Échec inscription");
-        }
-        afficherClient(hedy);
-
-        Client hedwig = new Client("Lamarr", "Hedwig Eva Maria", "hlamarr@insa-lyon.fr", "WiFi");
-        Long idHedwig = service.inscrireClient(hedwig);
-        if (idHedwig != null) {
-            System.out.println("> Succès inscription");
-        } else {
-            System.out.println("> Échec inscription");
-        }
-        afficherClient(hedwig);
-    }
 
     public static void testerRechercheClient() {
         
@@ -364,100 +322,7 @@ public class Main {
         }
     }
 
-
-
-    public static void saisirInscriptionClient() {
-        Service service = new Service();
-
-        System.out.println();
-        System.out.println("Appuyer sur Entrée pour passer la pause...");
-        Saisie.pause();
-
-        System.out.println();
-        System.out.println("**************************");
-        System.out.println("** NOUVELLE INSCRIPTION **");
-        System.out.println("**************************");
-        System.out.println();
-
-        String nom = Saisie.lireChaine("Nom ? ");
-        String prenom = Saisie.lireChaine("Prénom ? ");
-        String mail = Saisie.lireChaine("Mail ? ");
-        String motDePasse = Saisie.lireChaine("Mot de passe ? ");
-
-        Client employe = new Client(nom, prenom, mail, motDePasse);
-        Long idClient = service.inscrireClient(employe);
-
-        if (idClient != null) {
-            System.out.println("> Succès inscription");
-        } else {
-            System.out.println("> Échec inscription");
-        }
-        afficherClient(employe);
-
-    }
-
-    public static void saisirRechercheClient() {
-        Service service = new Service();
-
-        System.out.println();
-        System.out.println("*********************");
-        System.out.println("** MENU INTERACTIF **");
-        System.out.println("*********************");
-        System.out.println();
-
-        Saisie.pause();
-
-        System.out.println();
-        System.out.println("**************************");
-        System.out.println("** RECHERCHE de CLIENTS **");
-        System.out.println("**************************");
-        System.out.println();
-        System.out.println();
-        System.out.println("** Recherche par Identifiant:");
-        System.out.println();
-
-        Integer idClient = Saisie.lireInteger("Identifiant ? [0 pour quitter] ");
-        while (idClient != 0) {
-            Client employe = service.rechercherClientParId(idClient.longValue());
-            if (employe != null) {
-                afficherClient(employe);
-            } else {
-                System.out.println("=> Client #" + idClient + " non-trouvé");
-            }
-            System.out.println();
-            idClient = Saisie.lireInteger("Identifiant ? [0 pour quitter] ");
-        }
-
-        System.out.println();
-        System.out.println("********************************");
-        System.out.println("** AUTHENTIFICATION de CLIENT **");
-        System.out.println("********************************");
-        System.out.println();
-        System.out.println();
-        System.out.println("** Authentifier Client:");
-        System.out.println();
-
-        String clientMail = Saisie.lireChaine("Mail ? [0 pour quitter] ");
-
-        while (!clientMail.equals("0")) {
-            String clientMotDePasse = Saisie.lireChaine("Mot de passe ? ");
-            Client employe = service.authentifierClient(clientMail, clientMotDePasse);
-            if (employe != null) {
-                afficherClient(employe);
-            } else {
-                System.out.println("=> Client non-authentifié");
-            }
-            clientMail = Saisie.lireChaine("Mail ? [0 pour quitter] ");
-        }
-
-        System.out.println();
-        System.out.println("*****************");
-        System.out.println("** AU REVOIR ! **");
-        System.out.println("*****************");
-        System.out.println();
-
-    }
-    */
+   */
     public static void testerInscriptionMedium() {
         
         System.out.println();
@@ -493,15 +358,13 @@ public class Main {
         
         Medium david = new Spirite("David","M","Yo tout le monde c'est david lafarge pokemon","cartes pokemon");
         service.inscrireMedium(david);
+
         
-        ProfilAstral profil2 = new ProfilAstral("Cancer", "chien", "jaune", "chat");
-        service.inscrireProfilAstral(profil2);
-        
-        Users user1 = new Client("Jean", "bon", "3636", "11 rue", 25, profil2, Date.valueOf("2015-12-25"), "12345", "l@g.com");
-        service.inscrireClient(user1);
+        Users user1 = new Client("Jean", "bon", "3636", "11 rue", 25, Date.valueOf("2015-12-25"), "12345", "l@g.com");
+        service.inscrireUsers(user1);
         
         Users user2 = new Employe("Jean", "bon", "3636",  25, "M", 0, "12345", "l@g.com");
-        service.inscrireClient(user2);
+        service.inscrireUsers(user2);
         
         Consultation consult1 = new Consultation(Date.valueOf("2015-12-25"),12,Date.valueOf("2015-12-25"),Date.valueOf("2015-12-25"),"c t bi1");
         
@@ -519,14 +382,6 @@ public class Main {
         }
         System.out.println(consult1.toString());
         
-        /*Consultation consult2 = new Consultation(Date.valueOf("2015-12-25"),12,Date.valueOf("2015-12-25"),Date.valueOf("2015-12-25"),"franchement pas fou");
-        Long idc2 = service.inscrireConsultation(consult2);
-        if (idc2 != null) {
-            System.out.println("> Succès inscription");
-        } else {
-            System.out.println("> Échec inscription");
-        }
-        System.out.println(consult2.toString());*/
       
     }
 }
