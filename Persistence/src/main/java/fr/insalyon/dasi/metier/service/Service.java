@@ -32,7 +32,6 @@ public class Service {
     protected ProfilAstralDao profilAstralDao = new ProfilAstralDao();
     protected ConsultationDao consultationDao = new ConsultationDao();
     protected AstroUtil astroUtil = new AstroUtil();
-    protected static Set<Long> EmployeEnConsultation = new HashSet<Long>(); 
     protected MessageUtil messageUtil = new MessageUtil();
     
 
@@ -310,6 +309,7 @@ public class Service {
         try {
             JpaUtil.ouvrirTransaction();
             consultationDao.creer(consultation);
+            usersDao.modifierEtatConsultation(consultation.getEmploye(), Boolean.FALSE);
             JpaUtil.validerTransaction();
             resultat = consultation.getId();
         } catch (Exception ex) {
@@ -350,15 +350,18 @@ public class Service {
             Medium medium = mediumDao.chercherParId(mediumID);
             List<Employe> possible = usersDao.listerEmployesParGenre(medium.getGenre());
             for(Employe emp : possible){
-                if(!EmployeEnConsultation.contains(emp.getId())){
+                if(!emp.getEnConsultation()){
                     employeChoisi = emp.getId();
-                    EmployeEnConsultation.add(employeChoisi);
+                    JpaUtil.ouvrirTransaction();
+                    usersDao.modifierEtatConsultation(emp, Boolean.TRUE);
+                    JpaUtil.validerTransaction();
                 }
             }
         }
         catch(Exception ex){
             Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service ChoisirEmploye(Medium)", ex);
             employeChoisi = null;
+            JpaUtil.annulerTransaction();
         } finally {
             JpaUtil.fermerContextePersistance();
         }
@@ -404,7 +407,7 @@ public class Service {
             nouvelleConsultation.setClient(client);
             nouvelleConsultation.setEmploye(employe);
             nouvelleConsultation.setMedium(medium);
-            consultationID = inscrireConsultation(nouvelleConsultation);
+            consultationID = inscrireConsultation(nouvelleConsultation);            
             
         }
         catch(Exception ex){
@@ -412,7 +415,6 @@ public class Service {
             consultationID = null;
         }
         //Enleve l'employe de la liste des employe en consultation
-        EmployeEnConsultation.remove(employe.getId());
         return consultationID;
     }
     

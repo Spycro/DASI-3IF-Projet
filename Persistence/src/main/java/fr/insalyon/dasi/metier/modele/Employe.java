@@ -27,7 +27,8 @@ public class Employe extends Users implements Serializable{
     private Integer nbConsultations;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="employe")
     private List<Consultation> consultations;
-    
+    private Boolean enConsultation;
+
     public Employe() {
     }
 
@@ -39,6 +40,7 @@ public class Employe extends Users implements Serializable{
         this.Age = Age;
         this.genre = genre;
         this.nbConsultations = nbConsultations;
+        this.enConsultation = false;
        
     }
 
@@ -100,6 +102,15 @@ public class Employe extends Users implements Serializable{
     public void setNbConsultations(Integer nbConsultations) {
         this.nbConsultations = nbConsultations;
     }
+    
+    public Boolean getEnConsultation() {
+        return enConsultation;
+    }
+
+    public void setEnConsultation(Boolean enConsultation) {
+        this.enConsultation = enConsultation;
+    }
+    
     
         @Override
     public String toString() {

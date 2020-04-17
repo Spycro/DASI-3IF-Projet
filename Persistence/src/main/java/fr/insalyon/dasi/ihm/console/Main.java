@@ -47,8 +47,10 @@ public class Main {
         //testerMotDePasseOublie();
         //testerChangerMotDePasse();
         //testerRechercheConsultationParId()
-        //System.out.println(s.rechercherConsultationParId((long)1).toString());
-       
+        //testerListeConsultation();
+        //testerListeConsultationParClient();
+        //testerListeConsultationParEmploye();
+        //testerListeConsultationParMedium();
         JpaUtil.destroy();
     }
 
@@ -281,7 +283,7 @@ public class Main {
         }
     }
     
-       public static void testerListeConsultation() {
+    public static void testerListeConsultation() {
         
         System.out.println();
         System.out.println("**** testerListeConsultation() ****");
@@ -299,7 +301,8 @@ public class Main {
             System.out.println("=> ERREUR...");
         }
     }
-          public static void testerListeConsultationParClient() {
+    
+    public static void testerListeConsultationParClient() {
         
         System.out.println();
         System.out.println("**** testerListeConsultationParClient() ****");
@@ -318,7 +321,8 @@ public class Main {
             System.out.println("=> ERREUR...");
         }
     }
-             public static void testerListeConsultationParEmploye() {
+    
+    public static void testerListeConsultationParEmploye() {
         
         System.out.println();
         System.out.println("**** testerListeConsultationParEmploye() ****");
@@ -337,7 +341,8 @@ public class Main {
             System.out.println("=> ERREUR...");
         }
     }
-                public static void testerListeConsultationParMedium() {
+    
+    public static void testerListeConsultationParMedium() {
         
         System.out.println();
         System.out.println("**** testerListeConsultationParMedium() ****");
@@ -356,9 +361,6 @@ public class Main {
             System.out.println("=> ERREUR...");
         }
     }
-
-   
-     
      
     public static void testerInscriptionMedium() {
         
@@ -545,6 +547,8 @@ public class Main {
             Date dateDeb = format.parse(datedeb);
             Date dateFin = format.parse(datefin);
             consultationID = service.EnregistrerConsultation(user1, david, user2, dateDeb, dateFin, "Pas trop mal");
+            consultationID = service.EnregistrerConsultation(user1, david, user2, dateDeb, dateFin, "Assez cool");
+
 
         } catch(Exception ex){
             System.out.println("Bad date");

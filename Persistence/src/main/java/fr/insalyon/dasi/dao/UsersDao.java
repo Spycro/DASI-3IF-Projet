@@ -93,6 +93,11 @@ public class UsersDao {
         return query.getResultList();
     }
     
+    public void modifierEtatConsultation(Employe employe, Boolean etat){
+        EntityManager em = JpaUtil.obtenirContextePersistance();
+        employe = em.merge(employe);
+        employe.setEnConsultation(etat);
+    }
     
     
 }
