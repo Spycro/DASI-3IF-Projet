@@ -46,10 +46,9 @@ public class Main {
         //testerTopMedium();
         //testerMotDePasseOublie();
         //testerChangerMotDePasse();
+        //testerRechercheConsultationParId()
         //System.out.println(s.rechercherConsultationParId((long)1).toString());
-       /* for(Consultation c : s.listerConsultationParClient((long)1)){
-            System.out.println(c.toString());
-        }*/
+       
         JpaUtil.destroy();
     }
 
@@ -263,18 +262,94 @@ public class Main {
         }
     }
 
-    public static void testerListeClients() {
+    public static void testerListeMedium() {
         
         System.out.println();
-        System.out.println("**** testerListeClients() ****");
+        System.out.println("**** testerListeMedium() ****");
         System.out.println();
         
         Service service = new Service();
         List<Medium> listeMediums = service.listerMedium();
-        System.out.println("*** Liste des Clients");
+        System.out.println("*** Liste des Medium");
         if (listeMediums != null) {
             for (Medium medium : listeMediums) {
                 afficherMedium(medium);
+            }
+        }
+        else {
+            System.out.println("=> ERREUR...");
+        }
+    }
+    
+       public static void testerListeConsultation() {
+        
+        System.out.println();
+        System.out.println("**** testerListeConsultation() ****");
+        System.out.println();
+        
+        Service service = new Service();
+        List<Consultation> listeConsultation = service.listerConsultation();
+        System.out.println("*** Liste des Medium");
+        if (listeConsultation != null) {
+            for (Consultation consult : listeConsultation) {
+                System.out.println(consult.toString());
+            }
+        }
+        else {
+            System.out.println("=> ERREUR...");
+        }
+    }
+          public static void testerListeConsultationParClient() {
+        
+        System.out.println();
+        System.out.println("**** testerListeConsultationParClient() ****");
+        System.out.println();
+        
+        Service service = new Service();
+        long id=1;
+        List<Consultation> listeConsultation = service.listerConsultationParClient(id);
+        System.out.println("*** Liste des Medium");
+        if (listeConsultation != null) {
+            for (Consultation consult : listeConsultation) {
+                System.out.println(consult.toString());
+            }
+        }
+        else {
+            System.out.println("=> ERREUR...");
+        }
+    }
+             public static void testerListeConsultationParEmploye() {
+        
+        System.out.println();
+        System.out.println("**** testerListeConsultationParEmploye() ****");
+        System.out.println();
+        
+        Service service = new Service();
+        long id=1;
+        List<Consultation> listeConsultation = service.listerConsultationParEmploye(id);
+        System.out.println("*** Liste des Medium");
+        if (listeConsultation != null) {
+            for (Consultation consult : listeConsultation) {
+                System.out.println(consult.toString());
+            }
+        }
+        else {
+            System.out.println("=> ERREUR...");
+        }
+    }
+                public static void testerListeConsultationParMedium() {
+        
+        System.out.println();
+        System.out.println("**** testerListeConsultationParMedium() ****");
+        System.out.println();
+        
+        Service service = new Service();
+        long id=1;
+        List<Consultation> listeConsultation = service.listerConsultationParMedium(id);
+        System.out.println("*** Liste des Medium");
+        if (listeConsultation != null) {
+            for (Consultation consult : listeConsultation) {
+                System.out.println(consult.toString());
             }
         }
         else {
@@ -554,6 +629,42 @@ public class Main {
     private static void afficherMedium(Medium medium) {
          System.out.println("-> " + medium);
     }
-    
+    public static void testerRechercheConsultationParId() {
+        
+        System.out.println();
+        System.out.println("**** testerRechercheConsultationParId() ****");
+        System.out.println();
+        
+        Service service = new Service();
+        long id;
+        Consultation consult;
+
+        id = 1;
+        System.out.println("** Recherche de la consultation #" + id);
+        consult = service.rechercherConsultationParId(id);
+        if (consult != null) {
+            System.out.println(consult.toString());
+        } else {
+            System.out.println("=> Consultation non-trouvé");
+        }
+
+        id = 3;
+        System.out.println("** Recherche de la consultation #" + id);
+        consult = service.rechercherConsultationParId(id);
+        if (consult != null) {
+            System.out.println(consult.toString());
+        } else {
+            System.out.println("=> Consultation non-trouvé");
+        }
+
+        id = 17;
+        System.out.println("** Recherche de la consultation #" + id);
+        consult = service.rechercherConsultationParId(id);
+        if (consult != null) {
+            System.out.println(consult.toString());
+        } else {
+            System.out.println("=> Consultation #" + id + " non-trouvé");
+        }
+    }
     
 }
