@@ -37,14 +37,12 @@ public class Main {
         //testerRechercheClient();        
         //testerListeClients();            
         //testerAuthentificationClient();  
-        //saisirInscriptionClient();       
-        //saisirRechercheClient();
         //testerInscriptionMedium();
         //testerInscriptionClient();
         //testerInscriptionConsultation();
         //testerChoisirEmploye();
         //testerAccepterConsultation();
-        testerEnregistrerConsultation();
+        //testerEnregistrerConsultation();
         //testerTopMedium();
         //testerMotDePasseOublie();
         //testerChangerMotDePasse();
@@ -112,7 +110,7 @@ public class Main {
 
 
         
-        Client user1 = new Client("Jean", "bon", "3636", "11 rue", 25, Date.valueOf("2015-12-25"), "12345", "l@g.com");
+        Client user1 = new Client("Jean", "bon", "3636", "11 rue", 25, new Date(), "12345", "l@g.com");
         Long profil1ID = service.inscrireClient(user1);
         if (profil1ID != null) {
             System.out.println("> Succès inscription");
@@ -223,58 +221,10 @@ public class Main {
         System.out.println("-> " + client);
     }
     
-     public static void afficherEmploye(Employe employe) {
+    public static void afficherEmploye(Employe employe) {
         System.out.println("-> " + employe);
     }
     
-     
-     /*
-    public static void initialiserClients() {
-        
-        System.out.println();
-        System.out.println("**** initialiserClients() ****");
-        System.out.println();
-        
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("DASI-PU");
-        EntityManager em = emf.createEntityManager();
-
-        User ada = new Client("Lovelace", "Ada", "ada.lovelace@insa-lyon.fr", "Ada1012", );
-        
-        
-        System.out.println();
-        System.out.println("** Clients avant persistance: ");
-        afficherClient(ada);
-        afficherClient(blaise);
-        afficherClient(fred);
-        System.out.println();
-
-        try {
-            em.getTransaction().begin();
-            em.persist(ada);
-            em.persist(blaise);
-            em.persist(fred);
-            em.getTransaction().commit();
-        } catch (Exception ex) {
-            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service", ex);
-            try {
-                em.getTransaction().rollback();
-            }
-            catch (IllegalStateException ex2) {
-                // Ignorer cette exception...
-            }
-        } finally {
-            em.close();
-        }
-
-        System.out.println();
-        System.out.println("** Clients après persistance: ");
-        afficherClient(ada);
-        afficherClient(blaise);
-        afficherClient(fred);
-        System.out.println();
-    }
-
-
     public static void testerRechercheClient() {
         
         System.out.println();
@@ -283,31 +233,31 @@ public class Main {
         
         Service service = new Service();
         long id;
-        Client employe;
+        Client client;
 
         id = 1;
         System.out.println("** Recherche du Client #" + id);
-        employe = service.rechercherClientParId(id);
-        if (employe != null) {
-            afficherClient(employe);
+        client = service.rechercherClientParId(id);
+        if (client != null) {
+            afficherClient(client);
         } else {
             System.out.println("=> Client non-trouvé");
         }
 
         id = 3;
         System.out.println("** Recherche du Client #" + id);
-        employe = service.rechercherClientParId(id);
-        if (employe != null) {
-            afficherClient(employe);
+        client = service.rechercherClientParId(id);
+        if (client != null) {
+            afficherClient(client);
         } else {
             System.out.println("=> Client non-trouvé");
         }
 
         id = 17;
         System.out.println("** Recherche du Client #" + id);
-        employe = service.rechercherClientParId(id);
-        if (employe != null) {
-            afficherClient(employe);
+        client = service.rechercherClientParId(id);
+        if (client != null) {
+            afficherClient(client);
         } else {
             System.out.println("=> Client #" + id + " non-trouvé");
         }
@@ -320,11 +270,11 @@ public class Main {
         System.out.println();
         
         Service service = new Service();
-        List<Client> listeClients = service.listerClients();
+        List<Medium> listeMediums = service.listerMedium();
         System.out.println("*** Liste des Clients");
-        if (listeClients != null) {
-            for (Client employe : listeClients) {
-                afficherClient(employe);
+        if (listeMediums != null) {
+            for (Medium medium : listeMediums) {
+                afficherMedium(medium);
             }
         }
         else {
@@ -332,7 +282,7 @@ public class Main {
         }
     }
 
-   */
+   
      
      
     public static void testerInscriptionMedium() {
@@ -373,13 +323,13 @@ public class Main {
         service.inscrireMedium(david);
 
         
-        Users user1 = new Client("Jean", "bon", "3636", "11 rue", 25, Date.valueOf("2015-12-25"), "12345", "l@g.com");
+        Users user1 = new Client("Jean", "bon", "3636", "11 rue", 25, new Date(), "12345", "l@g.com");
         service.inscrireUsers(user1);
         
         Users user2 = new Employe("Jean", "bon", "3636",  25, "M", 0, "12345", "l@g.com");
         service.inscrireUsers(user2);
         
-        Consultation consult1 = new Consultation(Date.valueOf("2015-12-25"),12L,Date.valueOf("2015-12-25"),Date.valueOf("2015-12-25"),"c t bi1");
+        Consultation consult1 = new Consultation(new Date(),new Date(),12L,"c t bi1");
         
         consult1.setClient((Client)user1);
         consult1.setEmploye((Employe)user2);
@@ -451,7 +401,7 @@ public class Main {
         }
         
         /*
-        On reessaye, normalement on doit avoir un id d'employe null
+        On reessaye, normalement on doit avoir un id d'client null
         */
         Long employeChoisi2 = service.ChoisirEmploye(mediumID);
         if(employeChoisi2 !=null){
@@ -507,7 +457,7 @@ public class Main {
         Employe user2 = new Employe("Jean", "bon", "3636",  25, "M", 0, "12345", "l@g.com");
         service.inscrireUsers(user2);
      
-        //On choisit l'employe puis on accepte la consultation
+        //On choisit l'client puis on accepte la consultation
         service.ChoisirEmploye(mediumID);
         service.AccepterConsultation(user1, david, user2);
         
@@ -599,6 +549,10 @@ public class Main {
         service.ChangerMotDePasse(user1, "54321");
         user1 = service.rechercherClientParMail("l@g.com");
         System.out.println("MDP apres changement : " + user1.getMotDePasse());
+    }
+
+    private static void afficherMedium(Medium medium) {
+         System.out.println("-> " + medium);
     }
     
     
