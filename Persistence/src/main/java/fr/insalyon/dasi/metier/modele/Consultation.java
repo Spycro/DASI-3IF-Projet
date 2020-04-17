@@ -7,6 +7,7 @@
 package fr.insalyon.dasi.metier.modele;
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,19 +24,17 @@ public class Consultation implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
-    @Temporal(TemporalType.DATE) //A enlever probablement
-    private Date dateConsultation;
-    private int duree;
+    private Long duree;
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateDebut;
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateFin;
     private String commentaire;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Client client;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Employe employe;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Medium medium;
     
     public Consultation(){
@@ -53,24 +52,21 @@ public class Consultation implements Serializable{
 //        this.medium=me;
 //    }
 
-    public Consultation(Date dateConsultation, int duree, Date dateDebut, Date dateFin, String commentaire) {
-        this.dateConsultation = dateConsultation;
-        this.duree = duree;
+
+
+    public Consultation(Date dateDebut, Date dateFin, Long duree, String commentaire) {
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
         this.commentaire = commentaire;
+        this.duree = duree;
     }
 
     public Long getId() {
         return id;
     }
 
-    
-    public Date getDateConsultation() {
-        return dateConsultation;
-    }
 
-    public int getDuree() {
+    public Long getDuree() {
         return duree;
     }
 
@@ -98,12 +94,8 @@ public class Consultation implements Serializable{
         return medium;
     }
     
-    
-    public void setDate(Date date) {
-        this.dateConsultation = date;
-    }
 
-    public void setDuree(int duree) {
+    public void setDuree(Long duree) {
         this.duree = duree;
     }
 
@@ -136,6 +128,6 @@ public class Consultation implements Serializable{
     
      @Override
     public String toString() {
-        return "Consultation : id=" + id + ", date de consultation=" + dateConsultation + ", duree=" + duree + ", date de debut=" + dateDebut + ", date de fin=" + dateFin+"\nCommentaire :"+commentaire +"\n"+client.toString()+"\n"+employe.toString()+"\n"+medium.toString();
+        return "Consultation : id=" + id +  ", duree=" + duree + ", date de debut=" + dateDebut + ", date de fin=" + dateFin+"\nCommentaire :"+commentaire +"\n"+client.toString()+"\n"+employe.toString()+"\n"+medium.toString();
     }
 }

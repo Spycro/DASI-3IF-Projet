@@ -16,7 +16,7 @@ import java.util.Date;
  *
  * @author DASI Team
  */
-public class Message {
+public class MessageUtil {
     
     private final static PrintStream OUT = System.out;
     private final static SimpleDateFormat TIMESTAMP_FORMAT = new SimpleDateFormat("yyyy-MM-dd~HH:mm:ss");
@@ -40,25 +40,25 @@ public class Message {
     public static void envoyerMail(String mailExpediteur, String mailDestinataire, String objet, String corps) {
         
         Date maintenant = new Date();
-        Message.debut();
+        MessageUtil.debut();
         OUT.println("~~~ E-mail envoyé le " + HORODATE_FORMAT.format(maintenant) + " ~~~");
         OUT.println("De : " + mailExpediteur);
         OUT.println("À  : " + mailDestinataire);
         OUT.println("Obj: " + objet);
         OUT.println();
         OUT.println(corps);
-        Message.fin();
+        MessageUtil.fin();
     }
 
     public static void envoyerNotification(String telephoneDestinataire, String message) {
         
         Date maintenant = new Date();
-        Message.debut();
+        MessageUtil.debut();
         OUT.println("~~~ Notification envoyée le " + HORODATE_FORMAT.format(maintenant) + " ~~~");
         OUT.println("À  : " + telephoneDestinataire);
         OUT.println();
         OUT.println(message);
-        Message.fin();
+        MessageUtil.fin();
     }
     
     public static void main(String[] args) {
@@ -76,7 +76,7 @@ public class Message {
         mailWriter.println();
         mailWriter.println("    Yann Gripay");
 
-        Message.envoyerMail(
+        MessageUtil.envoyerMail(
                 "yann.gripay@insa-lyon.fr",
                 "etudiants.3IF@insa-lyon.fr",
                 "[DASI] Test d'envoi de e-mail",
@@ -91,7 +91,7 @@ public class Message {
         notificationWriter.println("1) NE PAS oublier le poly");
         notificationWriter.println("2) TESTER au fur et à mesure du développement");
 
-        Message.envoyerNotification(
+        MessageUtil.envoyerNotification(
                 "0988776655",
                 message.toString()
             );

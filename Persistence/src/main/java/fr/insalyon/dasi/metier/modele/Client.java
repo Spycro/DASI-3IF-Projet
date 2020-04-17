@@ -1,13 +1,14 @@
 package fr.insalyon.dasi.metier.modele;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
 
 
 /**
@@ -27,6 +28,8 @@ public class Client extends Users implements Serializable {
     private ProfilAstral profilAstral;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,mappedBy="client")
     private List<Consultation> consultations;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date dateNaissance;
 
 
 
@@ -57,7 +60,6 @@ public class Client extends Users implements Serializable {
     public Date getDateNaissance() {
         return dateNaissance;
     }
-    private Date dateNaissance;
 
     protected Client() {
     }

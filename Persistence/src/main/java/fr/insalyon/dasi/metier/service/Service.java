@@ -15,6 +15,11 @@ import fr.insalyon.dasi.metier.modele.Medium;
 import fr.insalyon.dasi.metier.modele.ProfilAstral;
 import fr.insalyon.dasi.metier.modele.Users;
 import fr.insalyon.dasi.util.AstroUtil;
+import fr.insalyon.dasi.util.MessageUtil;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -27,6 +32,9 @@ public class Service {
     protected ProfilAstralDao profilAstralDao = new ProfilAstralDao();
     protected ConsultationDao consultationDao = new ConsultationDao();
     protected AstroUtil astroUtil = new AstroUtil();
+    protected static Set<Long> EmployeEnConsultation = new HashSet<Long>(); 
+    protected MessageUtil messageUtil = new MessageUtil();
+    
 
     public Long inscrireUsers(Users user) {
         Long resultat = null;
@@ -73,7 +81,7 @@ public class Service {
         Client resultat = null;
         JpaUtil.creerContextePersistance();
         try {
-            // Recherche du client
+            // Recherche du user
             Client client = usersDao.chercherClientParMail(mail);
             if (client != null) {
                 // Vérification du mot de passe
@@ -96,7 +104,7 @@ public class Service {
         Employe resultat = null;
         JpaUtil.creerContextePersistance();
         try {
-            // Recherche du client
+            // Recherche du user
             Employe employe = usersDao.chercherEmployeParMail(mail);
             if (employe != null) {
                 // Vérification du mot de passe
@@ -129,7 +137,7 @@ public class Service {
         return resultat;
     }
     
-     public Client rechercherClientParMail(String mail) {
+    public Client rechercherClientParMail(String mail) {
         Client resultat = null;
         JpaUtil.creerContextePersistance();
         try {
@@ -312,6 +320,165 @@ public class Service {
             JpaUtil.fermerContextePersistance();
         }
         return resultat;
+    }
+    
+    public List<String> ObtenirPrediction(String couleur, String animal, int amour, int sante, int travail){
+        List<String> prediction = null;
+        try{
+            prediction = astroUtil.getPredictions(couleur, animal, amour, sante, travail);
+        }
+        catch(Exception ex){
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service  ObtenirPrediction(couleur, animal, amour, sante, travail)", ex);
+            prediction = null;
+        }
+        return prediction;
+    }
+    
+    
+    /**
+     * 
+     * @param mediumID ID du Medium choisi par le user pour sa futur consultation
+     * @return Id de l'employe qui effectura la consultation avec l'employe
+     * Id null si aucun employe ne correspond
+     */
+    
+    public Long ChoisirEmploye(Long mediumID){
+        Long employeChoisi = null;
+        JpaUtil.creerContextePersistance();
+
+        try{
+            Medium medium = mediumDao.chercherParId(mediumID);
+            List<Employe> possible = usersDao.listerEmployesParGenre(medium.getGenre());
+            for(Employe emp : possible){
+                if(!EmployeEnConsultation.contains(emp.getId())){
+                    employeChoisi = emp.getId();
+                    EmployeEnConsultation.add(employeChoisi);
+                }
+            }
+        }
+        catch(Exception ex){
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service ChoisirEmploye(Medium)", ex);
+            employeChoisi = null;
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+        return employeChoisi;
+    }
+    
+    /**
+     * 
+     * @param client numero de telephone necessaire
+     * @param medium Permet d'obtenir la denomination du medium
+     * @param employe numero de telephone necessaire
+     * 
+     */
+    
+    public void AccepterConsultation(Client client, Medium medium, Employe employe){
+        String message = "";
+        message += "Vous avez une consultation avec " + medium.getDenomination() + "\n";
+        message += "Vous pouvez contacter le medium au " + employe.getNumeroTel() + "\n";
+        message += "Merci de la confiance que vous accordée à Predict'IF, et bonne consultation";
+        
+        messageUtil.envoyerNotification(client.getNumeroTel(), message);
+    }
+    
+    /**
+     *
+     * @param client
+     * @param medium
+     * @param employe
+     * @param dateDebut
+     * @param dateFin
+     * @param commentaire
+     * @return  ID de la consultation rajoutee dans la base de donnee 
+     * 
+     * 
+     */
+    
+    public Long EnregistrerConsultation(Client client, Medium medium, Employe employe, Date dateDebut, Date dateFin, String commentaire){
+        Long consultationID = null;
+        try {
+            Long diffInMillies = Math.abs(dateFin.getTime() - dateDebut.getTime());
+            Long duree = TimeUnit.MINUTES.convert(diffInMillies, TimeUnit.MILLISECONDS);
+            Consultation nouvelleConsultation = new Consultation(dateDebut, dateFin,  duree, commentaire);
+            nouvelleConsultation.setClient(client);
+            nouvelleConsultation.setEmploye(employe);
+            nouvelleConsultation.setMedium(medium);
+            consultationID = inscrireConsultation(nouvelleConsultation);
+            
+        }
+        catch(Exception ex){
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service ChoisirEmploye(Medium)", ex);
+            consultationID = null;
+        }
+        //Enleve l'employe de la liste des employe en consultation
+        EmployeEnConsultation.remove(employe.getId());
+        return consultationID;
+    }
+    
+    
+    public List<Medium> TopMedium(){
+        List<Medium> top = null;
+        try{
+            JpaUtil.creerContextePersistance();
+            top = mediumDao.listerTopMedium();
+            
+        } catch (Exception ex){
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service ChoisirEmploye(Medium)", ex);
+            top = null;
+        } finally{
+            JpaUtil.fermerContextePersistance();
+        }
+        
+        return top;
+    }
+    
+    public Long motDePasseOublie(String mail){
+        Users user = rechercherClientParMail(mail);
+
+        Long userID = null;
+        
+        try{
+            JpaUtil.creerContextePersistance();
+            JpaUtil.ouvrirTransaction();
+            //TODO : A rendre BEAUCOUP plus securise (String random) ou page de 
+            // de changement de mot de passe speciale
+            usersDao.changerMotDePasse(user, "INSA");
+            JpaUtil.validerTransaction();
+            
+            String corps = "Votre nouveau mot de passe est 'INSA'\n";
+            corps += "Veuillez le changer au plus vite";
+            messageUtil.envoyerMail("admin@predict-if.fr", mail, "Oubli de mot de passe", corps);
+            userID = user.getId();
+        } catch(Exception ex){
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service ChoisirEmploye(Medium)", ex);
+            JpaUtil.annulerTransaction();
+            userID = null;
+
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+        return userID;
+
+    }
+    
+    public Boolean ChangerMotDePasse(Users client, String nouveauMDP){
+        Boolean reussite = false;
+        
+        try{
+            JpaUtil.creerContextePersistance();
+            JpaUtil.ouvrirTransaction();
+            usersDao.changerMotDePasse(client, nouveauMDP);
+            JpaUtil.validerTransaction();
+            reussite = true;
+        } catch(Exception ex){
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service ChoisirEmploye(Medium)", ex);
+            JpaUtil.annulerTransaction();
+            reussite = false;
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+        return reussite;
     }
     
 }

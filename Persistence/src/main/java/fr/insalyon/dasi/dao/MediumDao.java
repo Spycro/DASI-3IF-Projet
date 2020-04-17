@@ -38,6 +38,11 @@ public class MediumDao {
         TypedQuery<Medium> query = em.createQuery("SELECT m FROM Medium m ORDER BY m.denomination ASC", Medium.class);
         return query.getResultList();
     }
-    
+
+    public List<Medium> listerTopMedium() {
+        EntityManager em = JpaUtil.obtenirContextePersistance();
+        TypedQuery<Medium> query = em.createQuery("SELECT m FROM Medium m ORDER BY m.nbConsultation DESC", Medium.class);
+        return query.getResultList();
+    }
     // modifier / supprimer  ... 
 }

@@ -10,7 +10,9 @@ import fr.insalyon.dasi.metier.modele.ProfilAstral;
 import fr.insalyon.dasi.metier.modele.Spirite;
 import fr.insalyon.dasi.metier.modele.Users;
 import fr.insalyon.dasi.metier.service.Service;
-import java.sql.Date;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,16 +32,22 @@ public class Main {
         // Contrôlez l'affichage du log de JpaUtil grâce à la méthode log de la classe JpaUtil
         JpaUtil.init();
 
-        //initialiserClients();            // Question 3
-        testerInscriptionClient();       // Question 4 & 5
-        //testerRechercheClient();         // Question 6
-        //testerListeClients();            // Question 7
-        //testerAuthentificationClient();  // Question 8
-        //saisirInscriptionClient();       // Question 9
+        //initialiserClients();         
+        //testerInscriptionClient();       
+        //testerRechercheClient();        
+        //testerListeClients();            
+        //testerAuthentificationClient();  
+        //saisirInscriptionClient();       
         //saisirRechercheClient();
         //testerInscriptionMedium();
         //testerInscriptionClient();
         //testerInscriptionConsultation();
+        //testerChoisirEmploye();
+        //testerAccepterConsultation();
+        testerEnregistrerConsultation();
+        //testerTopMedium();
+        //testerMotDePasseOublie();
+        //testerChangerMotDePasse();
         //System.out.println(s.rechercherConsultationParId((long)1).toString());
        /* for(Consultation c : s.listerConsultationParClient((long)1)){
             System.out.println(c.toString());
@@ -117,7 +125,7 @@ public class Main {
     public static void testerInscriptionEmploye() {
         
         System.out.println();
-        System.out.println("**** testerInscriptionClient() ****");
+        System.out.println("**** testerInscriptionEmploye() ****");
         System.out.println();
         
         
@@ -218,7 +226,9 @@ public class Main {
      public static void afficherEmploye(Employe employe) {
         System.out.println("-> " + employe);
     }
-    /*
+    
+     
+     /*
     public static void initialiserClients() {
         
         System.out.println();
@@ -323,6 +333,8 @@ public class Main {
     }
 
    */
+     
+     
     public static void testerInscriptionMedium() {
         
         System.out.println();
@@ -349,6 +361,7 @@ public class Main {
         System.out.println(david.toString());
       
     }
+    
     public static void testerInscriptionConsultation(){
         System.out.println();
         System.out.println("**** testerInscriptionConsultation() ****");
@@ -366,7 +379,7 @@ public class Main {
         Users user2 = new Employe("Jean", "bon", "3636",  25, "M", 0, "12345", "l@g.com");
         service.inscrireUsers(user2);
         
-        Consultation consult1 = new Consultation(Date.valueOf("2015-12-25"),12,Date.valueOf("2015-12-25"),Date.valueOf("2015-12-25"),"c t bi1");
+        Consultation consult1 = new Consultation(Date.valueOf("2015-12-25"),12L,Date.valueOf("2015-12-25"),Date.valueOf("2015-12-25"),"c t bi1");
         
         consult1.setClient((Client)user1);
         consult1.setEmploye((Employe)user2);
@@ -384,4 +397,209 @@ public class Main {
         
       
     }
+    
+    public static void testerListerEmployeParGenre(){
+         
+        System.out.println();
+        System.out.println("**** testerListerEmployeParGenre() ****");
+        System.out.println();
+        
+        
+        
+        Service service = new Service();
+        
+        
+
+        
+        Users user1 = new Employe("Jean", "bon", "3636",  25, "M", 0, "12345", "l@g.com");
+        Long profil1ID = service.inscrireUsers(user1);
+        Users user2 = new Employe("Jean3", "bon3", "3636",  25, "M", 0, "12345", "l@g.fr");
+        Long profil2ID = service.inscrireUsers(user2);
+        Users user3 = new Employe("Jeanne", "bonne", "3636",  25, "F", 0, "12345", "l@g.po");
+        Long profil3ID = service.inscrireUsers(user3);
+        
+        List<Employe> genre;
+        
+    }
+    
+    public static void testerChoisirEmploye(){
+        
+        System.out.println();
+        System.out.println("**** testerChoisirEmploye() ****");
+        System.out.println();
+        
+        /*
+        L'utilisateur vient de choisir son medium
+        On a donc un ID de medium
+        */
+        Service service = new Service();
+        Medium david = new Spirite("David","M","Yo tout le monde c'est david lafarge pokemon","cartes pokemon");
+        Long mediumID = service.inscrireMedium(david);
+        if(mediumID == null){
+            System.out.println("Probleme d'inscription du medium");
+        }
+        
+        Employe user1 = new Employe("Jean", "bon", "3636",  25, "M", 0, "12345", "l@g.com");
+        service.inscrireUsers(user1);
+        
+        Long employeChoisi = service.ChoisirEmploye(mediumID);
+        if(employeChoisi !=null){
+            System.out.println(service.rechercherEmployeParId(employeChoisi));
+        }
+        else {
+            System.out.println("Echec de la recherche / Pas d'employe disponibles");
+        }
+        
+        /*
+        On reessaye, normalement on doit avoir un id d'employe null
+        */
+        Long employeChoisi2 = service.ChoisirEmploye(mediumID);
+        if(employeChoisi2 !=null){
+            System.out.println(service.rechercherEmployeParId(employeChoisi2));
+        }
+        else {
+            System.out.println("Echec de la recherche / Pas d'employe disponibles");
+        }
+        
+    }
+   
+    public static void testerAccepterConsultation(){
+        
+        System.out.println();
+        System.out.println("**** testerAccepterConsultation() ****");
+        System.out.println();
+        
+        Service service = new Service();
+        
+        Medium david = new Spirite("David","M","Yo tout le monde c'est david lafarge pokemon","cartes pokemon");
+        service.inscrireMedium(david);
+
+        
+        Client user1 = new Client("Jean", "bon", "3630", "11 rue", 25, new Date(), "12345", "l@g.com");
+        service.inscrireUsers(user1);
+        
+        Employe user2 = new Employe("Jean", "bon", "3636",  25, "M", 0, "12345", "l@g.com");
+        service.inscrireUsers(user2);
+        
+        service.AccepterConsultation(user1, david, user2);
+        
+        
+        
+        
+    }
+    
+    public static void testerEnregistrerConsultation() {
+        System.out.println();
+        System.out.println("**** testerEnregistrerConsultation() ****");
+        System.out.println();
+        
+        
+        
+        Service service = new Service();  
+        
+        Medium david = new Spirite("David","M","Yo tout le monde c'est david lafarge pokemon","cartes pokemon");
+        Long mediumID = service.inscrireMedium(david);
+
+        
+        Client user1 = new Client("Jean", "bon", "3630", "11 rue", 25, new Date(), "12345", "l@g.com");
+        service.inscrireUsers(user1);
+        
+        Employe user2 = new Employe("Jean", "bon", "3636",  25, "M", 0, "12345", "l@g.com");
+        service.inscrireUsers(user2);
+     
+        //On choisit l'employe puis on accepte la consultation
+        service.ChoisirEmploye(mediumID);
+        service.AccepterConsultation(user1, david, user2);
+        
+        Long consultationID = null;
+        
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss"); 
+        String datedeb = "10-10-2001 13:50:20";
+        String datefin = "10-10-2001 14:50:20";
+        try{
+            Date dateDeb = format.parse(datedeb);
+            Date dateFin = format.parse(datefin);
+            consultationID = service.EnregistrerConsultation(user1, david, user2, dateDeb, dateFin, "Pas trop mal");
+
+        } catch(Exception ex){
+            System.out.println("Bad date");
+        }
+        
+        
+        if (consultationID != null) {
+            System.out.println("> Succès Energistrement consultation");
+        } else {
+            System.out.println("> Échec Energistrement consultation");
+        }
+        
+    }
+    
+    public static void testerTopMedium(){
+        System.out.println();
+        System.out.println("**** testerTopMedium() ****");
+        System.out.println();
+        
+        
+        Service service = new Service();  
+        
+        Medium david = new Spirite("David","M","Yo tout le monde c'est david lafarge pokemon","cartes pokemon");
+        Long mediumID = service.inscrireMedium(david);
+        
+        Medium a = new Spirite("David","M","Yo tout le monde c'est david lafarge pokemon","cartes pokemon");
+        service.inscrireMedium(a);
+        
+        Medium b = new Spirite("David","M","Yo tout le monde c'est david lafarge pokemon","cartes pokemon");
+        service.inscrireMedium(b);
+        
+        Medium c = new Spirite("David","M","Yo tout le monde c'est david lafarge pokemon","cartes pokemon");
+        service.inscrireMedium(c);
+        
+        Medium d = new Spirite("David","M","Yo tout le monde c'est david lafarge pokemon","cartes pokemon");
+        service.inscrireMedium(d);
+        
+        Medium e = new Spirite("David","M","Yo tout le monde c'est david lafarge pokemon","cartes pokemon");
+        service.inscrireMedium(e);
+        
+        List<Medium> top = service.TopMedium();
+        for(int i = 0; i<5; i++){
+            System.out.println(top.get(i));
+        }
+        
+    }
+    
+    public static void testerMotDePasseOublie(){
+        System.out.println();
+        System.out.println("**** testerMotDePasseOublie() ****");
+        System.out.println();
+        
+        
+        Service service = new Service();  
+        
+        Client user1 = new Client("Jean", "bon", "3636", "11 rue", 25, new Date(), "12345", "l@g.com");
+        Long profil1ID = service.inscrireClient(user1);
+        
+        System.out.println("MDP avant changement : " + user1.getMotDePasse());
+        service.motDePasseOublie("l@g.com");
+        user1 = service.rechercherClientParMail("l@g.com");
+        System.out.println("MDP apres changement : " + user1.getMotDePasse());
+    }
+    
+    public static void testerChangerMotDePasse(){
+        System.out.println();
+        System.out.println("**** testerChangerMotDePasse() ****");
+        System.out.println();
+        
+        
+        Service service = new Service();  
+        
+        Client user1 = new Client("Jean", "bon", "3636", "11 rue", 25, new Date(), "12345", "l@g.com");
+        Long profil1ID = service.inscrireClient(user1);
+        
+        System.out.println("MDP avant changement : " + user1.getMotDePasse());
+        service.ChangerMotDePasse(user1, "54321");
+        user1 = service.rechercherClientParMail("l@g.com");
+        System.out.println("MDP apres changement : " + user1.getMotDePasse());
+    }
+    
+    
 }

@@ -103,11 +103,12 @@ public class Employe extends Users implements Serializable{
     
         @Override
     public String toString() {
-        return "Client : id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", mail=" + mail + ", motDePasse=" + motDePasse;
+        return "Employe : id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", mail=" + mail + ", motDePasse=" + motDePasse;
     }
 
     @Override
     public void addConsultation(Consultation consultation) {
         consultations.add(consultation);
+        nbConsultations++;
     }
 }

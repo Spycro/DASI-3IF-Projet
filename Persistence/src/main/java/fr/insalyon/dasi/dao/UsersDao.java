@@ -22,6 +22,13 @@ public class UsersDao {
         em.persist(user);
     }
     
+    public void changerMotDePasse(Users user, String MDP){
+        EntityManager em = JpaUtil.obtenirContextePersistance();
+        user = em.merge(user);
+        user.setMotDePasse(MDP);
+        
+    }
+    
     //Dao en relation avec les clients
     
     public Client chercherClientParId(Long clientId) {
@@ -73,8 +80,19 @@ public class UsersDao {
         return query.getResultList();
     }
     
+    /**
+     * 
+     * @param genre soit "M" soit "F" 
+     * @return Une liste des employe d'un genre ordonnee par leur nombre
+     * de consultations
+     */
+    public List<Employe> listerEmployesParGenre(String genre) {
+        EntityManager em = JpaUtil.obtenirContextePersistance();
+        TypedQuery<Employe> query = em.createQuery("SELECT c FROM Employe c WHERE c.genre = :genre ORDER BY c.nbConsultations ASC", Employe.class);
+        query.setParameter("genre", genre);
+        return query.getResultList();
+    }
     
-  
-
+    
     
 }

@@ -19,6 +19,9 @@ public class ConsultationDao {
     
     public void creer(Consultation consultation) {
         EntityManager em = JpaUtil.obtenirContextePersistance();
+        em.merge(consultation.getClient());
+        em.merge(consultation.getEmploye());
+        em.merge(consultation.getMedium());
         em.persist(consultation);
     }
     

@@ -106,6 +106,7 @@ public abstract class Medium implements Serializable {
     
     public void addConsultation(Consultation consultation){
         this.consultations.add(consultation);
+        nbConsultation++;
     }
    
     
