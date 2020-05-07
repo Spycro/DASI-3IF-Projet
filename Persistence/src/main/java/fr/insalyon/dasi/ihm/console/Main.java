@@ -1,6 +1,7 @@
 package fr.insalyon.dasi.ihm.console;
 
 import fr.insalyon.dasi.dao.JpaUtil;
+import fr.insalyon.dasi.metier.modele.Astrologue;
 import fr.insalyon.dasi.metier.modele.Cartomancien;
 import fr.insalyon.dasi.metier.modele.Client;
 import fr.insalyon.dasi.metier.modele.Consultation;
@@ -51,6 +52,9 @@ public class Main {
         //testerListeConsultationParClient();
         //testerListeConsultationParEmploye();
         //testerListeConsultationParMedium();
+
+
+        initialiserBD();
         JpaUtil.destroy();
     }
 
@@ -669,6 +673,29 @@ public class Main {
         } else {
             System.out.println("=> Consultation #" + id + " non-trouvé");
         }
+    }
+    
+    public static void initialiserBD(){
+        Service service = new Service();
+
+        Client client1 = new Client("Jean", "bon", "3636", "11 rue", 25, new Date(), "12345", "l@gmail.com");
+        Client client2 = new Client("Jeanne", "bonne", "3636", "11 rue", 25, new Date(), "12345", "J@gmail.com");
+        
+        Medium irma = new Cartomancien("Irma","F","Yo moi c'est IRMA");
+        Medium david = new Spirite("David","M","Yo tout le monde c'est david lafarge pokemon","cartes pokemon");
+        Medium Yuta = new Astrologue("Paul Le Grand", "M", "JE suis le plus grand Astrologue de la decennie" , "10 ans a polytechnique");
+        
+        Employe user1 = new Employe("Charle", "Magne", "3636",  25, "M", 0, "12345", "l@g.com");
+        Employe user2 = new Employe("Louis", "Soleil", "3636",  25, "M", 0, "12345", "louis@app.com");
+        
+        service.inscrireUsers(user1);
+        service.inscrireUsers(user2);
+        service.inscrireClient(client1);
+        service.inscrireClient(client2);
+        service.inscrireMedium(david);
+        service.inscrireMedium(irma);
+        service.inscrireMedium(Yuta);
+
     }
     
 }
