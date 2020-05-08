@@ -52,7 +52,7 @@ public class Main {
         //testerListeConsultationParClient();
         //testerListeConsultationParEmploye();
         //testerListeConsultationParMedium();
-
+        //testerListeMedium();
 
         initialiserBD();
         JpaUtil.destroy();
@@ -683,7 +683,7 @@ public class Main {
         
         Medium irma = new Cartomancien("Irma","F","Yo moi c'est IRMA");
         Medium david = new Spirite("David","M","Yo tout le monde c'est david lafarge pokemon","cartes pokemon");
-        Medium Yuta = new Astrologue("Paul Le Grand", "M", "JE suis le plus grand Astrologue de la decennie" , "10 ans a polytechnique");
+        Medium Yuta = new Astrologue("Paul Le Grand", "M", "JE suis le plus grand Astrologue de la decennie" , "10 ans a polytechnique", 10);
         
         Employe user1 = new Employe("Charle", "Magne", "3636",  25, "M", 0, "12345", "l@g.com");
         Employe user2 = new Employe("Louis", "Soleil", "3636",  25, "M", 0, "12345", "louis@app.com");

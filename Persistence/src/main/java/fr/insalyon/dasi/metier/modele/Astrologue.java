@@ -19,15 +19,16 @@ public class Astrologue extends Medium implements Serializable {
     
     
     protected String formation;
-    protected int promotion;
+    protected Integer promotion;
     
     public Astrologue(){
         
     }
     
-    public Astrologue(String denomination, String genre, String presentation, String formation) {
+    public Astrologue(String denomination, String genre, String presentation, String formation, int promotion) {
         super(denomination, genre, presentation);
         this.formation = formation;
+        this.promotion = promotion;
 //        this.type=2;
     }
     
