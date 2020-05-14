@@ -5,29 +5,70 @@
         <title>Connexion</title>
         <!-- Librairie Javascript: jQuery (v3.4.1) -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/mainStyle.css">             
     </head>
     <body>
         
-        <a href="inscription.html">Aller vers la page d'inscription </a><br/>
-        <a href="forgot.html">mot de pass oublie ? </a><br/>
+        <header>
+            <div class="container-fluid header">
+                <div class="row">
+                    <div class="col-8 align-self-center text-center">
+                        <h1 class="titre">PREDICT’IF</h1>
+                    </div>
+                    <div class="col">
+                        <nav class="navigation">
+                            <a href="index.html"><button class="btn btn-custom">Retour à l'accueil </button></a><br/>
+                            <a href="inscription.html"><button class="btn btn-custom">Aller vers la page d'inscription </button></a><br/>
+                        </nav>
+                    </div>
+                    <div class="col">
+    
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="container">
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <h1>Connexion</h1>
 
-        <h1>Connexion</h1>
-
-        <!-- Paragraphe avec id="notification" pour les messages de notification -->
-        <p id="notification">Veuillez saisir votre identifiant (adresse mail) et votre mot de passe.</p>
-        
-        <!-- Champs et Bouton de Formulaire -->
-        Identifiant: <input type="text" id="champ-login" size="40" />
-        <br/>
-        Mot de passe: <input type="password" id="champ-password" />
-        <br/>
-        <button id="bouton-connexion">Connexion</button>
-        <p>Information client : </p>
-        <p id="client">N/A</p>
-        
-        <!-- Lien vers l'accueil -->
-        <p><a href="index.html">Retour à la page d'Accueil</a></p>
-
+                    <!-- Paragraphe avec id="notification" pour les messages de notification -->
+                    <p id="notification">Veuillez saisir votre identifiant (adresse mail) et votre mot de passe.</p>
+                    
+                    <!-- Champs et Bouton de Formulaire -->
+                    <div class="form-group">
+                        <input type="email" name="email" id="email" class="form-control" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" id="password" class="form-control" placeholder="Mot de passe">
+                    </div>
+                    <button class="btn btn-custom-2" id="bouton-connexion">Connexion</button> <br>
+                    Identifiant: <input type="text" id="champ-login" size="40" />
+                    <br/>
+                    Mot de passe: <input type="password" id="champ-password" />
+                    <br/>
+                    <p>Information client : </p>
+                    <p id="client">N/A</p>
+                    <a href="inscription.html">Aller vers la page d'inscription </a><br/>
+                    <a href="forgot.html">mot de pass oublie ? </a><br/>
+                    <!-- Lien vers l'accueil -->
+                    <p><a href="index.html">Retour à la page d'Accueil</a></p>
+                </div>
+                <div class="col-md-6 justify-content-center">
+                    <div class="jumbotron premier">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nunc mi, mattis in lobortis sit amet, molestie blandit odio. Vivamus finibus felis orci, ut iaculis turpis egestas at. Praesent pretium erat arcu, in maximus neque semper id. Proin finibus massa sit amet risus pretium vehicula. Pellentesque tempor lorem id elementum mattis. Nam ornare erat in maximus scelerisque. Fusce ornare sapien a ex facilisis accumsan.
+                    </div>
+                    <div class="jumbotron second text-center">
+                        Vous n’avez pas encore de compte ? N’hesitez pas à vous inscrire pour en apprendre encore plus sur votre futur !
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-custom-2 btn-inscription">Je m'inscris !</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <script>
             $(document).ready( function () {
                 $('#bouton-connexion').on( 'click', function () { // Fonction appelée lors du clic sur le bouton

@@ -1,0 +1,20 @@
+html, body, .row {
+	height: 100%;
+}
+
+.main_body {
+	padding-left: 0;
+	height: 100%;
+}
+
+.left_side {
+	background-color: #482E74;
+}
+
+.btn-custom {
+	background-color: #8D79AE;
+}
+
+.btn-custom:hover {
+	background-color: rgb(171, 151, 204);
+}
