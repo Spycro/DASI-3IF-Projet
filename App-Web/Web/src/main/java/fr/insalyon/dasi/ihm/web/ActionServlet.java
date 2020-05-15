@@ -58,12 +58,49 @@ public class ActionServlet extends HttpServlet {
                     action = new AuthentifierClientAction();
                     serialisation = new ProfilClientSerialisation();
                     break;
-            }
+                }
                 case "listermedium" : {
                     action = new ListerMediumAction();
                     serialisation = new ListerMediumSerialisation();
                     break;
-               }
+                }
+                
+                case "choisir-medium" : {
+                    break;
+                }
+                
+                case "lister-consultation" : {
+                    break;
+                }
+                
+                case "inscription" : {
+                    break;
+                }
+                
+                case "mot-de-passe-oublie" : {
+                    break;
+                }
+                
+                case "connecter-employe" : {
+                    break;
+                }
+                
+                case "finir-consultation" : {
+                    break;
+                }
+                
+                case "generer-prediction" : {
+                    break;
+                }
+                
+                case "obtenir-top-medium" : {
+                    
+                }
+                
+                case "obtenir-profil-client" : {
+                    break;
+                }
+                
             }
         }
         if (action != null) {
