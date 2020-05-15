@@ -9,10 +9,36 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/inscriptionStyle.css">             
+
     </head>
     
     <body>
-        <a href="forgot.html">mot de pass oublie ? </a><br/>
-        <div>TODO write content</div>
+        <div class="container-fluid main_body">
+            <div class="row">
+                <div class="col-md-3 left_side"></div>
+                <div class="col-md-3 offset-md-2 align-self-center formulaire">
+                    <h1 class="text-center">Formulaire de connexion employé</h1>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email" class="form-control">
+
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Mot de Passe</label>
+                        <input type="password" name="password" id="password" class="form-control">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-custom btn-lg">Connexion</button>
+                    </div>
+                    <div class="block-link">
+                        <a href="forgot.html" class="btn btn-link">Mot de passe oublié ?</a>
+                        <a href="index.html" class="btn btn-link">Vous n'êtes pas medium ? C'est par ici !</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </body>
 </html>

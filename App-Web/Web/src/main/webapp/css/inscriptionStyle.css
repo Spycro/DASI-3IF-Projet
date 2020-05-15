@@ -18,3 +18,11 @@ html, body, .row {
 .btn-custom:hover {
 	background-color: rgb(171, 151, 204);
 }
+
+.formulaire {
+	padding-bottom: 200px;
+}
+
+.block-link{
+	margin-top: 1.1em;
+}
