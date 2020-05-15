@@ -56,9 +56,9 @@ public class Main {
         
 
         //Tester qq trucs
-        testerRechercheEmployeParMail();
+        //testerRechercheEmployeParMail();
 
-        //initialiserBD();
+        initialiserBD();
         JpaUtil.destroy();
     }
 
@@ -702,12 +702,24 @@ public class Main {
 
          
         Consultation consult1 = new Consultation(new Date(),new Date(),12L,"c t bi1");
-        
-        consult1.setClient(client2);
-        consult1.setEmploye(user2);
-        consult1.setMedium(irma);
-        
+        Consultation consult2 = new Consultation(new Date(),new Date(),15L,"incroyable");
+        Consultation consult3 = new Consultation(new Date(),new Date(),14L,"magique!");
+
+        consult1.setClient((Client)client1);
+        consult1.setEmploye((Employe)user1);
+        consult1.setMedium(david);
+
+        consult2.setClient((Client)client1);
+        consult2.setEmploye((Employe)user2);
+        consult2.setMedium(david);
+
+        consult3.setClient((Client)client2);
+        consult3.setEmploye((Employe)user2);
+        consult3.setMedium(Yuta);
+
         service.inscrireConsultation(consult1);
+        service.inscrireConsultation(consult2);
+        service.inscrireConsultation(consult3);
         
     }
     
