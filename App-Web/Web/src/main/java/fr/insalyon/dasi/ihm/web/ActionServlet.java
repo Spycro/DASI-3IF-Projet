@@ -6,7 +6,15 @@ import com.google.gson.reflect.TypeToken;
 import fr.insalyon.dasi.dao.JpaUtil;
 import fr.insalyon.dasi.ihm.web.action.Action;
 import fr.insalyon.dasi.ihm.web.action.AuthentifierClientAction;
+import fr.insalyon.dasi.ihm.web.action.AuthentifierEmployeAction;
+import fr.insalyon.dasi.ihm.web.action.ForgotClientAction;
+import fr.insalyon.dasi.ihm.web.action.ForgotEmployeAction;
+import fr.insalyon.dasi.ihm.web.action.InscrireAction;
 import fr.insalyon.dasi.ihm.web.action.ListerMediumAction;
+import fr.insalyon.dasi.ihm.web.serialisation.AuthentifierEmployeSerialisation;
+import fr.insalyon.dasi.ihm.web.serialisation.ForgotClientSerialisation;
+import fr.insalyon.dasi.ihm.web.serialisation.ForgotEmployeSerialisation;
+import fr.insalyon.dasi.ihm.web.serialisation.InscrireSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ListerMediumSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ProfilClientSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.Serialisation;
@@ -74,14 +82,25 @@ public class ActionServlet extends HttpServlet {
                 }
                 
                 case "inscription" : {
+                    action = new InscrireAction();
+                    serialisation = new InscrireSerialisation();
                     break;
                 }
                 
-                case "mot-de-passe-oublie" : {
+                case "mot-de-passe-oublie-client" : {
+                    action = new ForgotClientAction();
+                    serialisation = new ForgotClientSerialisation();
                     break;
                 }
                 
+                case "mot-de-passe-oublie-employe" : {
+                    action = new ForgotEmployeAction();
+                    serialisation = new ForgotEmployeSerialisation();
+                    break;
+                }
                 case "connecter-employe" : {
+                    action = new AuthentifierEmployeAction();
+                    serialisation = new AuthentifierEmployeSerialisation();
                     break;
                 }
                 
@@ -108,7 +127,7 @@ public class ActionServlet extends HttpServlet {
             serialisation.serialiser(request, response);
         }
         else {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Erreur dans les paramètres de la requête");
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Erreur dans les paramè  tres de la requête");
         }
         
     }
