@@ -53,8 +53,12 @@ public class Main {
         //testerListeConsultationParEmploye();
         //testerListeConsultationParMedium();
         //testerListeMedium();
+        
 
-        initialiserBD();
+        //Tester qq trucs
+        testerRechercheEmployeParMail();
+
+        //initialiserBD();
         JpaUtil.destroy();
     }
 
@@ -696,6 +700,23 @@ public class Main {
         service.inscrireMedium(irma);
         service.inscrireMedium(Yuta);
 
+         
+        Consultation consult1 = new Consultation(new Date(),new Date(),12L,"c t bi1");
+        
+        consult1.setClient(client2);
+        consult1.setEmploye(user2);
+        consult1.setMedium(irma);
+        
+        service.inscrireConsultation(consult1);
+        
     }
     
+    public static void testerRechercheEmployeParMail(){
+        Service service = new Service();
+        String mail = "l@g.com";
+        //Client client2 = new Client("Jeanne", "bonne", "3636", "11 rue", 25, new Date(), "12345", "l@g.com");
+        //service.inscrireClient(client2);
+        Employe user = service.rechercherEmployeParMail(mail);
+        System.out.println(user);
+    }
 }

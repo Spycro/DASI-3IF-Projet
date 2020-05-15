@@ -68,6 +68,19 @@ public class UsersDao {
         }
         return result;
     }
+    
+    public Users chercherUsersParMail(String employeMail) {
+        EntityManager em = JpaUtil.obtenirContextePersistance();
+        TypedQuery<Users> query = em.createQuery("SELECT c FROM Users c WHERE c.mail = :mail", Users.class);
+        query.setParameter("mail", employeMail); // correspond au paramètre ":mail" dans la requête
+        List<Users> users = query.getResultList();
+        Users result = null;
+        if (!users.isEmpty()) {
+            result = users.get(0); // premier de la liste
+        }
+        return result;
+    }
+    
               
     public Employe chercherEmployeParId(Long employeId) {
         EntityManager em = JpaUtil.obtenirContextePersistance();

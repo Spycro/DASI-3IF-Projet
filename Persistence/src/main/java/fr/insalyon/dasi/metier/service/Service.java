@@ -163,6 +163,36 @@ public class Service {
       }
       return resultat;
     }
+    
+     public Employe rechercherEmployeParMail(String mail) {
+      Employe resultat = null;
+      JpaUtil.creerContextePersistance();
+      try {
+          resultat = usersDao.chercherEmployeParMail(mail);
+      } catch (Exception ex) {
+          Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service rechercherClientParId(id)", ex);
+          resultat = null;
+      } finally {
+          JpaUtil.fermerContextePersistance();
+      }
+      return resultat;
+    }
+      
+    
+    
+    public Users rechercherUsersParMail(String mail) {
+      Users resultat = null;
+      JpaUtil.creerContextePersistance();
+      try {
+          resultat = usersDao.chercherUsersParMail(mail);
+      } catch (Exception ex) {
+          Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service rechercherClientParId(id)", ex);
+          resultat = null;
+      } finally {
+          JpaUtil.fermerContextePersistance();
+      }
+      return resultat;
+    }
       
     public Medium rechercherMediumParId(Long id) {
         Medium resultat = null;
