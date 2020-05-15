@@ -31,7 +31,12 @@ public class ProfilClientSerialisation extends Serialisation {
             jsonClient.addProperty("nom", client.getNom());
             jsonClient.addProperty("prenom", client.getPrenom());
             jsonClient.addProperty("mail", client.getMail());
-
+            JsonObject jsonProfilAstral = new JsonObject();
+            jsonProfilAstral.addProperty("zodiaque", client.getProfilAstral().getSigneZodiaque());
+            jsonProfilAstral.addProperty("astrologique", client.getProfilAstral().getSigneAstrologique());
+            jsonProfilAstral.addProperty("couleur", client.getProfilAstral().getCouleurPorteBonheur());
+            jsonProfilAstral.addProperty("animal", client.getProfilAstral().getAnimalTotem());
+            jsonClient.add("ProfilAstral", jsonProfilAstral);
             container.add("client", jsonClient);
         }
 

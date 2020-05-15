@@ -33,7 +33,7 @@ public class InscrireAction extends Action {
         
         Date date1;  
         try {
-            date1 = new SimpleDateFormat("dd/MM/yyyy").parse(date);
+            date1 = new SimpleDateFormat("MM-dd-yyyy").parse(date);
             Client client = new Client(nom, prenom, numero, adresse, 10, date1, password, mail);
             Long id = service.inscrireClient(client);
             request.setAttribute("id", id);

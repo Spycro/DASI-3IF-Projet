@@ -39,16 +39,12 @@
                     
                     <!-- Champs et Bouton de Formulaire -->
                     <div class="form-group">
-                        <input type="email" name="email" id="email" class="form-control" placeholder="Email">
+                        <input type="email" name="email" id="mail" class="form-control" placeholder="Email">
                     </div>
                     <div class="form-group">
                         <input type="password" name="password" id="password" class="form-control" placeholder="Mot de passe">
                     </div>
                     <button class="btn btn-custom-2" id="bouton-connexion">Connexion</button> <br>
-                    Identifiant: <input type="text" id="champ-login" size="40" />
-                    <br/>
-                    Mot de passe: <input type="password" id="champ-password" />
-                    <br/>
                     <p>Information client : </p>
                     <p id="client">N/A</p>
                     <a href="forgot.html">mot de pass oublie ? </a><br/>
@@ -74,8 +70,8 @@
                     $('#notification').html("Connexion..."); // Message pour le paragraphe de notification
 
                     // Récupération de la valeur des champs du formulaire
-                    var champLogin = $('#champ-login').val();
-                    var champPassword = $('#champ-password').val();
+                    var champLogin = $('#mail').val();
+                    var champPassword = $('#password').val();
 
                     // Appel AJAX
                     $.ajax({
@@ -83,7 +79,7 @@
                         method: 'POST',
                         data: {
                             todo: 'connecter',
-                            login: champLogin,
+                            mail: champLogin,
                             password: champPassword
                         },
                         dataType: 'json'
@@ -91,7 +87,7 @@
                     .done( function (response) { // Fonction appelée en cas d'appel AJAX réussi
                         console.log('Response',response); // LOG dans Console Javascript
                         if (response.connexion) {
-                            $('#notification').html("Connexion OK");  // Message pour le paragraphe de notification
+                            $('#notification').html("Connexion OK 2");  // Message pour le paragraphe de notification
                             // TODO: afficher les informations du client dans la notification
                             // Exemple: Connexion de Ada Lovelace (ID 1)
                             $("#client").html("Connexion de " + 

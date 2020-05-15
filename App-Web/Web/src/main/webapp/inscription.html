@@ -9,8 +9,11 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/inscriptionStyle.css">        
+       
+        <script src="js/inscription.js"></script>
     </head>
     <body>
         <div class="container-fluid main_body">
@@ -46,6 +49,7 @@ and open the template in the editor.
                     <div class="form-group">
                         <label for="mail">Mail</label>
                         <input type="email" class="form-control" id="mail" placeholder="abc@exemple.com">
+                        
                     </div>
                     <div class="form-group">
                         <label for="date">Date de naissance</label>
@@ -63,8 +67,15 @@ and open the template in the editor.
                         </div>
                     </div>
                     <div class="form-row">
-                        <button class="btn btn-custom col-md-4 offset-md-4">Je m'inscris !</button>
+                        <button class="btn btn-custom col-md-4 offset-md-4" id="btn-connexion">Je m'inscris !</button>
+                        <div class="invalid-feedback">
+                            Veuillez remplir toutes les cases !
+                        </div>
+                        <div class="d-none" id="success">
+                            Succes de l'inscription! Vous allez être redigrigé sous peu !
+                        </div>
                     </div>
+                    
                 </div>
             </div>
         </div>

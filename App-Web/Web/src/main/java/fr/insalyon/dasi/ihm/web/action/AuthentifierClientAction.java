@@ -14,7 +14,7 @@ public class AuthentifierClientAction extends Action {
     @Override
     public void executer(HttpServletRequest request) {
         
-        String login = request.getParameter("login");
+        String login = request.getParameter("mail");
         String password = request.getParameter("password");
 
         Service service = new Service();
