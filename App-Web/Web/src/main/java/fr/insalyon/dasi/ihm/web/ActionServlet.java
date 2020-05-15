@@ -12,12 +12,14 @@ import fr.insalyon.dasi.ihm.web.action.ForgotEmployeAction;
 import fr.insalyon.dasi.ihm.web.action.InscrireAction;
 import fr.insalyon.dasi.ihm.web.action.ListerConsultationAction;
 import fr.insalyon.dasi.ihm.web.action.ListerConsultationClientAction;
+import fr.insalyon.dasi.ihm.web.action.ListerConsultationEmployeAction;
 import fr.insalyon.dasi.ihm.web.action.ListerMediumAction;
 import fr.insalyon.dasi.ihm.web.serialisation.AuthentifierEmployeSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ForgotClientSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ForgotEmployeSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.InscrireSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ListerConsultationClientSerialisation;
+import fr.insalyon.dasi.ihm.web.serialisation.ListerConsultationEmployeSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ListerConsultationSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ListerMediumSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ProfilClientSerialisation;
@@ -86,9 +88,14 @@ public class ActionServlet extends HttpServlet {
                     serialisation =new ListerConsultationSerialisation();
                     break;
                 }
-                case "listerconsultationclient" : {
+                case "listerconsultation-client" : {
                     action= new ListerConsultationClientAction();
                     serialisation =new ListerConsultationClientSerialisation();
+                    break;
+                }
+                 case "listerconsultation-employe" : {
+                    action= new ListerConsultationEmployeAction();
+                    serialisation =new ListerConsultationEmployeSerialisation();
                     break;
                 }
                 
