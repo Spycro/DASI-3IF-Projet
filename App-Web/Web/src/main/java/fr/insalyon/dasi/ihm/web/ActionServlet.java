@@ -6,7 +6,11 @@ import com.google.gson.reflect.TypeToken;
 import fr.insalyon.dasi.dao.JpaUtil;
 import fr.insalyon.dasi.ihm.web.action.Action;
 import fr.insalyon.dasi.ihm.web.action.AuthentifierClientAction;
+import fr.insalyon.dasi.ihm.web.action.ListerConsultationAction;
+import fr.insalyon.dasi.ihm.web.action.ListerConsultationClientAction;
 import fr.insalyon.dasi.ihm.web.action.ListerMediumAction;
+import fr.insalyon.dasi.ihm.web.serialisation.ListerConsultationClientSerialisation;
+import fr.insalyon.dasi.ihm.web.serialisation.ListerConsultationSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ListerMediumSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ProfilClientSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.Serialisation;
@@ -69,7 +73,14 @@ public class ActionServlet extends HttpServlet {
                     break;
                 }
                 
-                case "lister-consultation" : {
+                case "listerconsultation" : {
+                    action= new ListerConsultationAction();
+                    serialisation =new ListerConsultationSerialisation();
+                    break;
+                }
+                case "listerconsultationclient" : {
+                    action= new ListerConsultationClientAction();
+                    serialisation =new ListerConsultationClientSerialisation();
                     break;
                 }
                 
