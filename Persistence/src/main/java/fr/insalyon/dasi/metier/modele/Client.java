@@ -105,6 +105,14 @@ public class Client extends Users implements Serializable {
         this.prenom = prenom;
     }
 
+    public ProfilAstral getProfilAstral() {
+        return profilAstral;
+    }
+
+    public List<Consultation> getConsultations() {
+        return consultations;
+    }
+
     public void setProfilAstral(ProfilAstral profilAstral) {
         this.profilAstral = profilAstral;
     }
