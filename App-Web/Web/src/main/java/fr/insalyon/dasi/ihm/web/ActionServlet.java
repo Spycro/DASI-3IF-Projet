@@ -12,6 +12,7 @@ import fr.insalyon.dasi.ihm.web.action.ChoisirMediumAction;
 import fr.insalyon.dasi.ihm.web.action.FinirConsultationAction;
 import fr.insalyon.dasi.ihm.web.action.ForgotClientAction;
 import fr.insalyon.dasi.ihm.web.action.ForgotEmployeAction;
+import fr.insalyon.dasi.ihm.web.action.GenererPredictionAction;
 import fr.insalyon.dasi.ihm.web.action.InscrireAction;
 import fr.insalyon.dasi.ihm.web.action.ListerConsultationAction;
 import fr.insalyon.dasi.ihm.web.action.ListerConsultationClientAction;
@@ -19,11 +20,13 @@ import fr.insalyon.dasi.ihm.web.action.ListerConsultationEmployeAction;
 import fr.insalyon.dasi.ihm.web.action.ListerMediumAction;
 import fr.insalyon.dasi.ihm.web.action.ObtenirProfilClientAction;
 import fr.insalyon.dasi.ihm.web.serialisation.AccepterConsultationSerialisation;
+import fr.insalyon.dasi.ihm.web.action.TopMediumAction;
 import fr.insalyon.dasi.ihm.web.serialisation.AuthentifierEmployeSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ChoisirMediumSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.FinirConsultationSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ForgotClientSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ForgotEmployeSerialisation;
+import fr.insalyon.dasi.ihm.web.serialisation.GenererPredictionSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.InscrireSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ListerConsultationClientSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ListerConsultationEmployeSerialisation;
@@ -140,11 +143,15 @@ public class ActionServlet extends HttpServlet {
                 }
                 
                 case "generer-prediction" : {
+                    action = new GenererPredictionAction();
+                    serialisation = new GenererPredictionSerialisation();
                     break;
                 }
                 
                 case "obtenir-top-medium" : {
-                    
+                    action = new TopMediumAction();
+                    serialisation = new ListerMediumSerialisation();
+                    break;
                 }
                 
                 case "obtenir-profil-client" : {

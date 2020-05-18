@@ -46,6 +46,46 @@ $( document ).ready(function() {
 
         });
     });
+    /////////////////////////////////////////////////
+    $('#bouton-Stat').on( 'click', function () { // Fonction appelée lors du clic sur le bouton
+
+                 
+        // Appel AJAX
+        $.ajax({
+            url: './ActionServlet',
+            method: 'POST',
+            data: {
+                todo: 'obtenir-top-medium'
+            },
+            dataType: 'json'
+        })
+        .done( function (response) { // Fonction appelée en cas d'appel AJAX réussi
+            console.log('Response',response); // LOG dans Console Javascript
+
+                // TODO: afficher les informations du client dans la notification
+                // Exemple: Connexion de Ada Lovelace (ID 1)
+                $.each(response.mediums, function(key, med){
+                    var new_text = '<li class="list-group-item medium">' +'Denomination : '+ med.denomination;
+                   
+                    new_text += ' Type : ' + med.type;
+                    new_text += ' Genre : ' + med.genre;
+                    new_text += '</li>';
+                    
+                    $("#liste").append(new_text);
+                    
+                    
+                });
+
+
+        })
+        .fail( function (error) { // Fonction appelée en cas d'erreur lors de l'appel AJAX
+            console.log('Error',error); // LOG dans Console Javascript
+            alert("Erreur lors de l'appel AJAX");
+        })
+        .always( function () { // Fonction toujours appelée
+
+        });
+    });
 });
 
 $( window ).on( "load", function() {
