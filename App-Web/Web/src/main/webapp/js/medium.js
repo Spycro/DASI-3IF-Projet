@@ -7,7 +7,7 @@
 
 $( document ).ready(function() {
     console.log( "document loaded" );
-     $('#bouton-connexion').on( 'click', function () { // Fonction appelée lors du clic sur le bouton
+    $('#bouton-connexion').on( 'click', function () { // Fonction appelée lors du clic sur le bouton
 
                  
         // Appel AJAX
@@ -25,19 +25,14 @@ $( document ).ready(function() {
                 // TODO: afficher les informations du client dans la notification
                 // Exemple: Connexion de Ada Lovelace (ID 1)
                 $.each(response.mediums, function(key, med){
+                    var new_text = '<li class="list-group-item medium">' +'Denomination : '+ med.denomination;
                    
+                    new_text += ' Type : ' + med.type;
+                    new_text += ' Genre : ' + med.genre;
+                    new_text += '</li>';
                     
-                    $("#liste").append("<p>" + med.denomination + "</p>");
-                    $("#liste").append("<p>Type : " + med.type + "</p>");
-                    $("#liste").append("<p>Presentation : " + med.presentation + "</p>");
+                    $("#liste").append(new_text);
                     
-                    if(med.type === "astrologue"){
-                        $("#liste").append("<p>Formation : " + med.formation + "</p>");
-                        $("#liste").append("<p>Promotion : " + med.promotion + "</p>");
-                    }
-                    if(med.type === "spirite"){
-                        $("#liste").append("<p>Support : " + med.support + "</p>");
-                    }
                     
                 });
 

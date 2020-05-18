@@ -36,6 +36,7 @@ public class ListerMediumSerialisation extends Serialisation{
         JsonArray listeMedium = new JsonArray();
         for(Medium med : target){
             JsonObject m = new JsonObject();
+            m.addProperty("id", med.getId());
             m.addProperty("denomination", med.getDenomination());
             m.addProperty("genre", med.getGenre());
             m.addProperty("presentation", med.getPresentation());
