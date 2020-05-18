@@ -15,6 +15,7 @@ import fr.insalyon.dasi.ihm.web.action.ListerConsultationClientAction;
 import fr.insalyon.dasi.ihm.web.action.ListerConsultationEmployeAction;
 import fr.insalyon.dasi.ihm.web.action.ListerMediumAction;
 import fr.insalyon.dasi.ihm.web.action.ObtenirProfilClientAction;
+import fr.insalyon.dasi.ihm.web.action.TopMediumAction;
 import fr.insalyon.dasi.ihm.web.serialisation.AuthentifierEmployeSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ForgotClientSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ForgotEmployeSerialisation;
@@ -132,7 +133,9 @@ public class ActionServlet extends HttpServlet {
                 }
                 
                 case "obtenir-top-medium" : {
-                    
+                    action = new TopMediumAction();
+                    serialisation = new ListerMediumSerialisation();
+                    break;
                 }
                 
                 case "obtenir-profil-client" : {
