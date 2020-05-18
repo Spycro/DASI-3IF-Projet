@@ -23,7 +23,7 @@ public class ForgotEmployeAction extends Action {
         
         Employe employe = service.rechercherEmployeParMail(mail);
         if(employe != null) {
-            MessageUtil.envoyerMail("predicitf@insa.fr", employe.getMail(), "Mot de pass", employe.getMotDePasse());
+            MessageUtil.envoyerMail("predicitf@insa.fr", employe.getMail(), "Mot de passe", employe.getMotDePasse());
         }
         request.setAttribute("employe", employe);
         
