@@ -9,6 +9,7 @@ import fr.insalyon.dasi.ihm.web.action.AuthentifierClientAction;
 import fr.insalyon.dasi.ihm.web.action.AuthentifierEmployeAction;
 import fr.insalyon.dasi.ihm.web.action.ForgotClientAction;
 import fr.insalyon.dasi.ihm.web.action.ForgotEmployeAction;
+import fr.insalyon.dasi.ihm.web.action.GenererPredictionAction;
 import fr.insalyon.dasi.ihm.web.action.InscrireAction;
 import fr.insalyon.dasi.ihm.web.action.ListerConsultationAction;
 import fr.insalyon.dasi.ihm.web.action.ListerConsultationClientAction;
@@ -19,6 +20,7 @@ import fr.insalyon.dasi.ihm.web.action.TopMediumAction;
 import fr.insalyon.dasi.ihm.web.serialisation.AuthentifierEmployeSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ForgotClientSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ForgotEmployeSerialisation;
+import fr.insalyon.dasi.ihm.web.serialisation.GenererPredictionSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.InscrireSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ListerConsultationClientSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ListerConsultationEmployeSerialisation;
@@ -129,6 +131,8 @@ public class ActionServlet extends HttpServlet {
                 }
                 
                 case "generer-prediction" : {
+                    action = new GenererPredictionAction();
+                    serialisation = new GenererPredictionSerialisation();
                     break;
                 }
                 
