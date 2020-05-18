@@ -5,23 +5,6 @@
  */
 
 
-function isLoggedIn() {
-    $.ajax({
-        url: './ActionServlet',
-        method: 'POST',
-        data: {
-            todo : 'est-connecte-client'
-        },
-        datatype: 'json'
-    })
-    .done(function(response) {
-        return response.connecte;
-    })
-    .fail(function(error) {
-        console.log(error);
-        return false;
-    });
-}
 
 //taken from https://stackoverflow.com/questions/3930199/how-to-run-a-jquery-or-javascript-before-page-start-to-load
 function redirectHandler(condition, url){
