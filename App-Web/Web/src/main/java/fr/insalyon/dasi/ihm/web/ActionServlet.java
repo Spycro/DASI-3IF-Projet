@@ -21,6 +21,7 @@ import fr.insalyon.dasi.ihm.web.action.ListerMediumAction;
 import fr.insalyon.dasi.ihm.web.action.ObtenirProfilClientAction;
 import fr.insalyon.dasi.ihm.web.serialisation.AccepterConsultationSerialisation;
 import fr.insalyon.dasi.ihm.web.action.TopMediumAction;
+import fr.insalyon.dasi.ihm.web.action.TopMediumAction;
 import fr.insalyon.dasi.ihm.web.serialisation.AuthentifierEmployeSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ChoisirMediumSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.FinirConsultationSerialisation;
