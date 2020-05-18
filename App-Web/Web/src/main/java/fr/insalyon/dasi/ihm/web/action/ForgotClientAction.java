@@ -23,7 +23,7 @@ public class ForgotClientAction extends Action {
         
         Client client = service.rechercherClientParMail(mail);
         if(client != null) {
-            MessageUtil.envoyerMail("predicitf@insa.fr", client.getMail(), "Mot de pass", client.getMotDePasse());
+            MessageUtil.envoyerMail("predicitf@insa.fr", client.getMail(), "Mot de passe", client.getMotDePasse());
         }
         request.setAttribute("client", client);
         
