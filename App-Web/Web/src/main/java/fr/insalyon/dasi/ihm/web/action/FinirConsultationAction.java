@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author Lucas
  */
-public class FinirconsultationAction extends Action{
+public class FinirConsultationAction extends Action{
 
     @Override
     public void executer(HttpServletRequest request) {
