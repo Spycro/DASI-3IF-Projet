@@ -17,22 +17,20 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Lucas
  */
-public class FinirConsultationSerialisation extends Serialisation{
+public class AccepterConsultationSerialisation extends Serialisation{
 
     @Override
     public void serialiser(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Long id = (Long)request.getAttribute("consult_id");
+        Boolean done = (Boolean)request.getAttribute("done");
         
         JsonObject container = new JsonObject();
-        Boolean succes = (id!=null);
         
-        container.addProperty("success", succes);
+        container.addProperty("done", done);
         response.setContentType("application/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
         Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
         gson.toJson(container, out);
         out.close();
-        
     }
     
 }

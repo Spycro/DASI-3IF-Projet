@@ -4,9 +4,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import fr.insalyon.dasi.dao.JpaUtil;
+import fr.insalyon.dasi.ihm.web.action.AccepterConsultationAction;
 import fr.insalyon.dasi.ihm.web.action.Action;
 import fr.insalyon.dasi.ihm.web.action.AuthentifierClientAction;
 import fr.insalyon.dasi.ihm.web.action.AuthentifierEmployeAction;
+import fr.insalyon.dasi.ihm.web.action.ChoisirMediumAction;
+import fr.insalyon.dasi.ihm.web.action.FinirConsultationAction;
 import fr.insalyon.dasi.ihm.web.action.ForgotClientAction;
 import fr.insalyon.dasi.ihm.web.action.ForgotEmployeAction;
 import fr.insalyon.dasi.ihm.web.action.InscrireAction;
@@ -15,7 +18,10 @@ import fr.insalyon.dasi.ihm.web.action.ListerConsultationClientAction;
 import fr.insalyon.dasi.ihm.web.action.ListerConsultationEmployeAction;
 import fr.insalyon.dasi.ihm.web.action.ListerMediumAction;
 import fr.insalyon.dasi.ihm.web.action.ObtenirProfilClientAction;
+import fr.insalyon.dasi.ihm.web.serialisation.AccepterConsultationSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.AuthentifierEmployeSerialisation;
+import fr.insalyon.dasi.ihm.web.serialisation.ChoisirMediumSerialisation;
+import fr.insalyon.dasi.ihm.web.serialisation.FinirConsultationSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ForgotClientSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ForgotEmployeSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.InscrireSerialisation;
@@ -81,6 +87,9 @@ public class ActionServlet extends HttpServlet {
                 }
                 
                 case "choisir-medium" : {
+                    // TODO ; TESTER
+                    action = new ChoisirMediumAction();
+                    serialisation = new ChoisirMediumSerialisation();
                     break;
                 }
                 
@@ -124,6 +133,9 @@ public class ActionServlet extends HttpServlet {
                 }
                 
                 case "finir-consultation" : {
+                    // TODO ; TESTER
+                    action = new FinirConsultationAction();
+                    serialisation = new FinirConsultationSerialisation();
                     break;
                 }
                 
@@ -138,6 +150,12 @@ public class ActionServlet extends HttpServlet {
                 case "obtenir-profil-client" : {
                     action = new ObtenirProfilClientAction();
                     serialisation = new ProfilClientSerialisation();
+                    break;
+                }
+                
+                case "accepter-consultation" : {
+                    action = new AccepterConsultationAction();
+                    serialisation = new AccepterConsultationSerialisation();
                     break;
                 }
                 
