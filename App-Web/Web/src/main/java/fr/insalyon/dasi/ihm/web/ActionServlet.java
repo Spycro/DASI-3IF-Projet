@@ -1,12 +1,13 @@
 package fr.insalyon.dasi.ihm.web;
 
-;
 import fr.insalyon.dasi.dao.JpaUtil;
 import fr.insalyon.dasi.ihm.web.action.AccepterConsultationAction;
 import fr.insalyon.dasi.ihm.web.action.Action;
 import fr.insalyon.dasi.ihm.web.action.AuthentifierClientAction;
 import fr.insalyon.dasi.ihm.web.action.AuthentifierEmployeAction;
 import fr.insalyon.dasi.ihm.web.action.ChoisirMediumAction;
+import fr.insalyon.dasi.ihm.web.action.DeconnexionAction;
+import fr.insalyon.dasi.ihm.web.action.DeconnexionEmployeAction;
 import fr.insalyon.dasi.ihm.web.action.EstConnecteClientAction;
 import fr.insalyon.dasi.ihm.web.action.FinirConsultationAction;
 import fr.insalyon.dasi.ihm.web.action.ForgotClientAction;
@@ -22,6 +23,7 @@ import fr.insalyon.dasi.ihm.web.serialisation.AccepterConsultationSerialisation;
 import fr.insalyon.dasi.ihm.web.action.TopMediumAction;
 import fr.insalyon.dasi.ihm.web.serialisation.AuthentifierEmployeSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ChoisirMediumSerialisation;
+import fr.insalyon.dasi.ihm.web.serialisation.DeconnexionSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.EstConnecteClientSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.FinirConsultationSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ForgotClientSerialisation;
@@ -165,6 +167,15 @@ public class ActionServlet extends HttpServlet {
                     action = new EstConnecteClientAction();
                     serialisation = new EstConnecteClientSerialisation();
                     break;
+                }
+                case "deconnexion-client" : {
+                    action = new DeconnexionAction();
+                    serialisation = new DeconnexionSerialisation();
+                    break;
+                }
+                case "deconnexion-employe" : {
+                    action = new DeconnexionEmployeAction();
+                    serialisation = new DeconnexionSerialisation();
                 }
                 
             }
