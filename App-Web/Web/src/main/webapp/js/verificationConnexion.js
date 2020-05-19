@@ -48,3 +48,41 @@ function isLoggedInEmploye(redirecturl) {
         window.location = redirecturl;
     });
 }
+$( document ).ready(function() {
+    $("#btn-deconnexion-client").on("click", function(event){
+        $.ajax({
+            url:'./ActionServlet',
+            method: 'POST',
+            data: {
+                todo : 'deconnexion-client'
+            },
+            datatype: 'json'
+        })
+        .done(function(response){
+            window.location = 'index.html';
+        })
+        .fail(function(error){
+            console.log(error);
+            console.log("Il y a eu un probleme");
+        });
+    });
+
+    $("#btn-deconnexion-employe").on("click", function(event){
+        $.ajax({
+            url:'./ActionServlet',
+            method: 'POST',
+            data: {
+                todo : 'deconnexion-employe'
+            },
+            datatype: 'json'
+        })
+        .done(function(response){
+            window.location = 'index.html';
+        })
+        .fail(function(error){
+            console.log(error);
+            console.log("Il y a eu un probleme");
+        });
+    });
+
+});
