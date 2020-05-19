@@ -19,6 +19,8 @@ body {
 	font-family: Oregano;
 }
 
+
+
 .btn-custom {
 	background-color: rgba(125, 130, 176, 0.5);
 	/*margin: 5px;*/
@@ -45,8 +47,14 @@ body {
 
 .jumbotron {
 	background-color: #8D79AE;
+        
 }
-
+.jumbotron .description{
+    font-size: 28px;
+    color: grey;
+    margin: 0;
+    font-family: Oregano;
+}
 .premier {
 	margin-top: 30px ;
 	padding: 32px 16px;
