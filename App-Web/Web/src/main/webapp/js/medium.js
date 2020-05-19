@@ -7,9 +7,9 @@
 
 $( document ).ready(function() {
     console.log( "document loaded" );
-    $('#bouton-connexion').on( 'click', function () { // Fonction appelée lors du clic sur le bouton
-
-                 
+    //$('#bouton-connexion').on( 'click', function () { // Fonction appelée lors du clic sur le bouton
+    
+    if(window.location.pathname==="/medium.html"){  
         // Appel AJAX
         $.ajax({
             url: './ActionServlet',
@@ -45,10 +45,11 @@ $( document ).ready(function() {
         .always( function () { // Fonction toujours appelée
 
         });
-    });
+    }
+   // });
     /////////////////////////////////////////////////
-    $('#bouton-Stat').on( 'click', function () { // Fonction appelée lors du clic sur le bouton
-
+    //$('#bouton-Stat').on( 'click', function () { // Fonction appelée lors du clic sur le bouton
+    if(window.location.pathname==="/statistiques.html"){  
                  
         // Appel AJAX
         $.ajax({
@@ -85,7 +86,7 @@ $( document ).ready(function() {
         .always( function () { // Fonction toujours appelée
 
         });
-    });
+    }
 });
 
 $( window ).on( "load", function() {
