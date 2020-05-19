@@ -5,7 +5,7 @@
  */
 
 
-function isLoggedIn(redirecturl) {
+function isLoggedInClient(redirecturl) {
     $.ajax({
         url: './ActionServlet',
         method: 'POST',
@@ -17,6 +17,29 @@ function isLoggedIn(redirecturl) {
     .done(function(response) {
         console.log(response);
         if(!response.connecte){
+            window.location = redirecturl;
+        }
+    })
+    .fail(function(error) {
+        console.log(error);
+        window.location = redirecturl;
+    });
+}
+
+
+function isLoggedInEmploye(redirecturl) {
+    $.ajax({
+        url: './ActionServlet',
+        method: 'POST',
+        data: {
+            todo : 'est-connecte-employe'
+        },
+        datatype: 'json'
+    })
+    .done(function(response) {
+        console.log(response);
+        if(!response.connecte){
+            
             window.location = redirecturl;
         }
     })
