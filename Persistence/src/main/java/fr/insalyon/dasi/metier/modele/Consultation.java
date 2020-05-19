@@ -1,4 +1,5 @@
-    
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -57,6 +58,13 @@ public class Consultation implements Serializable{
     public Consultation(Date dateDebut, Date dateFin, Long duree, String commentaire) {
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
+        this.commentaire = commentaire;
+        this.duree = duree;
+    }
+    
+    public Consultation(Date dateDebut,Long duree, String commentaire) {
+        this.dateDebut = dateDebut;
+        this.dateFin = null;
         this.commentaire = commentaire;
         this.duree = duree;
     }

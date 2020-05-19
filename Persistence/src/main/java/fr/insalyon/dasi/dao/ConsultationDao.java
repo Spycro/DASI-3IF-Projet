@@ -6,6 +6,7 @@
 package fr.insalyon.dasi.dao;
 
 import fr.insalyon.dasi.metier.modele.Consultation;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -24,6 +25,16 @@ public class ConsultationDao {
         em.merge(consultation.getClient());
         em.merge(consultation.getEmploye());
         em.merge(consultation.getMedium());
+    }
+    
+    public void validerConsultation(Consultation consultation, Date deb, Date fin, Long duree, String commentaire){
+        EntityManager em = JpaUtil.obtenirContextePersistance();
+        
+        consultation = em.merge(consultation);
+        consultation.setDateDebut(deb);
+        consultation.setDateFin(fin);
+        consultation.setDuree(duree);
+        consultation.setCommentaire(commentaire);
     }
     
     public Consultation chercherParId(Long consultationId) {
@@ -56,6 +67,19 @@ public class ConsultationDao {
         TypedQuery<Consultation> query = em.createQuery("SELECT c FROM Consultation c WHERE c.medium.id=:id", Consultation.class);
         query.setParameter("id", mediumId);
         return query.getResultList();
+    }
+    
+    
+    public Consultation obtenirConsultationNonTerminee(long employeId) {
+        EntityManager em = JpaUtil.obtenirContextePersistance();
+        TypedQuery<Consultation> query = em.createQuery("SELECT c FROM Consultation c WHERE c.employe.id=:id and c.dateFin IS NULL", Consultation.class);
+        query.setParameter("id", employeId);
+        List<Consultation> c = query.getResultList();
+        Consultation result = null;
+        if(c!=null){
+            result = c.get(0);
+        }
+        return result;
     }
     
     // modifier / supprimer  ... 

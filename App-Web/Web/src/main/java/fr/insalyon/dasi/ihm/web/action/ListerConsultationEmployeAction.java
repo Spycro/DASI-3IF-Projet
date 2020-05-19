@@ -27,7 +27,7 @@ public class ListerConsultationEmployeAction extends Action{
         Service service = new Service();
         HttpSession session = request.getSession();
         
-        long ide=(long)session.getAttribute("idEmploye");
+        Long ide=(Long)session.getAttribute("idEmploye");
        
         List<Consultation> liste = service.listerConsultationParEmploye(ide);
 

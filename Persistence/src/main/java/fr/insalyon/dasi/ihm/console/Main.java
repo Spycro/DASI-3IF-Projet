@@ -53,12 +53,12 @@ public class Main {
         //testerListeConsultationParEmploye();
         //testerListeConsultationParMedium();
         //testerListeMedium();
-        
-
+        testerEnregistrerDemande();
+        testerValiderConsultation();
         //Tester qq trucs
         //testerRechercheEmployeParMail();
 
-        initialiserBD();
+        //initialiserBD();
         JpaUtil.destroy();
     }
 
@@ -567,6 +567,59 @@ public class Main {
             System.out.println("> Succès Energistrement consultation");
         } else {
             System.out.println("> Échec Energistrement consultation");
+        }
+        
+    }
+    
+    public static void testerEnregistrerDemande(){
+        System.out.println();
+        System.out.println("**** testerEnregistrerDemande() ****");
+        System.out.println();
+        
+        
+        
+        Service service = new Service();  
+        
+        Medium david = new Spirite("David","M","Yo tout le monde c'est david lafarge pokemon","cartes pokemon");
+        Long mediumID = service.inscrireMedium(david);
+
+        
+        Client user1 = new Client("Jean", "bon", "3630", "11 rue", 25, new Date(), "12345", "l@g.com");
+        service.inscrireUsers(user1);
+        
+        Employe user2 = new Employe("Jean", "bon", "3636",  25, "M", 0, "12345", "l@g.com");
+        service.inscrireUsers(user2); 
+        
+        service.ChoisirEmploye(mediumID);
+        service.AccepterConsultation(user1, david, user2);
+
+        service.EnregistrerDemandeConsultation(user1, david, user2);
+        
+        
+        
+    }
+    
+    
+    public static void testerValiderConsultation(){
+        System.out.println();
+        System.out.println("**** testerValiderConsultation() ****");
+        System.out.println();
+        
+        
+        
+        Service service = new Service();  
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss"); 
+        String datedeb = "10-10-2001 13:50:20";
+        String datefin = "10-10-2001 14:50:20";
+        try{
+            Date dateDeb = format.parse(datedeb);
+            Date dateFin = format.parse(datefin);
+            Consultation c = service.obtenirConsultationEmploye(1L);
+            service.ValiderConsultation(dateDeb, dateFin, "Cool", c.getId());
+
+
+        } catch(Exception ex){
+            System.out.println("Bad date");
         }
         
     }

@@ -27,7 +27,7 @@ public class ListerConsultationClientAction extends Action{
         Service service = new Service();
         HttpSession session = request.getSession();
         
-        long idc=(long)session.getAttribute("idClient");
+        Long idc=(Long)session.getAttribute("idClient");
        
         List<Consultation> liste = service.listerConsultationParClient(idc);
 

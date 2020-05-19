@@ -221,7 +221,21 @@ public class Service {
         }
         return resultat;
     }
-
+    
+    public Consultation obtenirConsultationEmploye(Long employeId){
+        Consultation resultat = null;
+        JpaUtil.creerContextePersistance();
+        try {
+            resultat = consultationDao.obtenirConsultationNonTerminee(employeId);
+        } catch (Exception ex) {
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service rechercherClientParId(id)", ex);
+            resultat = null;
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+        return resultat;
+    }
+ 
     public List<Medium> listerMedium() {
         List<Medium> resultat = null;
 
@@ -448,6 +462,48 @@ public class Service {
         return consultationID;
     }
     
+    public Long EnregistrerDemandeConsultation(Client client, Medium medium, Employe employe){
+        Long consultationID = null;
+        try {
+            Consultation nouvelleConsultation = new Consultation();
+            nouvelleConsultation.setClient(client);
+            nouvelleConsultation.setEmploye(employe);
+            nouvelleConsultation.setMedium(medium);
+            consultationID = inscrireConsultation(nouvelleConsultation);            
+            
+        }
+        catch(Exception ex){
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service ChoisirEmploye(Medium)", ex);
+            consultationID = null;
+        }
+        //Enleve l'employe de la liste des employe en consultation
+        return consultationID;
+    }
+    
+    public Long ValiderConsultation(Date datedeb, Date datefin, String commentaire, Long id){
+        Long consultationID = null;
+        JpaUtil.creerContextePersistance();
+        try {
+            JpaUtil.ouvrirTransaction();
+
+            Consultation consultation = consultationDao.chercherParId(id);
+            Long diffInMillies = Math.abs(datefin.getTime() - datedeb.getTime());
+            Long duree = TimeUnit.MINUTES.convert(diffInMillies, TimeUnit.MILLISECONDS);
+            consultationDao.validerConsultation(consultation, datedeb, datefin, duree, commentaire);
+            JpaUtil.validerTransaction();
+
+        }
+        catch(Exception ex){
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service ChoisirEmploye(Medium)", ex);
+            JpaUtil.annulerTransaction();
+            consultationID = null;
+        } finally {
+            JpaUtil.fermerContextePersistance();
+
+        }
+        //Enleve l'employe de la liste des employe en consultation
+        return consultationID;
+    }
     
     public List<Medium> TopMedium(){
         List<Medium> top = null;

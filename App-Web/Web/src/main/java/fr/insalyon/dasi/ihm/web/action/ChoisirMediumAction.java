@@ -6,6 +6,7 @@
 package fr.insalyon.dasi.ihm.web.action;
 
 import fr.insalyon.dasi.metier.modele.Client;
+import fr.insalyon.dasi.metier.modele.Consultation;
 import fr.insalyon.dasi.metier.modele.Employe;
 import fr.insalyon.dasi.metier.modele.Medium;
 import fr.insalyon.dasi.metier.service.Service;
@@ -31,7 +32,12 @@ public class ChoisirMediumAction extends Action{
         if(employe_choisi!=null){
             Employe employe = service.rechercherEmployeParId(employe_choisi);
             MessageUtil.envoyerNotification(employe.getNumeroTel(), "Vous avez une consultation en attente avec un client. Vous pourrez voir ses informations dans votre espace employe. Veuillez repondre a la demande rapidement");
+            Consultation temp = new Consultation();
+            service.EnregistrerDemandeConsultation(client, medium, employe);
             request.setAttribute("succes", Boolean.TRUE);
+        }
+        else{
+            request.setAttribute("succes", Boolean.FALSE);
         }
         
     }
