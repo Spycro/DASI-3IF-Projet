@@ -9,6 +9,7 @@ import fr.insalyon.dasi.ihm.web.action.ChoisirMediumAction;
 import fr.insalyon.dasi.ihm.web.action.DeconnexionAction;
 import fr.insalyon.dasi.ihm.web.action.DeconnexionEmployeAction;
 import fr.insalyon.dasi.ihm.web.action.EstConnecteClientAction;
+import fr.insalyon.dasi.ihm.web.action.EstConnecteEmployeAction;
 import fr.insalyon.dasi.ihm.web.action.FinirConsultationAction;
 import fr.insalyon.dasi.ihm.web.action.ForgotClientAction;
 import fr.insalyon.dasi.ihm.web.action.ForgotEmployeAction;
@@ -25,6 +26,7 @@ import fr.insalyon.dasi.ihm.web.serialisation.AuthentifierEmployeSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ChoisirMediumSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.DeconnexionSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.EstConnecteClientSerialisation;
+import fr.insalyon.dasi.ihm.web.serialisation.EstConnecteEmployeSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.FinirConsultationSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ForgotClientSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ForgotEmployeSerialisation;
@@ -166,6 +168,11 @@ public class ActionServlet extends HttpServlet {
                 case "est-connecte-client" : {
                     action = new EstConnecteClientAction();
                     serialisation = new EstConnecteClientSerialisation();
+                    break;
+                }
+                case "est-connecte-employe" : {
+                    action = new EstConnecteEmployeAction();
+                    serialisation = new EstConnecteEmployeSerialisation();
                     break;
                 }
                 case "deconnexion-client" : {

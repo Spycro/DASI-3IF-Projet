@@ -39,8 +39,8 @@ function isLoggedInEmploye(redirecturl) {
     .done(function(response) {
         console.log(response);
         if(!response.connecte){
-            
-            window.location = redirecturl;
+            //window.location = redirecturl;
+            console.log("Il y un pb");
         }
     })
     .fail(function(error) {
