@@ -8,6 +8,7 @@ import fr.insalyon.dasi.ihm.web.action.AuthentifierEmployeAction;
 import fr.insalyon.dasi.ihm.web.action.ChoisirMediumAction;
 import fr.insalyon.dasi.ihm.web.action.DeconnexionAction;
 import fr.insalyon.dasi.ihm.web.action.DeconnexionEmployeAction;
+import fr.insalyon.dasi.ihm.web.action.EnregistrerDemanderConsultationAction;
 import fr.insalyon.dasi.ihm.web.action.EstConnecteClientAction;
 import fr.insalyon.dasi.ihm.web.action.EstConnecteEmployeAction;
 import fr.insalyon.dasi.ihm.web.action.FinirConsultationAction;
@@ -19,12 +20,15 @@ import fr.insalyon.dasi.ihm.web.action.ListerConsultationAction;
 import fr.insalyon.dasi.ihm.web.action.ListerConsultationClientAction;
 import fr.insalyon.dasi.ihm.web.action.ListerConsultationEmployeAction;
 import fr.insalyon.dasi.ihm.web.action.ListerMediumAction;
+import fr.insalyon.dasi.ihm.web.action.ObtenirConsultationAction;
 import fr.insalyon.dasi.ihm.web.action.ObtenirProfilClientAction;
+import fr.insalyon.dasi.ihm.web.action.ObtenirProfilClientConnecteAction;
 import fr.insalyon.dasi.ihm.web.serialisation.AccepterConsultationSerialisation;
 import fr.insalyon.dasi.ihm.web.action.TopMediumAction;
 import fr.insalyon.dasi.ihm.web.serialisation.AuthentifierEmployeSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ChoisirMediumSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.DeconnexionSerialisation;
+import fr.insalyon.dasi.ihm.web.serialisation.EnregistrerDemandeConsultationSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.EstConnecteClientSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.EstConnecteEmployeSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.FinirConsultationSerialisation;
@@ -36,6 +40,7 @@ import fr.insalyon.dasi.ihm.web.serialisation.ListerConsultationClientSerialisat
 import fr.insalyon.dasi.ihm.web.serialisation.ListerConsultationEmployeSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ListerConsultationSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ListerMediumSerialisation;
+import fr.insalyon.dasi.ihm.web.serialisation.ObtenirConsultationSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ProfilClientSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.Serialisation;
 import java.io.IOException;
@@ -135,12 +140,6 @@ public class ActionServlet extends HttpServlet {
                     break;
                 }
                 
-                case "finir-consultation" : {
-                    // TODO ; TESTER
-                    action = new FinirConsultationAction();
-                    serialisation = new FinirConsultationSerialisation();
-                    break;
-                }
                 
                 case "generer-prediction" : {
                     action = new GenererPredictionAction();
@@ -160,11 +159,30 @@ public class ActionServlet extends HttpServlet {
                     break;
                 }
                 
+                case "enregistrer-demande-consultation" : {
+                    action = new EnregistrerDemanderConsultationAction();
+                    serialisation = new EnregistrerDemandeConsultationSerialisation();
+                    break;
+                }
+                
                 case "accepter-consultation" : {
                     action = new AccepterConsultationAction();
                     serialisation = new AccepterConsultationSerialisation();
                     break;
                 }
+                
+                case "obtenir-consultation" : {
+                    action = new ObtenirConsultationAction();
+                    serialisation = new ObtenirConsultationSerialisation();
+                    break;
+                }
+                
+                case "finir-consultation" : {
+                    action = new FinirConsultationAction();
+                    serialisation = new FinirConsultationSerialisation();
+                    break;
+                }
+                
                 case "est-connecte-client" : {
                     action = new EstConnecteClientAction();
                     serialisation = new EstConnecteClientSerialisation();
@@ -183,8 +201,14 @@ public class ActionServlet extends HttpServlet {
                 case "deconnexion-employe" : {
                     action = new DeconnexionEmployeAction();
                     serialisation = new DeconnexionSerialisation();
+                    break;
                 }
                 
+                case "profil-client-connecte": {
+                    action = new ObtenirProfilClientConnecteAction();
+                    serialisation = new ProfilClientSerialisation();
+                    break;
+                }
             }
         }
         if (action != null) {

@@ -21,11 +21,11 @@ $( document ).ready(function() {
         })
         .done( function (response) { // Fonction appelée en cas d'appel AJAX réussi
             console.log('Response',response); // LOG dans Console Javascript
-
+                document.mediums = response.mediums;
                 // TODO: afficher les informations du client dans la notification
                 // Exemple: Connexion de Ada Lovelace (ID 1)
                 $.each(response.mediums, function(key, med){
-                    var new_text = '<li class="list-group-item medium">' +'Denomination : '+ med.denomination;
+                    var new_text = '<li class="list-group-item medium" role="button" data-id="'+ med.id +'">' +'Denomination : '+ med.denomination;
                    
                     new_text += ' Type : ' + med.type;
                     new_text += ' Genre : ' + med.genre;
@@ -35,7 +35,19 @@ $( document ).ready(function() {
                     
                     
                 });
-
+                $(".medium").on("click", function(){
+                    var id = $(this).attr("data-id");
+                    $.each(document.mediums, function(key, med){
+                       if(id == med.id){
+                           console.log("found");
+                           $("#presentation").text(med.presentation);
+                           $("#denomination").text(med.denomination);
+                           
+                           $("#genre").text(med.genre);
+                           $("#chosen").attr("data-id", med.id);
+                       } 
+                    });
+                });
 
         })
         .fail( function (error) { // Fonction appelée en cas d'erreur lors de l'appel AJAX
@@ -45,7 +57,35 @@ $( document ).ready(function() {
         .always( function () { // Fonction toujours appelée
 
         });
+        
+        
+        $("#btn-choix").on("click", function(){
+            if($("#chosen").attr("data-id") === undefined){
+                console.log("pb");
+            }
+            else{
+                $.ajax({
+                    url: './ActionServlet',
+                    method: 'POST',
+                    data: {
+                        todo: 'enregistrer-demande-consultation',
+                        "medium-id": $("#chosen").attr("data-id")
+                    },
+                    dataType: 'json'
+                })
+                .done(function(response){
+                    if(response.success){
+                        alert("Votre medium vous contactera sous peu ! ");
+                    }else{
+                        alert("Il y a eu un probleme dans la demande, veuillez reeasayer plus tard");
+                    }
+                });
+            }
+        });
+        
+        
     }
+    
    // });
     /////////////////////////////////////////////////
     //$('#bouton-Stat').on( 'click', function () { // Fonction appelée lors du clic sur le bouton

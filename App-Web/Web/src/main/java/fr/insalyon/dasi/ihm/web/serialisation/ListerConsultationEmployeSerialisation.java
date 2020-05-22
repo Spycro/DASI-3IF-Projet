@@ -38,8 +38,8 @@ public class ListerConsultationEmployeSerialisation extends Serialisation {
         JsonArray listeConsult = new JsonArray();
         for(Consultation consult : target){
             JsonObject m = new JsonObject();
-            m.addProperty("duré", consult.getDuree());
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss"); 
+            m.addProperty("duree", consult.getDuree());
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); 
             m.addProperty("dateDebut", dateFormat.format(consult.getDateDebut()));
             m.addProperty("dateFin", dateFormat.format(consult.getDateFin()));
             m.addProperty("commentaire", consult.getCommentaire());

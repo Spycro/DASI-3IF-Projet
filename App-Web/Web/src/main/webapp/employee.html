@@ -12,8 +12,8 @@ and open the template in the editor.
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/connected.css">
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="js/profil.js"></script>    
         <script src="js/verificationConnexion.js"></script>
+        <script src="js/employe.js"></script>
         <script>
             isLoggedInEmploye("index.html");
         </script>
@@ -46,14 +46,28 @@ and open the template in the editor.
                 <div class="col-md-6">
                     Client en Attente : 
                     <div class="jumbotron">
-                        Info client s'il existe
+                        <div id="info" class="lead alert"></div>
+                        
+                        <br>
+                        <div class="d-none" id="client-info">
+                            Nom : <span id="nom"></span><br>
+                            Prenom : <span id="prenom"></span><br>
+                            Profil Astral : <br>
+                            Signe du zodiaque : <span id="zodiaque"></span><br>
+                            Signe Astrologique Chinois : <span id="astrologique"></span><br>
+                            Couleur Porte Bonheur : <span id="couleur"></span><br>
+                            Animal Totem : <span id="animal"></span><br>
+                            <button class="btn btn-custom" id="btn-accepter">Accepter consultation</button>
+                        </div>
                     </div>
 
                 </div>
                 <div class="col-md-6">
                     Mon historiques de consultations
                     <div class="liste-consultations">
-                        <!-- TODO : remplir avec les consultations -->
+                        <div class="jumbotron-list">
+                        
+                        </div>
                     </div>
                 </div>
             </div>

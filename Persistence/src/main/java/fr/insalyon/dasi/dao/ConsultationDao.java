@@ -27,7 +27,7 @@ public class ConsultationDao {
         em.merge(consultation.getMedium());
     }
     
-    public void validerConsultation(Consultation consultation, Date deb, Date fin, Long duree, String commentaire){
+    public Long validerConsultation(Consultation consultation, Date deb, Date fin, Long duree, String commentaire){
         EntityManager em = JpaUtil.obtenirContextePersistance();
         
         consultation = em.merge(consultation);
@@ -35,6 +35,7 @@ public class ConsultationDao {
         consultation.setDateFin(fin);
         consultation.setDuree(duree);
         consultation.setCommentaire(commentaire);
+        return consultation.getId();
     }
     
     public Consultation chercherParId(Long consultationId) {

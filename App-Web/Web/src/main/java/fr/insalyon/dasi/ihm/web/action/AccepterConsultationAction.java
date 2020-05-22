@@ -6,6 +6,7 @@
 package fr.insalyon.dasi.ihm.web.action;
 
 import fr.insalyon.dasi.metier.modele.Client;
+import fr.insalyon.dasi.metier.modele.Consultation;
 import fr.insalyon.dasi.metier.modele.Employe;
 import fr.insalyon.dasi.metier.modele.Medium;
 import fr.insalyon.dasi.metier.service.Service;
@@ -20,21 +21,17 @@ public class AccepterConsultationAction extends Action{
 
     @Override
     public void executer(HttpServletRequest request) {
-        String clientId = request.getParameter("client");
-        String mediumId = request.getParameter("medium");
         HttpSession session = request.getSession();
         
         Long employeId =(Long)session.getAttribute("idEmploye");
-        System.out.println(clientId + " " + mediumId + " " + employeId);
         Service service = new Service();
         
-        Client client = service.rechercherClientParId(Long.parseLong(clientId));
-        Employe employe = service.rechercherEmployeParId(employeId);
-        Medium medium = service.rechercherMediumParId(Long.parseLong(mediumId));
-        if(client ==null || medium == null || employe == null){
+        Consultation c = service.obtenirConsultationEmploye(employeId);
+        
+        if(c==null){
             request.setAttribute("done", Boolean.FALSE);
         }else {
-            service.AccepterConsultation(client, medium, employe);
+            service.AccepterConsultation(c.getClient(), c.getMedium(), c.getEmploye());
             request.setAttribute("done", Boolean.TRUE);
         }
         

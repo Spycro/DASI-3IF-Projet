@@ -53,12 +53,12 @@ public class Main {
         //testerListeConsultationParEmploye();
         //testerListeConsultationParMedium();
         //testerListeMedium();
-        testerEnregistrerDemande();
-        testerValiderConsultation();
+        //testerEnregistrerDemande();
+        //testerValiderConsultation();
         //Tester qq trucs
         //testerRechercheEmployeParMail();
 
-        //initialiserBD();
+        initialiserBD();
         JpaUtil.destroy();
     }
 
@@ -744,9 +744,13 @@ public class Main {
         
         Employe user1 = new Employe("Charle", "Magne", "3636",  25, "M", 0, "12345", "l@g.com");
         Employe user2 = new Employe("Louis", "Soleil", "3636",  25, "M", 0, "12345", "louis@app.com");
+        Employe user3 = new Employe("Karen", "karen", "3737",  25, "F", 0, "12345", "karen");
+
+        
         
         service.inscrireUsers(user1);
         service.inscrireUsers(user2);
+        service.inscrireUsers(user3);
         service.inscrireClient(client1);
         service.inscrireClient(client2);
         service.inscrireMedium(david);
@@ -773,6 +777,8 @@ public class Main {
         service.inscrireConsultation(consult1);
         service.inscrireConsultation(consult2);
         service.inscrireConsultation(consult3);
+        
+        
         
     }
     

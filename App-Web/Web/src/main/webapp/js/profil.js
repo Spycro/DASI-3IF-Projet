@@ -57,6 +57,44 @@ $( document ).ready(function() {
         });
     });
     /////////////////////////////////////////////////
+    
+    $.ajax({
+        url:'./ActionServlet',
+        method: 'POST',
+        data: {
+            todo: "profil-client-connecte"
+        },
+        dataType: 'json'
+    }).done(function(response){
+        if(response.connexion){
+            $("#nom").text("Bienvenue, " + response.client.prenom);
+            $("#zodiaque").text(response.client.ProfilAstral.zodiaque);
+            $("#astrologique").text(response.client.ProfilAstral.astrologique);            
+            $("#couleur").text(response.client.ProfilAstral.couleur);
+            $("#animal").text(response.client.ProfilAstral.animal);        
+        }
+    });
+    
+    $.ajax({
+        url:'./ActionServlet',
+        method: 'POST',
+        data: {
+            todo: "listerconsultation-client"
+        },
+        dataType: 'json'
+    }).done(function(response){
+        $.each(response.consultation, function(key, consultation){
+
+            var new_text = '<div class="jumbotron consultation">';
+                   
+            new_text += ' Avec : ' + consultation.medium + '<br>';
+            new_text += ' Le : ' + consultation.dateDebut + '<br>';
+            new_text += '</div>';
+
+            $(".jumbotron-list").append(new_text);
+        })
+    })
+    
 });
 
 $( window ).on( "load", function() {

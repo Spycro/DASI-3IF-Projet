@@ -21,3 +21,30 @@ nav {
     padding-top: 0;
     font-size: 1.3em;
 }
+
+.btn-custom {
+	background-color: rgba(125, 130, 176, 0.5);
+	/*margin: 5px;*/
+}
+
+
+#btn-prediction {
+   align-self: center;
+}
+
+.jumbotron-list {
+    max-height: 500px;
+    overflow:scroll;
+}
+
+.consultation {
+    padding-top : 5px;
+    padding-bottom: 5px;
+    background-color: rgba(125, 130, 176, 0.5);
+    margin-bottom: 16px;
+}
+
+.profil {
+    background-color: rgba(125, 130, 176, 0.5);
+}
+

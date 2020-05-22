@@ -353,7 +353,6 @@ public class Service {
         try {
             JpaUtil.ouvrirTransaction();
             consultationDao.creer(consultation);
-            usersDao.modifierEtatConsultation(consultation.getEmploye(), Boolean.FALSE);
             JpaUtil.validerTransaction();
             resultat = consultation.getId();
         } catch (Exception ex) {
@@ -399,6 +398,7 @@ public class Service {
                     JpaUtil.ouvrirTransaction();
                     usersDao.modifierEtatConsultation(emp, Boolean.TRUE);
                     JpaUtil.validerTransaction();
+                    break;
                 }
             }
         }
@@ -480,16 +480,17 @@ public class Service {
         return consultationID;
     }
     
-    public Long ValiderConsultation(Date datedeb, Date datefin, String commentaire, Long id){
+    public Long ValiderConsultation(Date datedeb, Date datefin, String commentaire, Long consultationId){
         Long consultationID = null;
         JpaUtil.creerContextePersistance();
         try {
             JpaUtil.ouvrirTransaction();
 
-            Consultation consultation = consultationDao.chercherParId(id);
+            Consultation consultation = consultationDao.chercherParId(consultationId);
             Long diffInMillies = Math.abs(datefin.getTime() - datedeb.getTime());
             Long duree = TimeUnit.MINUTES.convert(diffInMillies, TimeUnit.MILLISECONDS);
-            consultationDao.validerConsultation(consultation, datedeb, datefin, duree, commentaire);
+            consultationID = consultationDao.validerConsultation(consultation, datedeb, datefin, duree, commentaire);
+            usersDao.modifierEtatConsultation(consultation.getEmploye(), Boolean.FALSE);
             JpaUtil.validerTransaction();
 
         }

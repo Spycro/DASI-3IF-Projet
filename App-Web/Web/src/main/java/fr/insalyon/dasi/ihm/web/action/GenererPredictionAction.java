@@ -19,7 +19,7 @@ public class GenererPredictionAction extends Action{
      @Override
     public void executer(HttpServletRequest request) {
         
-        long ID =Integer.parseInt(request.getParameter("Id"));
+        Long ID =Long.parseLong(request.getParameter("id"));
         int amour = Integer.parseInt(request.getParameter("amour"));
         int sante = Integer.parseInt(request.getParameter("sante"));
         int travail = Integer.parseInt(request.getParameter("travail"));
