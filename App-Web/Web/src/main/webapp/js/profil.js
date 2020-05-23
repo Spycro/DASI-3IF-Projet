@@ -89,6 +89,7 @@ $( document ).ready(function() {
                    
             new_text += ' Avec : ' + consultation.medium + '<br>';
             new_text += ' Le : ' + consultation.dateDebut + '<br>';
+            new_text += ' Durée : ' +consultation.duree + ' minutes <br>' ;
             new_text += '</div>';
 
             $(".jumbotron-list").append(new_text);

@@ -9,16 +9,42 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/connected.css">
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="js/verificationConnexion.js"></script>
+        <script src="js/consultation.js"></script>
+        <script> 
+            isLoggedInClient();
+        </script>
     </head>
     <body>
+        <header class="">
+            <nav class="navbar navbar-expand-lg navbar-light navigation">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active" >
+                        <a class="nav-link"  href="profil.html">Mon Compte</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="medium.html">Trouvez votre medium !</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="historique.html">Historique de mes consultations</a>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" id="btn-deconnexion-client">Se deconnecter</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>         
         <h1>MES CONSULTATION</h1>
-        <button id="bouton-connexion">Connexion</button>
-        <div id="liste">
+       
+        <div class="jumbotron-list">
+                        
         </div>
-          <script>
-            $(document).ready( function () {
-               
-            });
-        </script> 
+         
     </body>
 </html>
