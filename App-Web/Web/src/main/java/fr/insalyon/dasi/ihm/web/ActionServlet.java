@@ -19,6 +19,7 @@ import fr.insalyon.dasi.ihm.web.action.InscrireAction;
 import fr.insalyon.dasi.ihm.web.action.ListerConsultationAction;
 import fr.insalyon.dasi.ihm.web.action.ListerConsultationClientAction;
 import fr.insalyon.dasi.ihm.web.action.ListerConsultationEmployeAction;
+import fr.insalyon.dasi.ihm.web.action.ListerLastConsultationClientAction;
 import fr.insalyon.dasi.ihm.web.action.ListerMediumAction;
 import fr.insalyon.dasi.ihm.web.action.ObtenirConsultationAction;
 import fr.insalyon.dasi.ihm.web.action.ObtenirProfilClientAction;
@@ -39,6 +40,7 @@ import fr.insalyon.dasi.ihm.web.serialisation.InscrireSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ListerConsultationClientSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ListerConsultationEmployeSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ListerConsultationSerialisation;
+import fr.insalyon.dasi.ihm.web.serialisation.ListerLastConsultationClientSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ListerMediumSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ObtenirConsultationSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ProfilClientSerialisation;
@@ -109,6 +111,11 @@ public class ActionServlet extends HttpServlet {
                 case "listerconsultation-client" : {
                     action= new ListerConsultationClientAction();
                     serialisation =new ListerConsultationClientSerialisation();
+                    break;
+                }
+                case "listerconsultation-last-client" : {
+                    action= new ListerLastConsultationClientAction();
+                    serialisation =new ListerLastConsultationClientSerialisation();
                     break;
                 }
                  case "listerconsultation-employe" : {

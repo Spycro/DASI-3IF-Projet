@@ -13,6 +13,10 @@ and open the template in the editor.
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="js/verificationConnexion.js"></script>
         <script src="js/employe.js"></script>
+        <script src="js/consultation.js"></script>
+        <script>
+            isLoggedInEmploye("index.html");
+        </script>
     </head>
     <body>
          <header class="">
@@ -71,12 +75,19 @@ and open the template in the editor.
                                 </div>
                             </div>
                         </form>
+                        
                     </div>
                 </div>
                 <div class="col-md-6">
-                    Derniere consultation du client : 
-                    <div class="jumbotron">
+                    Dernieres consultation du client : 
+                    <div class="jumbotron-list">
                         
+                    </div>
+                    Prédiction :
+                    <div class="jumbotron client">
+                        <div class="jumbotron-prediction">
+
+                        </div>
                     </div>
                     <br>
                     <h1>Detail de cette consultation</h1>
@@ -93,7 +104,11 @@ and open the template in the editor.
                             </div>
 
                         </div>
-                        <textarea type="text" class="form-control mb-2" id="commentaire" placeholder="commentaire"></textarea>
+                        <input type="text" id="Commentaire" placeholder="Commentaire">
+                        
+                        
+                
+                       
                         <button type="submit" class="btn btn-primary m-2" id="btn-validation">Submit</button>
                     </form>
                 </div>

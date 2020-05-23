@@ -69,6 +69,15 @@ $(document).ready(function(){
         })
         .done(function(response){
             console.log(response);
+            var new_text = '<div class="jumbotron-prediction">';
+            
+                   
+            new_text += ' Amour : ' + response.prediction.Amour + '<br>';
+            new_text += ' Santé : ' + response.prediction.Sante + '<br>';
+            new_text += ' Travail : ' + response.prediction.Travail + '<br><br>';
+            
+         
+            $(".jumbotron-prediction").html(new_text);
         })
     })
     
