@@ -93,6 +93,13 @@ public class UsersDao {
         return query.getResultList();
     }
     
+    public List<Employe> listerEmployesParConsultations() {
+        EntityManager em = JpaUtil.obtenirContextePersistance();
+        TypedQuery<Employe> query = em.createQuery("SELECT c FROM Employe c ORDER BY c.nbConsultations DESC", Employe.class);
+        return query.getResultList();
+    }
+    
+    
     /**
      * 
      * @param genre soit "M" soit "F" 
