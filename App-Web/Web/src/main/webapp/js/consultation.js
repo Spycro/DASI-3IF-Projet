@@ -57,21 +57,31 @@ $( document ).ready(function() {
     });
     }
    if(window.location.pathname==="/consultation.html"){  
-                 
+       waitForElement();
+
+    
+    }
+    
+});
+
+
+function waitForElement(){
+    if(typeof $(".client").attr("data-id") !== "undefined"){
         // Appel AJAX
         $.ajax({
-        url:'./ActionServlet',
-        method: 'POST',
-        data: {
-            todo: "listerconsultation-last-client",
-            id: $(".client").attr("data-id")
-        },
-        dataType: 'json'
-    }).done(function(response){
-        
+            url:'./ActionServlet',
+            method: 'POST',
+            data: {
+                todo: "listerconsultation-last-client",
+                id: $(".client").attr("data-id")
+            },
+            dataType: 'json'
+        })
+        .done(function(response){
+
             console.log(response);
-            var new_text = '<div class="jumbotron-list">';
-                   
+            var new_text = '<div class="jumbotron">';
+
             new_text += ' Avec : ' + consultation.medium + '<br>';
             new_text += ' Client : ' +consultation.client + '<br>';
             new_text += ' Le : ' + consultation.dateDebut + '<br>';
@@ -80,14 +90,16 @@ $( document ).ready(function() {
             new_text += '</div>';
 
             $(".jumbotron-list").append(new_text);
-        
-    }).fail( function (error) { // Fonction appelée en cas d'erreur lors de l'appel AJAX
-            
+
+        })
+        .fail( function (error) { // Fonction appelée en cas d'erreur lors de l'appel AJAX
+
             console.log('Error',error); // LOG dans Console Javascript
-           
-           // alert("Erreur lors de l'appel AJAX");
-    });
-    
+
+               // alert("Erreur lors de l'appel AJAX");
+        });
     }
-    
-});
+    else{
+        setTimeout(waitForElement, 250);
+    }
+}
