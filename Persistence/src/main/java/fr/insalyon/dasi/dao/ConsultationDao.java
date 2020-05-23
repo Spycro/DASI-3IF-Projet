@@ -51,21 +51,21 @@ public class ConsultationDao {
     
     public List<Consultation> listerConsultationParClient(long clientId) {
         EntityManager em = JpaUtil.obtenirContextePersistance();
-        TypedQuery<Consultation> query = em.createQuery("SELECT c FROM Consultation c WHERE c.client.id=:id", Consultation.class);
+        TypedQuery<Consultation> query = em.createQuery("SELECT c FROM Consultation c WHERE c.client.id=:id and c.dateDebut is not NULL", Consultation.class);
         query.setParameter("id", clientId);
         return query.getResultList();
     }
      
     public List<Consultation> listerConsultationParEmploye(long employeId) {
         EntityManager em = JpaUtil.obtenirContextePersistance();
-        TypedQuery<Consultation> query = em.createQuery("SELECT c FROM Consultation c WHERE c.employe.id=:id", Consultation.class);
+        TypedQuery<Consultation> query = em.createQuery("SELECT c FROM Consultation c WHERE c.employe.id=:id and c.dateDebut is not NULL", Consultation.class);
         query.setParameter("id", employeId);
         return query.getResultList();
     }
       
     public List<Consultation> listerConsultationParMedium(long mediumId) {
         EntityManager em = JpaUtil.obtenirContextePersistance();
-        TypedQuery<Consultation> query = em.createQuery("SELECT c FROM Consultation c WHERE c.medium.id=:id", Consultation.class);
+        TypedQuery<Consultation> query = em.createQuery("SELECT c FROM Consultation c WHERE c.medium.id=:id and c.dateDebut is not NULL", Consultation.class);
         query.setParameter("id", mediumId);
         return query.getResultList();
     }
