@@ -24,6 +24,7 @@ import fr.insalyon.dasi.ihm.web.action.ListerMediumAction;
 import fr.insalyon.dasi.ihm.web.action.ObtenirConsultationAction;
 import fr.insalyon.dasi.ihm.web.action.ObtenirProfilClientAction;
 import fr.insalyon.dasi.ihm.web.action.ObtenirProfilClientConnecteAction;
+import fr.insalyon.dasi.ihm.web.action.TopEmployeAction;
 import fr.insalyon.dasi.ihm.web.serialisation.AccepterConsultationSerialisation;
 import fr.insalyon.dasi.ihm.web.action.TopMediumAction;
 import fr.insalyon.dasi.ihm.web.serialisation.AuthentifierEmployeSerialisation;
@@ -45,6 +46,7 @@ import fr.insalyon.dasi.ihm.web.serialisation.ListerMediumSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ObtenirConsultationSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ProfilClientSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.Serialisation;
+import fr.insalyon.dasi.ihm.web.serialisation.TopEmployeSerialisation;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -216,6 +218,12 @@ public class ActionServlet extends HttpServlet {
                     serialisation = new ProfilClientSerialisation();
                     break;
                 }
+                
+                case "top-employe" : {
+                    action = new TopEmployeAction();
+                    serialisation = new TopEmployeSerialisation();
+                    break;
+                }
             }
         }
         if (action != null) {
@@ -223,7 +231,7 @@ public class ActionServlet extends HttpServlet {
             serialisation.serialiser(request, response);
         }
         else {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Erreur dans les paramè  tres de la requête");
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Erreur dans les paramètres de la requête");
         }
         
     }

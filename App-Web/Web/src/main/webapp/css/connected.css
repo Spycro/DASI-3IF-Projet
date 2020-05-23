@@ -48,3 +48,14 @@ nav {
     background-color: rgba(125, 130, 176, 0.5);
 }
 
+.medium {
+    padding-top : 20px;
+    padding-bottom: 20px;
+    background-color: rgba(125, 130, 176, 0.5);
+    margin-bottom: 16px;
+}
+
+.employe {
+    padding-top : 5px;
+    padding-bottom: 5px;
+}

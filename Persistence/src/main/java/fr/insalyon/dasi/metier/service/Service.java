@@ -53,7 +53,7 @@ public class Service {
         return resultat;
     }
     
-    public long inscrireClient(Client client) {
+    public Long inscrireClient(Client client) {
         Long resultat = null;
         JpaUtil.creerContextePersistance();
         try{
@@ -251,6 +251,22 @@ public class Service {
         return resultat;
     }
     
+    public List<Employe> listerEmployeParConsultation() {
+        List<Employe> resultat = null;
+
+        JpaUtil.creerContextePersistance();
+        try {
+            resultat = usersDao.listerEmployesParConsultations();
+        } catch (Exception ex) {
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service listerMedium()", ex);
+            resultat = null;
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+        return resultat;
+    }
+    
+    
     public List<Consultation> listerConsultation() {
         List<Consultation> resultat = null;
 
@@ -294,7 +310,7 @@ public class Service {
             JpaUtil.fermerContextePersistance();
         }
         return resultat;
-    } 
+    }
     
     public List<Consultation> listerConsultationParMedium(long idM) {
         List<Consultation> resultat = null;

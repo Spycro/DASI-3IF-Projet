@@ -106,13 +106,14 @@ $( document ).ready(function() {
                 // TODO: afficher les informations du client dans la notification
                 // Exemple: Connexion de Ada Lovelace (ID 1)
                 $.each(response.mediums, function(key, med){
-                    var new_text = '<li class="list-group-item medium">' +'Denomination : '+ med.denomination;
+                    var new_text = '<div class="jumbotron medium">' +'Denomination : <b>'+ med.denomination + '</b><br>';
                    
-                    new_text += ' Type : ' + med.type;
-                    new_text += ' Genre : ' + med.genre;
-                    new_text += '</li>';
+                    new_text += ' Type : ' + med.type + '<br>';
+                    new_text += ' Genre : ' + med.genre + '<br>';
+                    new_text += ' nb consultations : <b>' + med.nbConsulation + '</b><br>'
+                    new_text += '</div>';
                     
-                    $("#liste").append(new_text);
+                    $("#jumbotron-list").append(new_text);
                     
                     
                 });
@@ -126,6 +127,30 @@ $( document ).ready(function() {
         .always( function () { // Fonction toujours appelée
 
         });
+        
+        
+        $.ajax({
+            url: './ActionServlet',
+            method : 'POST',
+            data :{
+                todo: 'top-employe'
+            },
+            dataType: 'json'
+        })
+        .done(function(response){
+            if(response.success){
+                $.each(response.employes, function(key, emp){
+                    var new_text = '<div class="jumbotron employe">' +'Nom : <b>'+ emp.prenom + ' ' + emp.nom + '</b><br>';
+                   
+                    new_text += ' nombre de Consultation : ' + emp["nb-consultation"] + '<br>';
+                    new_text += ' Genre : ' + emp.genre + '<br>';
+                    new_text += '</div>';
+                    
+                    $(".stat-employe").append(new_text);
+                });
+            }
+        })
+        
     }
 });
 
