@@ -80,16 +80,16 @@ function waitForElement(){
         .done(function(response){
 
             console.log(response);
-            var new_text = '<div class="jumbotron">';
+            var new_text = '<div class="jumbotron consult-client">';
 
-            new_text += ' Avec : ' + consultation.medium + '<br>';
-            new_text += ' Client : ' +consultation.client + '<br>';
-            new_text += ' Le : ' + consultation.dateDebut + '<br>';
-            new_text += ' Durée : ' +consultation.duree + ' minutes <br>' ;
-            new_text += ' Commentaire ' +consultation.commentaire +'<br>';
+            new_text += ' Incarnation : ' + response.consultation.medium + '<br>';
+            new_text += ' Client : ' +response.consultation.client + '<br>';
+            new_text += ' Le : ' + response.consultation.dateDebut + '<br>';
+            new_text += ' Durée : ' +response.consultation.duree + ' minutes <br>' ;
+            new_text += ' Commentaire :' +response.consultation.commentaire +'<br>';
             new_text += '</div>';
 
-            $(".jumbotron-list").append(new_text);
+            $(".jumbotron-list-client").append(new_text);
 
         })
         .fail( function (error) { // Fonction appelée en cas d'erreur lors de l'appel AJAX

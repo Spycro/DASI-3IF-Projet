@@ -72,8 +72,8 @@ $(document).ready(function(){
             var new_text = '<div class="jumbotron-prediction">';
             
                    
-            new_text += ' Amour : ' + response.prediction.Amour + '<br>';
-            new_text += ' Santé : ' + response.prediction.Sante + '<br>';
+            new_text += ' Amour : ' + response.prediction.Amour + '<br><br>';
+            new_text += ' Santé : ' + response.prediction.Sante + '<br><br>';
             new_text += ' Travail : ' + response.prediction.Travail + '<br><br>';
             
          
@@ -96,34 +96,34 @@ $(document).ready(function(){
 
             }).done(function(response){
                 if(response.success){
-                    alert("La consultation s'est bien terminée")
+                    alert("La consultation s'est bien terminée");
                 }
                 else{
-                    alert("La consultation s'est mal terminee")
+                    alert("La consultation s'est mal terminee");
                 }
             })
     })
-    
-    $.ajax({
-        url:'./ActionServlet',
-        method: 'POST',
-        data: {
-            todo: "listerconsultation-employe"
-        },
-        dataType: 'json'
-    }).done(function(response){
-        $.each(response.consultation, function(key, consultation){
+    if(window.location.pathname!=="/consultation.html"){  
+        $.ajax({
+            url:'./ActionServlet',
+            method: 'POST',
+            data: {
+                todo: "listerconsultation-employe"
+            },
+            dataType: 'json'
+        }).done(function(response){
+            $.each(response.consultation, function(key, consultation){
 
-            var new_text = '<div class="jumbotron consultation">';
-                   
-            new_text += ' incarnation : ' + consultation.medium + '<br>';
-            new_text += ' Le : ' + consultation.dateDebut + '<br>';
-            new_text += ' client : ' + consultation.client + '<br>'
-            new_text += ' duree : ' +consultation.duree + 'min<br>'
-            new_text += '</div>';
+                var new_text = '<div class="jumbotron consultation">';
 
-            $(".jumbotron-list").append(new_text);
-        })
-    })
-    
+                new_text += ' incarnation : ' + consultation.medium + '<br>';
+                new_text += ' Le : ' + consultation.dateDebut + '<br>';
+                new_text += ' client : ' + consultation.client + '<br>';
+                new_text += ' duree : ' +consultation.duree + 'min<br>';
+                new_text += '</div>';
+
+                $(".jumbotron-list").append(new_text);
+            });
+        });
+    }
 });

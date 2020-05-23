@@ -38,12 +38,13 @@ public class ListerLastConsultationClientSerialisation extends Serialisation {
         
         
             JsonObject m = new JsonObject();
-            m.addProperty("duree", target.get(target.size()-2).getDuree());
+            m.addProperty("duree", target.get(target.size()-1).getDuree());
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); 
-            //m.addProperty("dateDebut", dateFormat.format(target.get(target.size()-1).getDateDebut()));
-            //m.addProperty("dateFin", dateFormat.format(target.get(target.size()-1).getDateFin()));
+            m.addProperty("dateDebut", dateFormat.format(target.get(target.size()-1).getDateDebut()));
+            m.addProperty("dateFin", dateFormat.format(target.get(target.size()-1).getDateFin()));
             m.addProperty("client", target.get(target.size()-1).getClient().getNom()+" "+target.get(target.size()-1).getClient().getPrenom());
             m.addProperty("medium", target.get(target.size()-1).getMedium().getDenomination());
+            m.addProperty("commentaire", target.get(target.size()-1).getCommentaire());
           
             
         
