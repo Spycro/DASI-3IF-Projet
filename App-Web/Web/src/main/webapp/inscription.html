@@ -21,61 +21,62 @@ and open the template in the editor.
                 <div class="col-md-3 left_side"></div>
                 <div class="col-md-5 offset-md-1 align-self-center">
                     <h1>Inscrivez-vous !</h1>
-                    <div class="form-row">
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="first_name">Prénom</label>
-                                <input type="text" class="form-control" id="first_name">
+                    <form id="form-connexion">
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="first_name">Prénom</label>
+                                    <input type="text" class="form-control" id="first_name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tel">Numéro</label>
+                                    <input type="text" class="form-control" id="tel" placeholder="Telephone" required>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="tel">Numéro</label>
-                                <input type="text" class="form-control" id="tel" placeholder="Telephone">
-                            </div>
-                        </div>
-                        
-                        
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="first_name">Nom</label>
-                                <input type="text" class="form-control" id="last_name">
-                            </div>
-                            <div class="form-group">
-                                <label for="adresse">Adresse</label>
-                                <input type="text" class="form-control" id="adresse" placeholder="Adresse">
-                            </div>
-                        </div>
-                    
-                    </div>
-                    <div class="form-group">
-                        <label for="mail">Mail</label>
-                        <input type="email" class="form-control" id="mail" placeholder="abc@exemple.com">
-                        
-                    </div>
-                    <div class="form-group">
-                        <label for="date">Date de naissance</label>
-                        <input role="button" class="form-control" type="date" value="2011-08-19" id="date">
-                    </div>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="password">Mot de passe</label>
-                            <input class="form-control" type="password" name="password" id="password">
+
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="first_name">Nom</label>
+                                    <input type="text" class="form-control" id="last_name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="adresse">Adresse</label>
+                                    <input type="text" class="form-control" id="adresse" placeholder="Adresse" required>
+                                </div>
+                            </div>
+
                         </div>
-                        <div class="form-group col-md-6">
-                            <label for="password-again">Répéter le mot de passe</label>
-                            <input class="form-control" type="password" name="password-again" id="password-again">
+                        <div class="form-group">
+                            <label for="mail">Mail</label>
+                            <input type="email" class="form-control" id="mail" placeholder="abc@exemple.com" required>
+
                         </div>
-                    </div>
-                    <div class="form-row">
-                        <button class="btn btn-custom col-md-4 offset-md-4" id="btn-connexion">Je m'inscris !</button>
-                        <div class="invalid-feedback">
-                            Veuillez remplir toutes les cases !
+                        <div class="form-group">
+                            <label for="date">Date de naissance</label>
+                            <input role="button" class="form-control" type="date" value="2011-08-19" id="date" required>
                         </div>
-                        <div class="d-none" id="success">
-                            Succes de l'inscription! Vous allez être redigrigé sous peu !
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="password">Mot de passe</label>
+                                <input class="form-control" type="password" name="password" id="password" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="password-again">Répéter le mot de passe</label>
+                                <input class="form-control" type="password" name="password-again" id="password-again" required>
+                            </div>
                         </div>
-                    </div>
-                    
+                        <div class="form-row">
+                            <input type="submit" class="btn btn-custom col-md-4 offset-md-4" id="btn-connexion" value="Je m'inscris !">
+                            <div class="invalid-feedback">
+                                Veuillez remplir toutes les cases !
+                            </div>
+                            <div class="d-none" id="success">
+                                Succes de l'inscription! Vous allez être redigrigé sous peu !
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
