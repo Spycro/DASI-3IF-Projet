@@ -14,8 +14,8 @@
 
 $( document ).ready(function() {
     console.log( "document loaded" );
-     $('#btn-connexion').on( 'click', function () { // Fonction appelée lors du clic sur le bouton
-
+     $('#form-connexion').on( 'submit', function (e) { // Fonction appelée lors du clic sur le bouton
+        e.preventDefault();
         var mail = $("#mail").val();
         var prenom = $("#first_name").val();
         var nom = $("#last_name").val();
@@ -32,6 +32,7 @@ $( document ).ready(function() {
                 $("#btn-connexion").addClass("is-invalid");
             }
             else{
+                
                 $.ajax({
                     url: './ActionServlet',
                     method: 'POST',
@@ -49,7 +50,7 @@ $( document ).ready(function() {
                 }).done(function (response){
                     if(response.success){
                         console.log("Succes inscription !");
-                        $("success").removeClass("d-none");
+                        $("#success").removeClass("d-none");
                         setTimeout(function(){
                             window.location = "login.html";
                         }, 5000);
@@ -57,6 +58,8 @@ $( document ).ready(function() {
                     }
                     else{
                         console.log("Echec inscription !");
+                        $("#failure").removeClass("d-none");
+                        
                     }
                 });
             }
