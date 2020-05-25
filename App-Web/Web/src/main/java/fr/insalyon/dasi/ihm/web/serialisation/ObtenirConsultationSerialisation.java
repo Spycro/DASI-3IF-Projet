@@ -35,6 +35,11 @@ public class ObtenirConsultationSerialisation extends Serialisation{
             consultJson.addProperty("employe-id", consult.getEmploye().getId());
             consultJson.addProperty("medium-id", consult.getMedium().getId());
             consultJson.addProperty("medium-denomination", consult.getMedium().getDenomination());
+            consultJson.addProperty("signeZodiaque", consult.getClient().getProfilAstral().getSigneZodiaque());
+            consultJson.addProperty("signeAstrologique", consult.getClient().getProfilAstral().getSigneAstrologique());
+            consultJson.addProperty("couleur", consult.getClient().getProfilAstral().getCouleurPorteBonheur());
+            consultJson.addProperty("animal", consult.getClient().getProfilAstral().getAnimalTotem());
+            
             container.add("consultation", consultJson);
             container.addProperty("success", Boolean.TRUE);
             
