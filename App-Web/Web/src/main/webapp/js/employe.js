@@ -22,6 +22,10 @@ $(document).ready(function(){
              $(".client").attr("data-id", response.consultation["client-id"])
              $("#prenom").text(response.consultation["client-name"]);
              $("#nom").text(response.consultation["client-surname"]);
+             $("#zodiaque").text(response.consultation["signeZodiaque"]);
+             $("#astrologique").text(response.consultation["signeAstrologique"]);
+             $("#couleur").text(response.consultation["couleur"]);
+             $("#animal").text(response.consultation["animal"]);
          }else{
              $("#info").addClass("alert-danger")
              $("#info").text("Vous n'avez pas de client en attente !");
