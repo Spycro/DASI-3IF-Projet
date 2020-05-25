@@ -69,21 +69,16 @@ and open the template in the editor.
                         </div>
                         <div class="form-row">
                             <input type="submit" class="btn btn-custom col-md-4 offset-md-4" id="btn-connexion" value="Je m'inscris !">
-                            
-                            
+                            <div class="invalid-feedback">
+                                Veuillez remplir toutes les cases !
+                            </div>
+                            <div class="d-none" id="success">
+                                Succes de l'inscription! Vous allez être redigrigé sous peu !
+                            </div>
                         </div>
-                        
                     </form>
-                    <div class="d-none alert alert-success" id="success">
-                        Succes de l'inscription! Vous allez être redigrigé sous peu !
-                    </div>
-                    <div class="d-none alert alert-warning" id="failure">
-                        Il y a eu un probleme lors de l'inscription (cet utilisateur existe deja)
-                    </div>
                 </div>
-                
             </div>
-            
         </div>
     </body>
 </html>

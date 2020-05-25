@@ -31,18 +31,10 @@ public class InscrireAction extends Action {
         String numero = request.getParameter("numero");
         
         
-        Date date1;
-        Date date2;
+        Date date1;  
         try {
-            
-            date1 = new SimpleDateFormat("yyyy-MM-dd").parse(date);
-            
-            date2 = new Date(System.currentTimeMillis());
-            int age= date2.getYear()-date1.getYear();
-           
-            
-            
-            Client client = new Client(nom, prenom, numero, adresse, age, date1, password, mail);
+            date1 = new SimpleDateFormat("MM-dd-yyyy").parse(date);
+            Client client = new Client(nom, prenom, numero, adresse, 10, date1, password, mail);
             Long id = service.inscrireClient(client);
             request.setAttribute("id", id);
         } catch (ParseException ex) {
