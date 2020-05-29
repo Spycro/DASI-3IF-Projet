@@ -45,6 +45,16 @@ $( document ).ready(function() {
                            
                            $("#genre").text(med.genre);
                            $("#chosen").attr("data-id", med.id);
+                           $("#type").text(med.type);
+                           var new_text = "";
+                           if(med.type === "astrologue"){
+                               new_text += "<b>Formation :</b> " + med.formation;
+                               new_text += "<br><b>Promotion :</b> " + med.promotion;
+                           }
+                           if(med.type === "spirite"){
+                               new_text += "<b>Support :</b> " + med.support;
+                           }
+                           $("#specific-info").html(new_text);
                        } 
                     });
                 });

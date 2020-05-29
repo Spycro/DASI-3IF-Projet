@@ -738,13 +738,13 @@ public class Main {
         Client client1 = new Client("Jean", "bon", "3636", "11 rue", 25, new Date(), "12345", "l@gmail.com");
         Client client2 = new Client("Jeanne", "bonne", "3636", "11 rue", 25, new Date(), "12345", "J@gmail.com");
         
-        Medium irma = new Cartomancien("Irma","F","Yo moi c'est IRMA");
-        Medium david = new Spirite("David","M","Yo tout le monde c'est david lafarge pokemon","cartes pokemon");
+        Medium irma = new Cartomancien("Irma","F","Je saurai TOUT sur votre futur, et ce avec mes cartes");
+        Medium david = new Spirite("David Lafarge Pokemon","M","Yo tout le monde c'est david lafarge pokemon","cartes pokemon");
         Medium Yuta = new Astrologue("Paul Le Grand", "M", "JE suis le plus grand Astrologue de la decennie" , "10 ans a polytechnique", 10);
         
-        Employe user1 = new Employe("Charle", "Magne", "3636",  25, "M", 0, "12345", "l@g.com");
-        Employe user2 = new Employe("Louis", "Soleil", "3636",  25, "M", 0, "12345", "louis@app.com");
-        Employe user3 = new Employe("Karen", "karen", "3737",  25, "F", 0, "12345", "karen");
+        Employe user1 = new Employe("Magne", "Charle", "0605040809",  25, "M", 0, "12345", "charle@predictif.com");
+        Employe user2 = new Employe("Soleil", "Louis", "3630",  25, "M", 0, "12345", "louis@predictif.com");
+        Employe user3 = new Employe("Ashe", "Alice", "19",  25, "F", 0, "12345", "alice@predictif.com");
 
         
         

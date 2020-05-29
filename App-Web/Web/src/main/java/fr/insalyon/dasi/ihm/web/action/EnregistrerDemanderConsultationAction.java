@@ -32,7 +32,7 @@ public class EnregistrerDemanderConsultationAction extends Action{
         Client client = service.rechercherClientParId(idc);
         Medium medium = service.rechercherMediumParId(mediumId);
         Employe employe = service.rechercherEmployeParId(empId);
-        MessageUtil.envoyerNotification(employe.getNumeroTel(), "Vous avez une consultation en attente avec un client. Vous pourrez voir ses informations dans votre espace employe. Veuillez repondre a la demande rapidement");
+        MessageUtil.envoyerNotification(employe.getNumeroTel(), "Bonjour, "+ employe.getPrenom() +" "+ employe.getNom()  + ". Vous avez une consultation en attente avec un client. Vous pourrez voir ses informations dans votre espace employe. Veuillez repondre a la demande rapidement");
         
         Long cid = service.EnregistrerDemandeConsultation(client, medium, employe);
         request.setAttribute("consultation-id", cid);
